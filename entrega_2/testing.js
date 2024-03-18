@@ -8,7 +8,7 @@ const app = async () => {
     try {
         
         const products = new ProductManager(path);
-        console.log("Inicio del Product Manager: \n", await products.getProducts());
+        console.log("Inicio del Product Manager: ", await products.getProducts());
         console.log("-------------------------------------------------")
         console.log(await products.addProduct("Monitor", "27''", 435000, "thumbnail", "m1000", 23))
         console.log("-------------------------------------------------")
@@ -16,6 +16,9 @@ const app = async () => {
         console.log("-------------------------------------------------")
         console.log(await products.addProduct("Teclado", "QWERTY", 23000, "thumbnail", "t1000", 20))
         console.log("-------------------------------------------------")
+        console.log(await products.getProductById(1));
+        console.log("-------------------------------------------------")
+        console.log(await products.getProductById(3));
 
 
     } catch (error) {

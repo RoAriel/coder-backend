@@ -53,6 +53,19 @@ class ProductManager {
         return `Producto agregado. ID: ${id}`;
 
     };
+
+    async getProductById(id){
+        let productos_db = await this.getProducts();
+
+        let prd = productos_db.find(p => p.id == id);
+
+        if (prd){
+            return prd;
+        }else{
+            return `Producto no encontrado con el id: ${id}`;
+        }
+
+    };
 }
 
 module.exports = ProductManager;
