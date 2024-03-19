@@ -12,7 +12,7 @@ const app = async () => {
         console.log("-------------------------------------------------")
         console.log(await products.addProduct("Monitor", "27''", 435000, "thumbnail", "m1000", 23))
         console.log("-------------------------------------------------")
-        console.log(await products.addProduct("Monitor", "27''", 435000, "thumbnail", "m1000", 23))
+        console.log(await products.addProduct("Monitor", "24''", 435000, "thumbnail", "m3000", 23))
         console.log("-------------------------------------------------")
         console.log(await products.addProduct("Teclado", "QWERTY", 23000, "thumbnail", "t1000", 20))
         console.log("-------------------------------------------------")
@@ -27,7 +27,8 @@ const app = async () => {
         console.log(await products.updateProduct(0, "id", 10))
         console.log("-------------------------------------------------")        
         console.log(await products.updateProduct(0, "cualquiera", 10))
-        console.log("-------------------------------------------------")       
+        console.log("-------------------------------------------------")
+        console.log(await products.deleteProduct(7));       
 
 
         

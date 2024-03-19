@@ -54,40 +54,54 @@ class ProductManager {
 
     };
 
-    async getProductById(id){
+    async getProductById(id) {
         let productos_db = await this.getProducts();
 
         let prd = productos_db.find(p => p.id == id);
 
-        if (prd){
+        if (prd) {
             return prd;
-        }else{
+        } else {
             return `Producto no encontrado con el id: ${id}`;
         }
 
     };
 
-    async updateProduct(id, campo, nuevoValor){
+    async updateProduct(id, campo, nuevoValor) {
 
-        if(campo == "id")
-            {return "No puede modificar este atributo"}
-        
+        if (campo == "id") { return "No puede modificar este atributo" }
+
         let prd = await this.getProductById(id)
-        
-        let productos_db = (await this.getProducts()).filter(p => p.id != id);
-        
-        
-        if(prd[`${campo}`]){
 
-            prd[`${campo}`]=nuevoValor;
+        let productos_db = (await this.getProducts()).filter(p => p.id != id);
+
+
+        if (prd[`${campo}`]) {
+
+            prd[`${campo}`] = nuevoValor;
 
             productos_db.push(prd);
-            
+
             await fs.promises.writeFile(this.pathFile, JSON.stringify(productos_db));
 
-            return (`Update completo al producto ID: ${id}`)
+            return (`Update completo al producto ID: ${id}`);
 
-        }else{return "No se encontro artibuto"}
+        } else { return "No se encontro artibuto" };
+    };
+
+    async deleteProduct(id) {
+
+        let productos_db = await this.getProducts();
+        let existCode = productos_db.some(p => p.id == id);
+
+        if (existCode) {
+
+            let newProductos_db = (await this.getProducts()).filter(p => p.id != id);
+            await fs.promises.writeFile(this.pathFile, JSON.stringify(newProductos_db));
+            return "Peroducto eliminado."
+        } else {
+            return "Producto Id no encontrado."
+        }
     };
 };
 
