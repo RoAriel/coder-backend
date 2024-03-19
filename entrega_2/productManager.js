@@ -66,6 +66,29 @@ class ProductManager {
         }
 
     };
-}
+
+    async updateProduct(id, campo, nuevoValor){
+
+        if(campo == "id")
+            {return "No puede modificar este atributo"}
+        
+        let prd = await this.getProductById(id)
+        
+        let productos_db = (await this.getProducts()).filter(p => p.id != id);
+        
+        
+        if(prd[`${campo}`]){
+
+            prd[`${campo}`]=nuevoValor;
+
+            productos_db.push(prd);
+            
+            await fs.promises.writeFile(this.pathFile, JSON.stringify(productos_db));
+
+            return (`Update completo al producto ID: ${id}`)
+
+        }else{return "No se encontro artibuto"}
+    };
+};
 
 module.exports = ProductManager;
