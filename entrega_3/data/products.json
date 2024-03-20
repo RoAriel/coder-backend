@@ -1,0 +1,108 @@
+[
+    {
+        "id": 0,
+        "title": "Teclado",
+        "description": "QWERTY",
+        "price": 23000,
+        "thumbnail": "thumbnail",
+        "code": "t1000",
+        "stock": 100
+    },
+    {
+        "id": 1,
+        "title": "Monitor",
+        "description": "40''",
+        "price": 435000,
+        "thumbnail": "thumbnail",
+        "code": "m1000",
+        "stock": 23
+    },
+    {
+        "id": 2,
+        "title": "Notebook",
+        "description": "lenobo404''",
+        "price": 1435000,
+        "thumbnail": "thumbnail",
+        "code": "nt1000",
+        "stock": 56
+    },
+    {
+        "id": 3,
+        "title": "Mouse",
+        "description": "Normal",
+        "price": 5000,
+        "thumbnail": "thumbnail",
+        "code": "mu1000",
+        "stock": 100
+    },
+    {
+        "id": 4,
+        "title": "Mouse RGB",
+        "description": "logitec S500",
+        "price": 435000,
+        "thumbnail": "thumbnail",
+        "code": "mu2000",
+        "stock": 43
+    },
+    {
+        "id": 5,
+        "title": "Impresora",
+        "description": "InkTank",
+        "price": 235000,
+        "thumbnail": "thumbnail",
+        "code": "imp1000",
+        "stock": 23
+    },
+    {
+        "id": 6,
+        "title": "Procesador A10",
+        "description": "6 nucleos",
+        "price": 70000,
+        "thumbnail": "thumbnail",
+        "code": "prd1000",
+        "stock": 30
+    },
+    {
+        "id": 7,
+        "title": "RAM KIGTUM",
+        "description": "16GB",
+        "price": 31000,
+        "thumbnail": "thumbnail",
+        "code": "m1000",
+        "stock": 130
+    },
+    {
+        "id": 8,
+        "title": "GTX 1660S",
+        "description": "6GB RAM",
+        "price": 435000,
+        "thumbnail": "thumbnail",
+        "code": "gtx12",
+        "stock": 15
+    },
+    {
+        "id": 9,
+        "title": "RTX 4090",
+        "description": "24GB",
+        "price": 1535000,
+        "thumbnail": "thumbnail",
+        "code": "rtx",
+        "stock": 33
+    },    {
+        "id": 10,
+        "title": "Fuente ATX",
+        "description": "1000 Bronce",
+        "price": 55000,
+        "thumbnail": "thumbnail",
+        "code": "f1000",
+        "stock": 230
+    },    {
+        "id": 11,
+        "title": "Parlante",
+        "description": "3 bocinas",
+        "price": 335000,
+        "thumbnail": "thumbnail",
+        "code": "p1000",
+        "stock": 2
+    }
+]
