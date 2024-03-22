@@ -11,10 +11,9 @@ const app = express();
 app.get('/products', async (req, res) =>{
     let prods = await pm.getProducts();
     
-    let limit = Number(req.query.limit);  console.log(limit)
+    let limit = Number(req.query.limit); 
 
     let isNAN = isNaN(limit)
-console.log(isNAN)
     if(!isNAN && limit>0){
         prods = prods.slice(0,limit);
     }
