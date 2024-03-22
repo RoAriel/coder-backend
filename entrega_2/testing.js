@@ -1,5 +1,5 @@
 const { clear } = require("console");
-const ProductManager = require("./productManager");
+const ProductManager = require("./ProductManager");
 
 const path = "./files/products.json"
 
