@@ -1,7 +1,6 @@
 import fs from "node:fs"
 
-export default class Product{
-    static nxtProductId = 0;
+export default class ProductManager{
 
     constructor(pathFile) {
         this.pathFile = pathFile
