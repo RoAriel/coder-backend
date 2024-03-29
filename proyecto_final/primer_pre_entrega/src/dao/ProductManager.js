@@ -2,6 +2,8 @@ import fs from "node:fs"
 
 export default class ProductManager{
 
+    static maxId = 0;
+
     constructor(pathFile) {
         this.pathFile = pathFile
     }
@@ -32,7 +34,9 @@ export default class ProductManager{
             return `El codigo: ${code}, ya existe para otro producto.`;
         } else {
             
-            id = Math.max(...productos_db.map(p => p.id)) + 1;
+            let maxIdProducts = Math.max(...productos_db.map(p => p.id));
+            let id = Math.max(ProductManager.maxId,maxIdProducts) + 1;
+
             prd = {
                 id: id,
                 title: title,
@@ -45,6 +49,8 @@ export default class ProductManager{
                 thumbnail: [thumbnail]
                 
             };
+            
+            ProductManager.maxId = id;
         };
 
         productos_db.push(prd);
