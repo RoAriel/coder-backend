@@ -18,7 +18,7 @@ export default class ProductManager{
         };
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, code, price, status, stock, category, thumbnail) {
 
         let prd;
         let id;
@@ -35,7 +35,7 @@ export default class ProductManager{
         } else {
             
             let maxIdProducts = Math.max(...productos_db.map(p => p.id));
-            let id = Math.max(ProductManager.maxId,maxIdProducts) + 1;
+            const id = Math.max(ProductManager.maxId,maxIdProducts) + 1;
 
             prd = {
                 id: id,

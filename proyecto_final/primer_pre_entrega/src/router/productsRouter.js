@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {join} from 'node:path'
 import __dirname from '../utils.js';
 import ProductManager from '../dao/ProductManager.js';
+import { randomBytes } from 'node:crypto';
 
 export const router=Router()
 
@@ -44,7 +45,46 @@ router.get("/:id", async(req, res)=>{
         console.log(error)
         return res.json({error:"Error desconocido...!!!"})
     }
+});
 
+router.post("/", async(req, res)=>{
+    let {title,
+        description,
+        code,
+        price,
+        status,
+        stock,
+        category,
+        thumbnail
+    } = req.body
+    // validacion
+    if (!title || !description || !price || !thumbnail || !code || !stock || !category){
+        res.setHeader('Content-Type','application/json');
+        return res.status(400).json({error:`Complete los campos que son requeridos`})
+    }
 
+    // resto validaciones 
+    try {
+        let nuevoProd=await pm.addProduct(title,
+            description,
+            code,
+            price,
+            status,
+            stock,
+            category,
+            thumbnail) 
 
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json(nuevoProd);
+
+    } catch (error) {
+        res.setHeader('Content-Type','application/json');
+        return res.status(500).json(
+            {
+                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle:`${error.message}`
+            }
+        )
+        
+    }
 })
