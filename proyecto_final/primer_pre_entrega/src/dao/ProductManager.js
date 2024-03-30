@@ -57,7 +57,7 @@ export default class ProductManager{
         await fs.promises.writeFile(this.pathFile, JSON.stringify(productos_db));
 
 
-        return `Producto agregado. ID: ${id}`;
+        return `Producto agregado. ID: ${ProductManager.maxId}`;
 
     };
 

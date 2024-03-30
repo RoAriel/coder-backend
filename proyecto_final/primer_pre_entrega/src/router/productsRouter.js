@@ -2,7 +2,6 @@ import { Router } from 'express';
 import {join} from 'node:path'
 import __dirname from '../utils.js';
 import ProductManager from '../dao/ProductManager.js';
-import { randomBytes } from 'node:crypto';
 
 export const router=Router()
 
@@ -87,4 +86,61 @@ router.post("/", async(req, res)=>{
         )
         
     }
+})
+
+router.put("/:id", async(req, res)=>{
+
+    let {campoAModificar, nuevoValor} = req.body
+
+    let id=req.params.id
+    // validar que sea numerico...
+
+    console.log(`aca llegue el id: ${id}, el campo es: ${campoAModificar}, el valor es: ${nuevoValor}`);
+    
+    id=Number(id)  // "100"
+    if(isNaN(id)){
+        return res.json({error:`Ingrese un id numérico...!!!`})
+    }
+
+
+    try {
+        console.log('pase por el try:', campoAModificar, nuevoValor);
+        
+        let prodModificado=await pm.updateProduct(id, campoAModificar, nuevoValor)
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json(prodModificado);
+    
+    } catch (error) {
+        console.log('pase por error');
+        
+        console.log(error)
+        return res.json({error:"Error desconocido...!!!"})
+    }
+
+})
+
+
+router.delete("/:id", async(req, res)=>{
+
+    let id=req.params.id
+    // validar que sea numerico...
+    id=Number(id)  // "100"
+    if(isNaN(id)){
+        return res.json({error:`Ingrese un id numérico...!!!`})
+    }
+
+    try {
+        let prAEliminar=await pm.deleteProduct(id)
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json(prAEliminar);
+    
+        return res.json(prAEliminar)
+        
+    } catch (error) {
+        console.log(error)
+        return res.json({error:"Error desconocido...!!!"})
+    }
+
+
+
 })
