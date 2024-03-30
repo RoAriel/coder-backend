@@ -17,7 +17,7 @@ router.get("/", async(req, res)=>{
 
     let products=await pm.getProducts()
     if(limit){
-        products=usuarios.slice(0, limit)
+        products=products.slice(0, limit)
     }
 
     res.json(products)
