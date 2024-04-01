@@ -11,9 +11,7 @@ const pm = new ProductManager(FILE_PATH)
 
 router.get("/", async(req, res)=>{
 
-    let {limit, skip, nombre}=req.query
-
-    console.log(skip, nombre)
+    let limit = Number(req.query.limit); 
 
     let products=await pm.getProducts()
     if(limit){
@@ -26,9 +24,8 @@ router.get("/", async(req, res)=>{
 
 router.get("/:id", async(req, res)=>{
 
-    let id=req.params.id
+    let id=Number(req.params.id)
 
-    id=Number(id)  // "100"
     if(isNaN(id)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
@@ -56,13 +53,12 @@ router.post("/", async(req, res)=>{
         category,
         thumbnail
     } = req.body
-    // validacion
+
     if (!title || !description || !price || !thumbnail || !code || !stock || !category){
         res.setHeader('Content-Type','application/json');
         return res.status(400).json({error:`Complete los campos que son requeridos`})
     }
 
-    // resto validaciones 
     try {
         let nuevoProd=await pm.addProduct(title,
             description,
@@ -93,26 +89,21 @@ router.put("/:id", async(req, res)=>{
     let {campoAModificar, nuevoValor} = req.body
 
     let id=req.params.id
-    // validar que sea numerico...
-
-    console.log(`aca llegue el id: ${id}, el campo es: ${campoAModificar}, el valor es: ${nuevoValor}`);
     
-    id=Number(id)  // "100"
+    id=Number(id)
     if(isNaN(id)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
 
 
     try {
-        console.log('pase por el try:', campoAModificar, nuevoValor);
         
         let prodModificado=await pm.updateProduct(id, campoAModificar, nuevoValor)
         res.setHeader('Content-Type','application/json');
         return res.status(200).json(prodModificado);
     
     } catch (error) {
-        console.log('pase por error');
-        
+       
         console.log(error)
         return res.json({error:"Error desconocido...!!!"})
     }
@@ -123,8 +114,7 @@ router.put("/:id", async(req, res)=>{
 router.delete("/:id", async(req, res)=>{
 
     let id=req.params.id
-    // validar que sea numerico...
-    id=Number(id)  // "100"
+    id=Number(id)
     if(isNaN(id)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
@@ -134,8 +124,6 @@ router.delete("/:id", async(req, res)=>{
         res.setHeader('Content-Type','application/json');
         return res.status(200).json(prAEliminar);
     
-        return res.json(prAEliminar)
-        
     } catch (error) {
         console.log(error)
         return res.json({error:"Error desconocido...!!!"})

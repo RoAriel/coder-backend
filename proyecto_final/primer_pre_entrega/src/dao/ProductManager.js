@@ -1,8 +1,6 @@
 import fs from "node:fs"
 
-export default class ProductManager{
-
-    static maxId = 0;
+export default class ProductManager {
 
     constructor(pathFile) {
         this.pathFile = pathFile
@@ -33,10 +31,9 @@ export default class ProductManager{
         if (existCode) {
             return `El codigo: ${code}, ya existe para otro producto.`;
         } else {
-            
-            let maxIdProducts = Math.max(...productos_db.map(p => p.id));
-            const id = Math.max(ProductManager.maxId,maxIdProducts) + 1;
 
+            let maxIdProducts = Math.max(...productos_db.map(p => p.id));
+            const id = maxIdProducts + 1
             prd = {
                 id: id,
                 title: title,
@@ -47,17 +44,14 @@ export default class ProductManager{
                 stock: stock,
                 category: category,
                 thumbnail: [thumbnail]
-                
+
             };
-            
-            ProductManager.maxId = id;
+
+            productos_db.push(prd);
+            await fs.promises.writeFile(this.pathFile, JSON.stringify(productos_db));
+
+            return `Producto agregado. ID: ${ProductManager.maxId}`;
         };
-
-        productos_db.push(prd);
-        await fs.promises.writeFile(this.pathFile, JSON.stringify(productos_db));
-
-
-        return `Producto agregado. ID: ${ProductManager.maxId}`;
 
     };
 
