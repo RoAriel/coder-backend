@@ -1,1 +1,301 @@
-[{"id":1,"title":"Leche","descripcion":"Leche descremada enriquecida con vitaminas","code":"123456","price":2.5,"status":true,"stock":50,"category":"Lácteos","thumbnails":["https://example.com/leche.jpg"]},{"id":2,"title":"Pan","descripcion":"Pan blanco fresco","code":"987654","price":2.5,"status":true,"stock":50,"category":"Panadería","thumbnails":["https://example.com/pan.jpg"]},{"id":3,"title":"Arroz","descripcion":"Arroz blanco de grano largo","code":"246813","price":2.5,"status":true,"stock":50,"category":"Cereales","thumbnails":["https://example.com/arroz.jpg"]},{"id":4,"title":"Azúcar","descripcion":"Azúcar blanca refinada","code":"135792","price":2.5,"status":true,"stock":50,"category":"Endulzantes","thumbnails":["https://example.com/azucar.jpg"]},{"id":5,"title":"Aceite","descripcion":"Aceite de oliva extra virgen","code":"864209","price":2.5,"status":true,"stock":50,"category":"Aceites","thumbnails":["https://example.com/aceite.jpg"]},{"id":6,"title":"Sal","descripcion":"Sal de mesa","code":"975310","price":2.5,"status":true,"stock":50,"category":"Especias","thumbnails":["https://example.com/sal.jpg"]},{"id":7,"title":"Pasta","descripcion":"Pasta de trigo durum","code":"732046","price":2.5,"status":true,"stock":50,"category":"Pastas","thumbnails":["https://example.com/pasta.jpg"]},{"id":8,"title":"Atún","descripcion":"Atún en agua enlatado","code":"618037","price":2.5,"status":true,"stock":50,"category":"Conservas","thumbnails":["https://example.com/atun.jpg"]},{"id":9,"title":"Café","descripcion":"Café molido 100% arabica","code":"409327","price":2.5,"status":true,"stock":50,"category":"Café","thumbnails":["https://example.com/cafe.jpg"]},{"id":10,"title":"Galletas","descripcion":"Galletas de chocolate","code":"281736","price":2.5,"status":true,"stock":50,"category":"Snacks","thumbnails":["https://example.com/galletas.jpg"]},{"id":11,"title":"Lechuga","descripcion":"Lechuga fresca","code":"174635","price":2.5,"status":true,"stock":50,"category":"Vegetales","thumbnails":["https://example.com/lechuga.jpg"]},{"id":12,"title":"Tomate","descripcion":"Tomate rojo fresco","code":"563829","price":2.5,"status":true,"stock":50,"category":"Vegetales","thumbnails":["https://example.com/tomate.jpg"]},{"id":13,"title":"Cebolla","descripcion":"Cebolla blanca fresca","code":"908172","price":2.5,"status":true,"stock":50,"category":"Vegetales","thumbnails":["https://example.com/cebolla.jpg"]},{"id":14,"title":"Zanahoria","descripcion":"Zanahoria fresca","code":"245671","price":2.5,"status":true,"stock":50,"category":"Vegetales","thumbnails":["https://example.com/zanahoria.jpg"]},{"id":15,"title":"Manzana","descripcion":"Manzana roja fresca","code":"718293","price":2.5,"status":true,"stock":50,"category":"Frutas","thumbnails":["https://example.com/manzana.jpg"]},{"id":16,"title":"Plátano","descripcion":"Plátano maduro","code":"362719","price":2.5,"status":true,"stock":50,"category":"Frutas","thumbnails":["https://example.com/platano.jpg"]},{"id":17,"title":"Naranja","descripcion":"Naranja jugosa","code":"819274","price":2.5,"status":true,"stock":50,"category":"Frutas","thumbnails":["https://example.com/naranja.jpg"]},{"id":18,"title":"Pollo","descripcion":"Pollo entero fresco","code":"526374","price":2.5,"status":true,"stock":50,"category":"Carnes","thumbnails":["https://example.com/pollo.jpg"]},{"id":19,"title":"Res","descripcion":"Carne de res magra","code":"937485","price":2.5,"status":true,"stock":50,"category":"Carnes","thumbnails":["https://example.com/res.jpg"]},{"id":20,"title":"Cerdo","descripcion":"Carne de cerdo fresca","code":"203948","price":2.5,"status":true,"stock":50,"category":"Carnes","thumbnails":["https://example.com/cerdo.jpg"]},{"id":21,"title":"Polenta","description":"Polenta x 3,5kgv","code":20323,"price":40.5,"status":true,"stock":1000,"category":"La Polenta moño rojo","thumbnail":["thumbnail"]}]
+[
+  {
+    "pid": 1,
+    "title": "Leche",
+    "descripcion": "Leche descremada enriquecida con vitaminas",
+    "code": "123456",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Lácteos",
+    "thumbnails": [
+      "https://example.com/leche.jpg"
+    ]
+  },
+  {
+    "pid": 2,
+    "title": "Pan",
+    "descripcion": "Pan blanco fresco",
+    "code": "987654",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Panadería",
+    "thumbnails": [
+      "https://example.com/pan.jpg"
+    ]
+  },
+  {
+    "pid": 3,
+    "title": "Arroz",
+    "descripcion": "Arroz blanco de grano largo",
+    "code": "246813",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Cereales",
+    "thumbnails": [
+      "https://example.com/arroz.jpg"
+    ]
+  },
+  {
+    "pid": 4,
+    "title": "Azúcar",
+    "descripcion": "Azúcar blanca refinada",
+    "code": "135792",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Endulzantes",
+    "thumbnails": [
+      "https://example.com/azucar.jpg"
+    ]
+  },
+  {
+    "pid": 5,
+    "title": "Aceite",
+    "descripcion": "Aceite de oliva extra virgen",
+    "code": "864209",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Aceites",
+    "thumbnails": [
+      "https://example.com/aceite.jpg"
+    ]
+  },
+  {
+    "pid": 6,
+    "title": "Sal",
+    "descripcion": "Sal de mesa",
+    "code": "975310",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Especias",
+    "thumbnails": [
+      "https://example.com/sal.jpg"
+    ]
+  },
+  {
+    "pid": 7,
+    "title": "Pasta",
+    "descripcion": "Pasta de trigo durum",
+    "code": "732046",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Pastas",
+    "thumbnails": [
+      "https://example.com/pasta.jpg"
+    ]
+  },
+  {
+    "pid": 8,
+    "title": "Atún",
+    "descripcion": "Atún en agua enlatado",
+    "code": "618037",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Conservas",
+    "thumbnails": [
+      "https://example.com/atun.jpg"
+    ]
+  },
+  {
+    "pid": 9,
+    "title": "Café",
+    "descripcion": "Café molido 100% arabica",
+    "code": "409327",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Café",
+    "thumbnails": [
+      "https://example.com/cafe.jpg"
+    ]
+  },
+  {
+    "pid": 10,
+    "title": "Galletas",
+    "descripcion": "Galletas de chocolate",
+    "code": "281736",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Snacks",
+    "thumbnails": [
+      "https://example.com/galletas.jpg"
+    ]
+  },
+  {
+    "pid": 11,
+    "title": "Lechuga",
+    "descripcion": "Lechuga fresca",
+    "code": "174635",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Vegetales",
+    "thumbnails": [
+      "https://example.com/lechuga.jpg"
+    ]
+  },
+  {
+    "pid": 12,
+    "title": "Tomate",
+    "descripcion": "Tomate rojo fresco",
+    "code": "563829",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Vegetales",
+    "thumbnails": [
+      "https://example.com/tomate.jpg"
+    ]
+  },
+  {
+    "pid": 13,
+    "title": "Cebolla",
+    "descripcion": "Cebolla blanca fresca",
+    "code": "908172",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Vegetales",
+    "thumbnails": [
+      "https://example.com/cebolla.jpg"
+    ]
+  },
+  {
+    "pid": 14,
+    "title": "Zanahoria",
+    "descripcion": "Zanahoria fresca",
+    "code": "245671",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Vegetales",
+    "thumbnails": [
+      "https://example.com/zanahoria.jpg"
+    ]
+  },
+  {
+    "pid": 15,
+    "title": "Manzana",
+    "descripcion": "Manzana roja fresca",
+    "code": "718293",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Frutas",
+    "thumbnails": [
+      "https://example.com/manzana.jpg"
+    ]
+  },
+  {
+    "pid": 16,
+    "title": "Plátano",
+    "descripcion": "Plátano maduro",
+    "code": "362719",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Frutas",
+    "thumbnails": [
+      "https://example.com/platano.jpg"
+    ]
+  },
+  {
+    "pid": 17,
+    "title": "Naranja",
+    "descripcion": "Naranja jugosa",
+    "code": "819274",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Frutas",
+    "thumbnails": [
+      "https://example.com/naranja.jpg"
+    ]
+  },
+  {
+    "pid": 18,
+    "title": "Pollo",
+    "descripcion": "Pollo entero fresco",
+    "code": "526374",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Carnes",
+    "thumbnails": [
+      "https://example.com/pollo.jpg"
+    ]
+  },
+  {
+    "pid": 19,
+    "title": "Res",
+    "descripcion": "Carne de res magra",
+    "code": "937485",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Carnes",
+    "thumbnails": [
+      "https://example.com/res.jpg"
+    ]
+  },
+  {
+    "pid": 20,
+    "title": "Cerdo",
+    "descripcion": "Carne de cerdo fresca",
+    "code": "203948",
+    "price": 2.5,
+    "status": true,
+    "stock": 50,
+    "category": "Carnes",
+    "thumbnails": [
+      "https://example.com/cerdo.jpg"
+    ]
+  },
+  {
+    "pid": 22,
+    "title": "Mantecol",
+    "description": "600gr",
+    "code": 223,
+    "price": 440.5,
+    "status": true,
+    "stock": 1000,
+    "category": "George",
+    "thumbnail": [
+      "thumbnail"
+    ]
+  },
+  {
+    "pid": 23,
+    "title": "Pepinillos",
+    "description": "600gr",
+    "code": 2123,
+    "price": 67,
+    "status": true,
+    "stock": 1000,
+    "category": "Empaquetados",
+    "thumbnail": [
+      "thumbnail"
+    ]
+  },
+  {
+    "pid": 24,
+    "title": "Ajies",
+    "description": "600gr",
+    "code": 21233,
+    "price": 87,
+    "status": true,
+    "stock": 1000,
+    "category": "Empaquetados",
+    "thumbnail": [
+      "thumbnail"
+    ]
+  }
+]

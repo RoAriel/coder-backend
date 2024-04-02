@@ -20,30 +20,21 @@ export default class CartManager {
 
     async getProductByCartId(cid) {
         let carts_bd = await this.getCarts();
-        let bd_products = await this.producManager.getProducts()
 
         let cart = carts_bd.find(p => p.cid == cid);
 
         if (cart) {
 
             let { products } = cart
-
-            let idProducts = products.map(p => p["pid"])
-            let productsName = []
-
-            idProducts.forEach(id => {
-                bd_products.forEach(p => {
-                    if (p["id"] == id) productsName.push(p["title"])
-                })
-            })
-
-            return productsName;
+            return products
         } else {
-            return `Producto no encontrado con el id: ${cid}`;
+            return `Cart no encontrado con el id: ${cid}`;
         }
 
     };
     async addCart(listProducts) {
+
+        let newID
 
         let bd_carts = await this.getCarts() // para ver el ID
 
@@ -55,19 +46,59 @@ export default class CartManager {
 
         if (pIds.every(id => bd_idProducts.includes(id))) {
 
-            let newID = maxCartID + 1
+            newID = maxCartID + 1
             let cart = {
                 cid: newID,
                 products: listProducts
             }
 
             bd_carts.push(cart);
-            await fs.promises.writeFile(this.pathFile, JSON.stringify(bd_carts));
-            return `Carrito agregado. ID: ${maxCartID}`;
+            await fs.promises.writeFile(this.pathFile, JSON.stringify(bd_carts, null, 2));
+            return `Carrito agregado. ID: ${newID}`;
 
         } else {
             return 'Producto/s no encontrado/s en la DB de productos'
         }
+
+    };
+
+    async addProductToCart(cid, pid) {
+        let pr = await this.producManager.getProductById(pid)
+        console.log('pr:\n',pr)
+        let prCart = await this.getProductByCartId(cid)
+
+        let cart = (await this.getCarts()).filter(cart => cart.cid == cid)
+
+        let bd_carts = (await this.getCarts()).filter(cart => cart.cid != cid)
+
+        if ((prCart.map(pr => pr.pid)).includes(pid)) {
+            prCart.forEach(pr => { if (pr.pid == pid) pr.quantity++ })
+            cart[0].products = prCart
+
+            bd_carts.push(cart[0])
+
+            await fs.promises.writeFile(this.pathFile, JSON.stringify(bd_carts, null, 2));
+            return `ProductId ${pid} agregado al Cart Id ${cid} `;
+
+        } else {
+
+            let pr = await this.producManager.getProductById(pid)
+
+            if (!(typeof(pr) != Object)) {
+                prCart.push({ pid: pid, quantity: 1 })
+                cart[0].products = prCart
+
+                bd_carts.push(cart[0])
+
+                await fs.promises.writeFile(this.pathFile, JSON.stringify(bd_carts, null, 2));
+                return `ProductId ${pid} agregado al Cart Id ${cid} `;
+            } else {
+                return `El producto de ID ${pid} no existe`
+            }
+        }
+
+
+
 
     }
 }

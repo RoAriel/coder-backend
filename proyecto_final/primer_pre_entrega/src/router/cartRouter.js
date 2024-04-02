@@ -64,3 +64,33 @@ router.post("/", async (req, res) => {
     }
 
 })
+
+router.post("/:cid/product/:pid", async(req,res) =>{
+    let cid = Number(req.params.cid)
+    let pid = Number(req.params.pid)
+
+    if(isNaN(cid) || isNaN(pid)){
+        return res.json({ error: `Ingrese un cid o pid numérico...!!!` })
+    }
+
+    try {
+
+        let prToAdd = await cm.addProductToCart(cid,pid)
+        console.log(prToAdd)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json(prToAdd);
+
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+
+
+})

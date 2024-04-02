@@ -4,11 +4,11 @@
     "products": [
       {
         "pid": 1,
-        "quantity": 20
+        "quantity": 29
       },
       {
         "pid": 2,
-        "quantity": 1
+        "quantity": 4
       },
       {
         "pid": 3,
@@ -17,6 +17,14 @@
       {
         "pid": 4,
         "quantity": 10
+      },
+      {
+        "pid": 5,
+        "quantity": 2
+      },
+      {
+        "pid": 6,
+        "quantity": 1
       }
     ]
   },
@@ -37,7 +45,7 @@
       },
       {
         "pid": 4,
-        "quantity": 10
+        "quantity": 11
       }
     ]
   },
@@ -45,16 +53,8 @@
     "cid": 3,
     "products": [
       {
-        "pid": 1,
+        "pid": 6,
         "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
       },
       {
         "pid": 4,
@@ -66,18 +66,6 @@
     "cid": 4,
     "products": [
       {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
         "pid": 4,
         "quantity": 10
       }
@@ -87,124 +75,7 @@
     "cid": 5,
     "products": [
       {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "cid": 6,
-    "products": [
-      {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "cid": 7,
-    "products": [
-      {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "cid": 8,
-    "products": [
-      {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "cid": 9,
-    "products": [
-      {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "cid": 10,
-    "products": [
-      {
-        "pid": 1,
-        "quantity": 20
-      },
-      {
-        "pid": 2,
-        "quantity": 1
-      },
-      {
-        "pid": 3,
-        "quantity": 45
-      },
-      {
-        "pid": 4,
+        "pid": 20,
         "quantity": 10
       }
     ]

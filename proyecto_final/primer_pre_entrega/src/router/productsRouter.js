@@ -22,18 +22,18 @@ router.get("/", async(req, res)=>{
 
 })
 
-router.get("/:id", async(req, res)=>{
+router.get("/:pid", async(req, res)=>{
 
-    let id=Number(req.params.id)
+    let pid=Number(req.params.pid)
 
-    if(isNaN(id)){
+    if(isNaN(pid)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
 
     try {
-        let product=await pm.getProductById(id)
+        let product=await pm.getProductById(pid)
         if(!product){
-            return res.json({message:`No existen producto con id ${id}`})
+            return res.json({message:`No existen producto con id ${pid}`})
         }
     
         return res.json(product)
@@ -84,21 +84,21 @@ router.post("/", async(req, res)=>{
     }
 })
 
-router.put("/:id", async(req, res)=>{
+router.put("/:pid", async(req, res)=>{
 
-    let {campoAModificar, nuevoValor} = req.body
+    let {propiedad, nuevoValor} = req.body
 
-    let id=req.params.id
+    let pid=req.params.pid
     
-    id=Number(id)
-    if(isNaN(id)){
+    pid=Number(pid)
+    if(isNaN(pid)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
 
 
     try {
         
-        let prodModificado=await pm.updateProduct(id, campoAModificar, nuevoValor)
+        let prodModificado=await pm.updateProduct(pid, propiedad, nuevoValor)
         res.setHeader('Content-Type','application/json');
         return res.status(200).json(prodModificado);
     
@@ -111,16 +111,16 @@ router.put("/:id", async(req, res)=>{
 })
 
 
-router.delete("/:id", async(req, res)=>{
+router.delete("/:pid", async(req, res)=>{
 
-    let id=req.params.id
-    id=Number(id)
-    if(isNaN(id)){
+    let pid=req.params.pid
+    pid=Number(pid)
+    if(isNaN(pid)){
         return res.json({error:`Ingrese un id numérico...!!!`})
     }
 
     try {
-        let prAEliminar=await pm.deleteProduct(id)
+        let prAEliminar=await pm.deleteProduct(pid)
         res.setHeader('Content-Type','application/json');
         return res.status(200).json(prAEliminar);
     
