@@ -2,7 +2,7 @@ import express from 'express';
 import { router as productsRouter } from "./router/productsRouter.js"
 import { router as cartsRouter } from "./router/cartRouter.js"
 
-const PORT = 3000;
+const PORT = 8080;
 
 const app = express();
 
