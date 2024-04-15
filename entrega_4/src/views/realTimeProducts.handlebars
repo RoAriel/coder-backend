@@ -1,7 +1,7 @@
 <h2>Productos RT</h2>
 <hr>
 <h3>Listado de productos</h3>
-<ul>
+<ul id="productos">
     {{#each products}}
     <li>{{title}}</li>
     {{/each}}
@@ -10,3 +10,6 @@
 <br>
 
 <a href="/">Inicio</a>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtime.js"></script>

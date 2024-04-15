@@ -297,5 +297,50 @@
     "thumbnail": [
       "thumbnail"
     ]
+  },
+  {
+    "pid": 25,
+    "title": "Papines",
+    "description": "Pequnia papa",
+    "code": 77001,
+    "price": 123.5,
+    "status": true,
+    "stock": 1000,
+    "category": "Verdutas",
+    "thumbnail": [
+      [
+        "thumbnail"
+      ]
+    ]
+  },
+  {
+    "pid": 26,
+    "title": "Cebolla",
+    "description": "Morada",
+    "code": 77002,
+    "price": 123.5,
+    "status": true,
+    "stock": 1000,
+    "category": "Verduras",
+    "thumbnail": [
+      [
+        "thumbnail"
+      ]
+    ]
+  },
+  {
+    "pid": 27,
+    "title": "Cebolla Blanca",
+    "description": "Blanca",
+    "code": 77082,
+    "price": 123.5,
+    "status": true,
+    "stock": 1000,
+    "category": "Verduras",
+    "thumbnail": [
+      [
+        "thumbnail"
+      ]
+    ]
   }
 ]

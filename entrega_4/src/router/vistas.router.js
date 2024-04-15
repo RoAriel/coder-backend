@@ -15,9 +15,10 @@ router.get('/', (req, res) => {
 
 router.get('/realTimeproducts', async (req, res) => {
 
-    let products = await prMg.getProducts();
+    let products
+    
     try {
-
+        products = await prMg.getProducts();
         res.setHeader('Content-Type', 'text/html');
         res.status(200).render('realTimeProducts', { products});
 
