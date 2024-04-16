@@ -232,5 +232,20 @@
     "thumbnails": [
       "https://example.com/pollo.jpg"
     ]
+  },
+  {
+    "pid": 19,
+    "title": "Cebolla Blanca",
+    "description": "Blanca",
+    "code": 77082,
+    "price": 123.5,
+    "status": true,
+    "stock": 1000,
+    "category": "Verduras",
+    "thumbnail": [
+      [
+        "thumbnail"
+      ]
+    ]
   }
 ]

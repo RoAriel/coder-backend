@@ -19,8 +19,8 @@ router.get('/realTimeproducts', async (req, res) => {
     
     try {
         products = await prMg.getProducts();
-        res.setHeader('Content-Type', 'text/html');
-        res.status(200).render('realTimeProducts', { products});
+        res.setHeader('Content-Type', 'text/html');      
+        res.status(200).render('realTimeProducts', {products});
 
     } catch (error) {
         console.log(error)
