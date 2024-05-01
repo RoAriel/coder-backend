@@ -92,7 +92,11 @@ router.post('/', async (req, res) => {
     try {
         let prd = { title, description, code, price, status, stock, category, thumbnail }
         let newProduct = await pm.addProduct(prd)
+
+        req.serverSocket.emit("nuevoProducto", title)
+
         res.setHeader('Content-Type', 'application/json');
+
         return res.status(201).json({ payload: newProduct });
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
@@ -138,7 +142,11 @@ router.delete('/:id', async (req, res) => {
 
     try {
         let prDel = await pm.deleteProduct(id)
+        let products = await pm.getProducts()
         res.setHeader('Content-Type', 'application/json');
+        
+        req.serverSocket.emit("productos", products)
+
         return res.status(200).json({ payload: prDel });
     } catch (error) {
 

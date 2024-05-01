@@ -4,13 +4,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { engine } from 'express-handlebars';
 import { router as productRouter } from './router/product.router.js';
+import { router as vistasRouter } from '../src/router/vistas.router.js'
+import { Server } from 'socket.io';
+
+let io
 
 const PORT = process.env.PORT;
-
 const DATABASE_URL = process.env.DATABASE_URL;
-
 const DATABASE = process.env.DATABASE;
-
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.engine('handlebars', engine({
         allowProtoMethodsByDefault: true,
     },
 }));
+
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '/views'));
 
@@ -28,17 +30,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', (req, res) => {
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(200).send('OK');
-})
+app.use('/api/products',
+    (req, res, next) => {
+        req.serverSocket = io
+        next()
+    }
+    , productRouter)
 
-app.get('/', (req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.status(200).render('home');
-})
-
-app.use('/api/products', productRouter)
+app.use('/', vistasRouter)
 
 const server = app.listen(PORT, () => {
     console.log(`Server escuchando en puerto ${PORT}`);
@@ -46,7 +45,7 @@ const server = app.listen(PORT, () => {
 
 const connDB = async () => {
     try {
-        
+
         await mongoose.connect(`${DATABASE_URL}`,
             {
                 dbName: `${DATABASE}`
@@ -59,3 +58,5 @@ const connDB = async () => {
 
 }
 connDB()
+
+io = new Server(server) 
