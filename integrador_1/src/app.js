@@ -5,7 +5,12 @@ import mongoose from 'mongoose';
 import { engine } from 'express-handlebars';
 import { router as productRouter } from './router/product.router.js';
 
-const PORT = 3000;
+const PORT = process.env.PORT;
+
+const DATABASE_URL = process.env.DATABASE_URL;
+
+const DATABASE = process.env.DATABASE;
+
 
 const app = express();
 
@@ -41,9 +46,10 @@ const server = app.listen(PORT, () => {
 
 const connDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://roarieldev:coder2024@cluster0.onipizz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+        
+        await mongoose.connect(`${DATABASE_URL}`,
             {
-                dbName: 'coder-project'
+                dbName: `${DATABASE}`
             }
         )
         console.log("DB Online...!!!")
