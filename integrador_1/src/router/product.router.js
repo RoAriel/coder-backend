@@ -27,28 +27,33 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    let {id} = req.params
+    let { id } = req.params
 
-    if (!isValidObjectId(id)){
-        res.setHeader('Content-Type','application/json');
-        return res.status(400).json({error:`Favor ingrese un ID valido.`})
+    if (!isValidObjectId(id)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
     }
 
     try {
-        let prd = await pm.getProductBy({_id : id})
-        res.setHeader('Content-Type','application/json');
-        return res.status(200).json({prd});
+        let prd = await pm.getProductBy({ _id: id })
+        if (prd) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(200).json({ prd });
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(400).json({ error: `Producto no encontrado` })
+        }
     } catch (error) {
         console.log('error', error);
-        res.setHeader('Content-Type','application/json');
+        res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
             {
-                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle:`${error.message}`
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
             }
         )
-        
-        
+
+
     }
 })
 
@@ -99,5 +104,54 @@ router.post('/', async (req, res) => {
         )
 
     }
+
+})
+
+router.delete('/:id', async (req, res) => {
+    let { id } = req.params
+
+    if (!isValidObjectId(id)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    let prExist
+
+    try {
+        prExist = await pm.getProductBy({ _id: id })
+        console.log('pr: ', prExist);
+
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    if (!prExist) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Producto con ID ${id} no existe.` })
+    }
+
+    try {
+        let prDel = await pm.deleteProduct(id)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({ payload: prDel });
+    } catch (error) {
+
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
 
 })

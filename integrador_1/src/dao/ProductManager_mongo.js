@@ -14,4 +14,9 @@ export class ProductManagerMongo{
         
         return await productModel.create(product)
     }
+
+    async deleteProduct(productId){
+
+        return await productModel.deleteOne({ _id : productId})
+    }
 }
