@@ -19,4 +19,8 @@ export class ProductManagerMongo{
 
         return await productModel.deleteOne({ _id : productId})
     }
+
+    async updtadeProduct(id, product){
+        return await productModel.findByIdAndUpdate(id, product, {runValidators: true, returnDocument: "after"})
+    }
 }

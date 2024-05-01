@@ -155,3 +155,45 @@ router.delete('/:id', async (req, res) => {
 
 
 })
+
+router.put('/:id', async (req, res) => {
+    let { id } = req.params
+    if (!isValidObjectId(id)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    let prdUpd =req.body
+
+    if(prdUpd._id){
+        delete prdUpd._id
+    }
+
+    if(prdUpd.code){
+        let exists
+        try {
+            exists = await pm.getProductBy({_id : {$ne:id}, code : prdUpd.code})
+            if(exists){
+                res.setHeader('Content-Type','application/json');
+                return res.status(400).json({error:`Ya existe otro producto con el nro de codigo ingresado`})
+            }
+        } catch (error) {
+            
+        }
+    }
+    try {
+        let  prodUpdated = await pm.updtadeProduct(id, prdUpd)
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json({prodUpdated});
+    } catch (error) {
+        res.setHeader('Content-Type','application/json');
+        return res.status(500).json(
+            {
+                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle:`${error.message}`
+            }
+        )
+        
+    }
+
+})
