@@ -119,7 +119,6 @@ router.delete('/:id', async (req, res) => {
 
     try {
         prExist = await pm.getProductBy({ _id: id })
-        console.log('pr: ', prExist);
 
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
