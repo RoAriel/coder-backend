@@ -28,12 +28,11 @@ router.get('/realTimeproducts', async (req, res) => {
         return res.status(500).json(
             {
                 error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-
             }
         )
-
     }
+})
 
-
-
+router.get('/chat',(req,res)=>{
+    res.status(200).render('chat')
 })

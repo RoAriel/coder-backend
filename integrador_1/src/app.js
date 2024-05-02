@@ -6,6 +6,7 @@ import { engine } from 'express-handlebars';
 import { router as productRouter } from './router/product.router.js';
 import { router as cartRouter } from './router/cart.router.js';
 import { router as vistasRouter } from '../src/router/vistas.router.js'
+import { messageModel } from './dao/models/message.model.js';
 import { Server } from 'socket.io';
 
 let io
@@ -61,4 +62,25 @@ const connDB = async () => {
 }
 connDB()
 
-io = new Server(server) 
+io = new Server(server)
+
+io.on("connection", socket => {
+    console.log(`Se ha conectado un cliente con id ${socket.id}`)
+
+    socket.on("id", async (user) => {
+        
+        let mensajes = await messageModel.find().lean()
+        mensajes = mensajes.map(m => {
+            return { user: m.user, mensaje: m.message }
+        })
+        socket.emit("mensajesPrevios", mensajes)
+        socket.broadcast.emit("nuevoUsuario", user)
+    })
+
+    socket.on("mensaje", async (user, mensaje) => {
+        // mensajes.push({user, mensaje})
+        await messageModel.create({ user: user, mensaje })
+        io.emit("nuevoMensaje", user, mensaje)
+    })
+
+})
