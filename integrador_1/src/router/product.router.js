@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
 import { isValidObjectId } from 'mongoose';
 
-const pm = new ProductManager
-
 export const router = Router()
+
+const pm = new ProductManager
 
 router.get('/', async (req, res) => {
 
@@ -142,12 +142,18 @@ router.delete('/:id', async (req, res) => {
 
     try {
         let prDel = await pm.deleteProduct(id)
-        let products = await pm.getProducts()
-        res.setHeader('Content-Type', 'application/json');
         
-        req.serverSocket.emit("productos", products)
+        if(prDel.deletedCount>0){
 
-        return res.status(200).json({ payload: prDel });
+            let products = await pm.getProducts()
+            req.serverSocket.emit("productos", products)
+
+            res.setHeader('Content-Type','application/json');
+            return res.status(200).json({payload:`Producto con id ${id} eliminado`});
+        }else{
+            res.setHeader('Content-Type','application/json');
+            return res.status(404).json({error:`No existen producto con id ${id} / o error al eliminar`})
+        }
     } catch (error) {
 
         res.setHeader('Content-Type', 'application/json');

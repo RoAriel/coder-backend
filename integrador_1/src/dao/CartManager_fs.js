@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import ProductManager from './ProductManager.js';
+import ProductManager from './ProductManager_fs.js';
 
 export default class CartManager {
 

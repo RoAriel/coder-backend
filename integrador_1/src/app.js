@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { engine } from 'express-handlebars';
 import { router as productRouter } from './router/product.router.js';
+import { router as cartRouter } from './router/cart.router.js';
 import { router as vistasRouter } from '../src/router/vistas.router.js'
 import { Server } from 'socket.io';
 
@@ -37,6 +38,7 @@ app.use('/api/products',
     }
     , productRouter)
 
+app.use('/api/carts', cartRouter)
 app.use('/', vistasRouter)
 
 const server = app.listen(PORT, () => {
