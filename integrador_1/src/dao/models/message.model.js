@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const messagesColl="messages"
 const messagesSchema=new mongoose.Schema(
     {
-        user: {type: String, unique: true, required:true}, 
+        user: String, 
         message: String
     },
     {

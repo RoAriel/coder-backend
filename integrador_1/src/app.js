@@ -70,15 +70,16 @@ io.on("connection", socket => {
     socket.on("id", async (user) => {
         
         let mensajes = await messageModel.find().lean()
+        
         mensajes = mensajes.map(m => {
-            return { user: m.user, mensaje: m.message }
+            return { user: m.user, mensaje: m.mensaje }
         })
+
         socket.emit("mensajesPrevios", mensajes)
         socket.broadcast.emit("nuevoUsuario", user)
     })
 
     socket.on("mensaje", async (user, mensaje) => {
-        // mensajes.push({user, mensaje})
         await messageModel.create({ user: user, mensaje })
         io.emit("nuevoMensaje", user, mensaje)
     })

@@ -7,7 +7,7 @@ Swal.fire({
     },
     allowOutsideClick:false
 }).then(datos=>{
-    // console.log(datos)
+     console.log(datos)
     let user=datos.value
     document.title=user
 
@@ -29,7 +29,7 @@ Swal.fire({
 
     socket.on("mensajesPrevios", mensajes=>{
         mensajes.forEach(m=>{
-            divMensajes.innerHTML+=`<span class="mensaje"><strong>${m.user}</strong> dice <i>${m.message}</i></span><br>`
+            divMensajes.innerHTML+=`<span class="mensaje"><strong>${m.user}</strong> dice <i>${m.mensaje}</i></span><br>`
             divMensajes.scrollTop=divMensajes.scrollHeight
         })
     })
@@ -42,7 +42,6 @@ Swal.fire({
     inputMensaje.addEventListener("keyup", e=>{
         e.preventDefault()
 
-        // console.log(e, e.target.value)
         if(e.code==="Enter" && e.target.value.trim().length>0){
             socket.emit("mensaje", user, e.target.value.trim())
             e.target.value=""
