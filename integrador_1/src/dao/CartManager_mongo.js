@@ -1,6 +1,6 @@
 import { cartModel } from './models/cart.model.js'
 
-export class CartManager_mongo {
+export class CartManagerMongo {
 
     async getCarts(){
         return await cartModel.find()
@@ -15,9 +15,9 @@ export class CartManager_mongo {
         return cartModel.create(listProducts)
     }
 
-    // async addProductToCart(cid, product){
-    //     return
-    // }
+    async addProductToCart(cid, products){
+        return cartModel.updateOne({_id : cid}, {$set: {products: products}})
+    }
 
 
 }
