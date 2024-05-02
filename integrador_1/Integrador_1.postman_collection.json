@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "caff5391-6628-488b-9885-abfbd0b7cf08",
+		"name": "Integrador_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1929407"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "pr_New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Banana\",\n    \"description\": \"Ecuador\",\n    \"code\": 5669,\n    \"price\": 1933.5,\n    \"status\": true,\n    \"stock\": 1000,\n    \"category\": \"Frutas\",\n    \"thumbnail\": \"thumbnail\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/products/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pr_upd",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"price\" : 1500.50}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/products/663299f230990f16438066ca",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"663299f230990f16438066ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pr_del",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products/6632c707f00a47e394af2e5f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"6632c707f00a47e394af2e5f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pr_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pr_byID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products/663299f230990f16438066ca",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"663299f230990f16438066ca"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para productos"
+		},
+		{
+			"name": "Carts",
+			"item": [
+				{
+					"name": "ct_cid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/carts/6632ff86913f09f018bb41ca",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carts",
+								"6632ff86913f09f018bb41ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ct_add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"products\": [\n\n    {\"pid\":\"6631c08adf6fe50224ee6d56\", \"quantity\": 1000},\n    {\"pid\":\"6631c3b686a505bd681930e5\", \"quantity\": 300},\n    {\"pid\":\"663299f230990f16438066ca\", \"quantity\": 40}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/carts/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ct_cid/pid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/carts/6632ff86913f09f018bb41ca/products/6631c08adf6fe50224ee6d56",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"carts",
+								"6632ff86913f09f018bb41ca",
+								"products",
+								"6631c08adf6fe50224ee6d56"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para Carts"
+		}
+	]
+}
