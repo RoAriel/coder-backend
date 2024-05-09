@@ -8,13 +8,14 @@ const pm = new ProductManager
 
 router.get('/', async (req, res) => {
 
-    let d0, d1, d2, d3 = {}, clave, val
     let pages_products
-    let qry = {}
-    let { limit, page, query, sort } = req.query
+    let d0, d1, d2, d3 = {}, clave, val, qry = {} // variables necesarias para generar el qry de filtro
+    let { limit, page, query, sort, category } = req.query
 
     if (query) {
+        
         let str = query.slice(1, -1)
+        
         let datos = str.split(':')
 
         if (datos.length > 2) {
@@ -33,7 +34,7 @@ router.get('/', async (req, res) => {
 
         }
     }
-
+    
     try {
 
         pages_products = await pm.getAllPaginate(limit, page, qry, sort)
