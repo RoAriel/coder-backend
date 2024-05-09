@@ -8,14 +8,38 @@ const pm = new ProductManager
 
 router.get('/', async (req, res) => {
 
+    let d0, d1, d2, d3 = {}, clave, val
     let pages_products
-    let { limit, page, query, sort} = req.query
+    let qry = {}
+    let { limit, page, query, sort } = req.query
+
+    if (query) {
+        let str = query.slice(1, -1)
+        let datos = str.split(':')
+
+        if (datos.length > 2) {
+
+            d0 = datos[0]
+            d1 = datos[1].slice(1)
+            d2 = datos[2].slice(0, -1)
+            d3[d1] = d2
+            qry[d0] = d3
+
+        } else {
+
+            clave = datos[0]
+            val = datos[1].slice(1, -1)
+            qry[clave] = val
+
+        }
+    }
 
     try {
 
-        pages_products = await pm.getAllPaginate(limit, page, query, sort)
+        pages_products = await pm.getAllPaginate(limit, page, qry, sort)
+
         res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(pages_products);
+        return res.status(200).json(pages_products);
 
     } catch (error) {
         console.log('Error:', error);
@@ -26,10 +50,7 @@ router.get('/', async (req, res) => {
                 detalle: `${error.message}`
             }
         )
-
-
     }
-
 })
 
 router.get('/:id', async (req, res) => {

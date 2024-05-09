@@ -21,8 +21,7 @@ export class ProductManagerMongo {
             sort: { price: orden }
         }
 
-        let filter = query ? { category: query } : {}
-
+        let filter = query ? query : {}
         let ret
         try {
             let { docs: payload, totalPages, prevPage, nextPage, page, hasPrevPage, hasNextPage } = await productModel.paginate(filter, options)
