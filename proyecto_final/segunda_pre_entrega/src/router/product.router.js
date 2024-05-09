@@ -8,10 +8,15 @@ const pm = new ProductManager
 
 router.get('/', async (req, res) => {
 
+    let pages_products
+    let { limit, page, query, sort} = req.query
+
     try {
-        let proucts = await pm.getProducts()
+
+        pages_products = await pm.getAllPaginate(limit, page, query, sort)
         res.setHeader('Content-Type', 'application/json');
-        return res.status(200).json({ proucts });
+            return res.status(200).json(pages_products);
+
     } catch (error) {
         console.log('Error:', error);
         res.setHeader('Content-Type', 'application/json');
@@ -24,6 +29,7 @@ router.get('/', async (req, res) => {
 
 
     }
+
 })
 
 router.get('/:id', async (req, res) => {
@@ -56,6 +62,7 @@ router.get('/:id', async (req, res) => {
 
     }
 })
+
 
 router.post('/', async (req, res) => {
 
@@ -140,15 +147,15 @@ router.delete('/:id', async (req, res) => {
 
     try {
         let prDel = await pm.deleteProduct(id)
-        
-        if(prDel.deletedCount>0){
+
+        if (prDel.deletedCount > 0) {
 
             let products = await pm.getProducts()
-            res.setHeader('Content-Type','application/json');
-            return res.status(200).json({payload:`Producto con id ${id} eliminado`});
-        }else{
-            res.setHeader('Content-Type','application/json');
-            return res.status(404).json({error:`No existen producto con id ${id} / o error al eliminar`})
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(200).json({ payload: `Producto con id ${id} eliminado` });
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(404).json({ error: `No existen producto con id ${id} / o error al eliminar` })
         }
     } catch (error) {
 
@@ -172,37 +179,37 @@ router.put('/:id', async (req, res) => {
         return res.status(400).json({ error: `Favor ingrese un ID valido.` })
     }
 
-    let prdUpd =req.body
+    let prdUpd = req.body
 
-    if(prdUpd._id){
+    if (prdUpd._id) {
         delete prdUpd._id
     }
 
-    if(prdUpd.code){
+    if (prdUpd.code) {
         let exists
         try {
-            exists = await pm.getProductBy({_id : {$ne:id}, code : prdUpd.code})
-            if(exists){
-                res.setHeader('Content-Type','application/json');
-                return res.status(400).json({error:`Ya existe otro producto con el nro de codigo ingresado`})
+            exists = await pm.getProductBy({ _id: { $ne: id }, code: prdUpd.code })
+            if (exists) {
+                res.setHeader('Content-Type', 'application/json');
+                return res.status(400).json({ error: `Ya existe otro producto con el nro de codigo ingresado` })
             }
         } catch (error) {
-            
+
         }
     }
     try {
-        let  prodUpdated = await pm.updtadeProduct(id, prdUpd)
-        res.setHeader('Content-Type','application/json');
-        return res.status(200).json({prodUpdated});
+        let prodUpdated = await pm.updtadeProduct(id, prdUpd)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({ prodUpdated });
     } catch (error) {
-        res.setHeader('Content-Type','application/json');
+        res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
             {
-                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle:`${error.message}`
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
             }
         )
-        
+
     }
 
 })

@@ -23,7 +23,7 @@
             nextLink: Link directo a la página siguiente (null si hasNextPage=false)
         }
 
-    - Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
+    Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
 
 
 - Además, agregar al router de carts los siguientes endpoints:
