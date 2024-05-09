@@ -112,17 +112,17 @@ router.post('/:cid/products/:pid', async (req, res) => {
 
     try {
 
-        let productsInCart = (await cm.getProductsByCartId(cid)).products
+        let productsInCart = await cm.getProductsByCartId(cid)
 
         if ((productsInCart.map(pr => (pr.pid).toString())).includes(pid)) {
 
             productsInCart.forEach(pr => { if ((pr.pid).toString() == pid) pr.quantity++ })
 
             await cm.addProductToCart(cid, productsInCart)
-            
+
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json(`El producto ya existia, se agrega una unidad más`);
-            
+
         } else {
 
             productsInCart.push({ pid: pid, quantity: 1 })
@@ -147,7 +147,7 @@ router.post('/:cid/products/:pid', async (req, res) => {
 
 })
 
-router.delete('/:cid/products/:pid', async(req, res) => {
+router.delete('/:cid/products/:pid', async (req, res) => {
 
     let { cid, pid } = req.params
 
@@ -192,27 +192,95 @@ router.delete('/:cid/products/:pid', async(req, res) => {
     }
 
     try {
-        
-        let cart_products = cart.products.filter( item => item.pid != pid)
 
-        await cm.addProductToCart(cid,cart_products)   
+        let cart_products = cart.products.filter(item => item.pid != pid)
 
-        
+        await cm.addProductToCart(cid, cart_products)
 
-        res.setHeader('Content-Type','application/json');
+
+
+        res.setHeader('Content-Type', 'application/json');
         return res.status(200).json('Carrito actializado');
-        
+
     } catch (error) {
-        res.setHeader('Content-Type','application/json');
+        res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
             {
-                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle:`${error.message}`
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
             }
         )
-        
-        
+
+
     }
 
+
+})
+
+router.put('/:cid', async (req, res) => {
+
+    let { cid } = req.params
+    let prods = req.body.products
+
+    if (!isValidObjectId(cid)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    //Controlo que existe el CID
+    let cart
+    try {
+        cart = await cm.getCart(cid)
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    if (!cart) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Ingrese ID's valido para la operacion` })
+    }
+
+    // Controlo que los productos que llegan al body sean existan
+    try {
+        let products = await pm.getProducts()
+        let existenProductos = prods.every(e => (products.map(pr => (pr._id).toString())).includes(e.pid))
+
+        if (!existenProductos) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(400).json({ error: `Uno o mas productos no existe` })
+        }
+    } catch (error) {
+
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+    }
+
+    // Cargo los nuevos productos
+    try {
+        await cm.addProductToCart(cid, prods)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json('ok');
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
 
 })
