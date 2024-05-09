@@ -284,3 +284,51 @@ router.put('/:cid', async (req, res) => {
     }
 
 })
+
+router.delete('/:cid', async (req, res) => {
+
+    let { cid } = req.params
+
+    if (!isValidObjectId(cid)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    //Controlo que existe el CID
+    let cart
+    try {
+        cart = await cm.getCart(cid)
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    if (!cart) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Ingrese ID's valido para la operacion` })
+    }
+
+    try {
+
+        await cm.addProductToCart(cid, [])
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json(`Carrido de CID ${cid}, fue vaciado.`);
+    } catch (error) {
+        console.log(error)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+}
+)
