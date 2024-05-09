@@ -6,9 +6,12 @@ export class CartManagerMongo {
         return await cartModel.find()
     }
 
+    async getCart(cid){
+        return await cartModel.findById({_id : cid})
+    }
     async getProductsByCartId(cid){
 
-        return await cartModel.findById({_id : cid})
+        return (await cartModel.findById({_id : cid})).products
     }
 
     async addCart(listProducts){

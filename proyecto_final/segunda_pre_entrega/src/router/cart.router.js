@@ -17,7 +17,7 @@ router.get('/:cid', async (req, res) => {
         return res.status(400).json({ error: `Favor ingrese un ID valido.` })
     }
     try {
-        let cart = await cm.getProductsByCartId(cid)
+        let cart = await cm.getCart(cid)
 
         if (cart) {
             res.setHeader('Content-Type', 'application/json');
@@ -121,7 +121,7 @@ router.post('/:cid/products/:pid', async (req, res) => {
             await cm.addProductToCart(cid, productsInCart)
             
             res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(`Se agrego el producto al Cart+1`);
+            return res.status(200).json(`El producto ya existia, se agrega una unidad más`);
             
         } else {
 
@@ -142,6 +142,76 @@ router.post('/:cid/products/:pid', async (req, res) => {
             }
         )
 
+    }
+
+
+})
+
+router.delete('/:cid/products/:pid', async(req, res) => {
+
+    let { cid, pid } = req.params
+
+    if (!isValidObjectId(cid) && !isValidObjectId(pid)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    //Controlo que existe el CID
+    let cart
+    try {
+        cart = await cm.getCart(cid)
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    //Controlo que existe el PID
+    let existProduct
+    try {
+        existProduct = await pm.getProductBy({ _id: pid })
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    if (!cart && !existProduct) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Ingrese ID's validos para la operacion` })
+    }
+
+    try {
+        
+        let cart_products = cart.products.filter( item => item.pid != pid)
+
+        await cm.addProductToCart(cid,cart_products)   
+
+        
+
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json('Carrito actializado');
+        
+    } catch (error) {
+        res.setHeader('Content-Type','application/json');
+        return res.status(500).json(
+            {
+                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle:`${error.message}`
+            }
+        )
+        
+        
     }
 
 
