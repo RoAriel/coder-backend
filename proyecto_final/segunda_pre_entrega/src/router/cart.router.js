@@ -330,5 +330,76 @@ router.delete('/:cid', async (req, res) => {
         )
 
     }
-}
-)
+})
+
+router.put('/:cid/products/:pid', async (req, res) =>{
+
+    let { cid, pid } = req.params
+    let cantidad = Number(req.body.quantity)
+
+    let isNAN = isNaN(cantidad)
+    if(isNAN || cantidad<=0){
+        res.setHeader('Content-Type','application/json');
+        return res.status(400).json({error:`Quantity no valido.`})
+    }
+
+    if (!isValidObjectId(cid) && !isValidObjectId(pid)) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+    }
+
+    //Controlo que existe el CID
+    let cart
+    try {
+        cart = await cm.getCart(cid)
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    //Controlo que existe el PID
+    let product
+    try {
+        product = await pm.getProductBy({ _id: pid })
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+
+    }
+
+    if (!cart && !product) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Ingrese ID's validos para la operacion` })
+    }
+
+    let products = cart.products
+    let indiceProducto=cart.products.findIndex(p => p.pid.toString() == product._id.toString())
+
+    products[indiceProducto].quantity = cantidad
+
+    try {
+        await cm.addProductToCart(cid,products)
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json(`Update quantity del Producto ${pid}`);
+    } catch (error) {
+     res.setHeader('Content-Type','application/json');
+     return res.status(500).json(
+        {
+            error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+            detalle:`${error.message}`
+        }
+     )
+        
+    }
+})
