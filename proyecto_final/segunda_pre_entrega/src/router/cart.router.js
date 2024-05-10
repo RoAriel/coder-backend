@@ -17,7 +17,7 @@ router.get('/:cid', async (req, res) => {
         return res.status(400).json({ error: `Favor ingrese un ID valido.` })
     }
     try {
-        let cart = await cm.getCart(cid)
+        let cart = await cm.getOneByPopulate(cid)
 
         if (cart) {
             res.setHeader('Content-Type', 'application/json');

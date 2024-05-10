@@ -22,5 +22,7 @@ export class CartManagerMongo {
         return cartModel.updateOne({_id : cid}, {$set: {products: products}})
     }
 
-
+    async getOneByPopulate(cid){
+        return await cartModel.findOne({_id : cid}).populate("products.pid").lean()
+    }
 }
