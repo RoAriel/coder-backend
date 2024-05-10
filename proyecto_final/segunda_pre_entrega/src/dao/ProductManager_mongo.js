@@ -26,6 +26,9 @@ export class ProductManagerMongo {
         try {
             let { docs: payload, totalPages, prevPage, nextPage, page, hasPrevPage, hasNextPage } = await productModel.paginate(filter, options)
 
+            let prevLink = hasPrevPage ? `/productos?pagina=${prevPage}` : null
+            let nextLink = hasNextPage ? `/productos?pagina=${nextPage}` : null
+
             ret = {
                 status: 'success',
                 payload,
@@ -35,8 +38,8 @@ export class ProductManagerMongo {
                 page,
                 hasPrevPage,
                 hasNextPage,
-                prevLink: null,
-                nextLink: null
+                prevLink,
+                nextLink
             }
         } catch (error) {
 

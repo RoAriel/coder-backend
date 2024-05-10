@@ -1,0 +1,37 @@
+<h2>Productos</h2>
+<hr>
+
+<ul>
+    {{#each payload}}
+    <li>
+        {{title}} || {{code}} || ${{price}}
+    </li>
+    {{/each}}
+</ul>
+
+<br>
+<a href="/productos?pagina=1">Pág. 1</a>
+<br>
+{{#if hasPrevPage}}
+<a href="{{prevLink}}">Ant.</a>
+{{/if}}
+<br>
+
+{{#if hasNextPage}}
+<a href="{{nextLink}}">Sig.</a>
+{{/if}}
+<br>
+
+<a href="/productos?pagina={{totalPages}}">Ult.Pág.</a>
+<br>
+<label for="paginaActual"></label>
+<input type="number" max="{{totalPages}}" min="1" step="1" id="paginaActual" name="paginaActual" value="{{page}}"
+    onchange="cambioPagina()">
+<br>
+<a href="/">Home</a>
+<script>
+    let inputPaginaActual = document.getElementById("paginaActual")
+    const cambioPagina = () => {
+        window.location.href = "/productos?pagina=" + inputPaginaActual.value
+    }
+</script>
