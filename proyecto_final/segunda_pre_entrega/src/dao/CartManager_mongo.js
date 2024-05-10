@@ -6,6 +6,10 @@ export class CartManagerMongo {
         return await cartModel.find()
     }
 
+    async getOneBy(filtro={}){
+        return await cartModel.findOne(filtro).lean()
+    }
+
     async getCart(cid){
         return await cartModel.findById({_id : cid})
     }
@@ -23,6 +27,6 @@ export class CartManagerMongo {
     }
 
     async getOneByPopulate(cid){
-        return await cartModel.findOne({_id : cid}).populate("products.pid").lean()
+        return await cartModel.findOne({_id : cid}).populate("products.pid")//.lean()
     }
 }
