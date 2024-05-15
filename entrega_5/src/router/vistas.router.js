@@ -50,14 +50,6 @@ router.get('/productos', async (req, res) => {
         )
 
     }
-
-
-
-
-
-
-
-
 })
 
 router.get('/carrito/:cid', async (req, res) => {
@@ -65,7 +57,6 @@ router.get('/carrito/:cid', async (req, res) => {
     let { cid } = req.params
 
     let cart = await cm.getOneByPopulate(cid)
-console.log('my_cart:', cart)
     res.setHeader('Content-Type', 'text/html');
-    return res.status(200).render("cart",  {cart});
+    return res.status(200).render("cart", { cart });
 })
