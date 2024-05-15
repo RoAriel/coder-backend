@@ -1,0 +1,50 @@
+<h2>Productos</h2>
+<hr>
+<input type="text" value="{{cart._id}}" id="cart" hidden>
+<div class="d-flex justify-content-end">
+    <div class="p-2"><a href="/">Home</a></div></a>
+    <div class="p-2"><a href="/carrito/{{cart._id}}">Ver Carrito</a></div></a>
+</div>
+<ul>
+    {{#each payload}}
+    <li>
+        <strong>{{title}}</strong> - {{code}} - ${{price}}
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="comprar('{{_id}}','{{title}}')">Agregar a
+            Carrito</button>
+    </li>
+    {{/each}}
+</ul>
+
+<div class="d-flex flex-row mb-3">
+    <div class="p-2"><a href="/productos?pagina=1">Ir a Pág. 1</a></div>
+    <div class="p-2">
+        <div class="d-flex flex-row mb-3">
+            <div class="p-2">
+                {{#if hasPrevPage}}
+                <a href="{{prevLink}}">Ant.</a>
+                {{/if}}
+            </div>
+            <div class="p-2">
+                <label for="paginaActual"></label>
+                <input type="number" max="{{totalPages}}" min="1" step="1" id="paginaActual" name="paginaActual"
+                    value="{{page}}" onchange="cambioPagina()">
+            </div>
+            <div class="p-2">
+                {{#if hasNextPage}}
+                <a href="{{nextLink}}">Sig.</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <a class="p-2" href="/productos?pagina={{totalPages}}">Ult.Pág.</a>
+</div>
+
+
+<script>
+    let inputPaginaActual = document.getElementById("paginaActual")
+    const cambioPagina = () => {
+        window.location.href = "/productos?pagina=" + inputPaginaActual.value
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/productos.js"></script>
