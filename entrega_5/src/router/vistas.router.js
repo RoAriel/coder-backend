@@ -20,7 +20,7 @@ router.get('/productos', async (req, res) => {
     if (!pagina) pagina = 1
 
     try {
-        cart = {_id: req.session.user.cart}
+        cart = {_id: req.session.user.cart._id}
         
         let {
             payload,

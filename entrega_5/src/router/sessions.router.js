@@ -95,7 +95,7 @@ router.post('/login', async (req, res) => {
     req.session.user = usr
 
     if (web) {
-        res.redirect("/perfil")
+        res.redirect("/productos")
     } else {
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ payload: "Login correcto", usr });
