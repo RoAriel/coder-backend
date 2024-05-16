@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
         }
     }
     
-    let usr = await usrm.getBy({email})
+    let usr = await usrm.getByPopulate({email})
     if (!usr) {
  
         if (web) {
