@@ -100,3 +100,22 @@ router.get('/perfil', auth, (req,res)=>{
         user:req.session.user, login: req.session.user
     })
 })
+
+router.get('/logout',(req,res)=>{
+    req.session.destroy(e=>{
+        if(e){
+            console.log(error);
+            res.setHeader('Content-Type','application/json');
+            return res.status(500).json(
+                {
+                    error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                    detalle:`${error.message}`
+                }
+            )
+            
+        }
+    })
+
+    res.setHeader('Content-Type','application/json');
+    return res.redirect("/login")
+})
