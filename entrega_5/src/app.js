@@ -12,11 +12,12 @@ import { router as vistasRouter } from '../src/router/vistas.router.js'
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
 const DATABASE = process.env.DATABASE;
+const SECRET = process.env.SECRET;
 
 const app = express();
 
 app.use(sessions({
-    secret:"CoderCoder123", resave:true, saveUninitialized: true
+    secret:SECRET, resave:true, saveUninitialized: true
 }))
 
 app.engine('handlebars', engine({
