@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ProductManagerMongo as ProductManager } from "../dao/ProductManager_mongo.js";
 import { CartManagerMongo as CartManager } from "../dao/CartManager_mongo.js"
+import { auth } from '../middleware/auth.js';
 
 export const router = Router()
 
@@ -59,4 +60,24 @@ router.get('/carrito/:cid', async (req, res) => {
     let cart = await cm.getOneByPopulate(cid)
     res.setHeader('Content-Type', 'text/html');
     return res.status(200).render("cart", { cart });
+})
+
+// LOGG
+router.get('/registro',(req,res)=>{
+
+    res.status(200).render('registro')
+})
+
+router.get('/login',(req,res)=>{
+
+    let {error}=req.query
+
+    res.status(200).render('login', {error})
+})
+
+router.get('/perfil', auth, (req,res)=>{
+
+    res.status(200).render('perfil',{
+        usuario:req.session.usuario
+    })
 })

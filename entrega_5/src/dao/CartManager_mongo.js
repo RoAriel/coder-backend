@@ -29,4 +29,9 @@ export class CartManagerMongo {
     async getOneByPopulate(cid){
         return await cartModel.findOne({_id : cid}).populate("products.pid")//.lean()
     }
+
+    async create(){
+        let cart=await cartModel.create({productos:[]})
+        return cart.toJSON()
+    }
 }

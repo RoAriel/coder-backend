@@ -9,8 +9,6 @@ const usrm = new UserManager()
 const cm = new CartManager()
 
 router.post('/registro', async (req, res) => {
-console.log('hola');
-
     let { name, email, password, web } = req.body
 
     if (!name || !email || !password) {
@@ -22,7 +20,8 @@ console.log('hola');
         }
     }
 
-    let exist = usrm.getBy({ email })
+    let exist = await usrm.getBy({ email })
+    console.log(exist)
     if (exist) {
         if (web) {
             return res.redirect(`/registro?error=Ya existe ${email}`)
@@ -35,8 +34,9 @@ console.log('hola');
     password = generaHash(password)
 
     try {
-        let newCart = cm.create()
-        let newUser = usrm.create({ name, email, password, rol: 'user', cart: newCart._id })
+        let newCart = await cm.create()
+        let newUser = await usrm.create({ name, email, password, rol: 'user', cart: newCart._id })
+
 
         if (web) {
             return res.redirect(`/login?mensaje=Registro correcto para ${name}`)
