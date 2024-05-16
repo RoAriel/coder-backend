@@ -7,7 +7,7 @@ export const router = Router()
 
 const pm = new ProductManager
 
-router.get('/', async (req, res) => {
+router.get('/', auth,async (req, res) => {
 
     let pages_products
     let d0, d1, d2, d3 = {}, clave, val, qry = {} // variables necesarias para generar el qry de filtro

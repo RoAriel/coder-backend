@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     res.status(200).render('home');
 })
 
-router.get('/productos', async (req, res) => {
+router.get('/productos', auth, async (req, res) => {
 
     let cart
     let { limit, pagina, query, sort } = req.query

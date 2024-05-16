@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js'
+import { auth } from '../middleware/auth.js';
 
 export const router = Router()
 
@@ -67,7 +68,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.post('/:cid/products/:pid', async (req, res) => {
+router.post('/:cid/products/:pid', auth, async (req, res) => {
     let { cid, pid } = req.params
 
     if (!isValidObjectId(cid) && !isValidObjectId(pid)) {
@@ -147,7 +148,7 @@ router.post('/:cid/products/:pid', async (req, res) => {
 
 })
 
-router.delete('/:cid/products/:pid', async (req, res) => {
+router.delete('/:cid/products/:pid', auth, async (req, res) => {
 
     let { cid, pid } = req.params
 
@@ -332,7 +333,7 @@ router.delete('/:cid', async (req, res) => {
     }
 })
 
-router.put('/:cid/products/:pid', async (req, res) =>{
+router.put('/:cid/products/:pid', auth, async (req, res) =>{
 
     let { cid, pid } = req.params
     let cantidad = Number(req.body.quantity)
