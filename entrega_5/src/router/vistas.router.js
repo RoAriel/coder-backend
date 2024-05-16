@@ -10,7 +10,9 @@ const cm = new CartManager
 
 router.get('/', (req, res) => {
     res.setHeader('Content-Type', 'text/html');
-    res.status(200).render('home');
+    res.status(200).render('home',{
+        user:req.session.user, login: req.session.user
+    });
 })
 
 router.get('/productos', auth, async (req, res) => {
