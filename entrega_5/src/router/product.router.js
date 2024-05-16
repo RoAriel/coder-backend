@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
 import { isValidObjectId } from 'mongoose';
+import { auth } from '../middleware/auth.js';
 
 export const router = Router()
 
@@ -86,7 +87,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
-router.post('/', async (req, res) => {
+router.post('/', auth,async (req, res) => {
 
     let { title, description, code, price, status, stock, category, thumbnail } = req.body
 
@@ -194,7 +195,7 @@ router.delete('/:id', async (req, res) => {
 
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth,async (req, res) => {
     let { id } = req.params
     if (!isValidObjectId(id)) {
         res.setHeader('Content-Type', 'application/json');

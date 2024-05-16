@@ -20,10 +20,8 @@ router.get('/productos', async (req, res) => {
     if (!pagina) pagina = 1
 
     try {
-        cart = await cm.getOneBy()
-        if (!cart) {
-            cart = await cm.addProduct([])
-        }
+        cart = {_id: req.session.user.cart}
+        
         let {
             payload,
             totalPages,
@@ -63,21 +61,40 @@ router.get('/carrito/:cid', async (req, res) => {
 })
 
 // LOGG
-router.get('/registro',(req,res)=>{
 
-    res.status(200).render('registro')
+router.get('/',(req,res)=>{
+
+    res.status(200).render('home', {login: req.session.user})
 })
 
-router.get('/login',(req,res)=>{
+router.get('/registro',(req, res, next)=>{
+    if(req.session.user){
+        return res.redirect("/perfil")
+    }
 
+    next()
+},(req,res)=>{
     let {error}=req.query
 
-    res.status(200).render('login', {error})
+    res.status(200).render('registro', {error, login: req.session.user})
+})
+
+router.get('/login',(req, res, next)=>{
+    if(req.session.user){
+        return res.redirect("/perfil")
+    }
+
+    next()
+}, (req,res)=>{
+
+    let {error, mensaje}=req.query
+
+    res.status(200).render('login', {error, mensaje, login: req.session.user})
 })
 
 router.get('/perfil', auth, (req,res)=>{
 
     res.status(200).render('perfil',{
-        user:req.session.user
+        user:req.session.user, login: req.session.user
     })
 })

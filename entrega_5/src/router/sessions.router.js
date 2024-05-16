@@ -61,7 +61,6 @@ router.post('/registro', async (req, res) => {
 router.post('/login', async (req, res) => {
     let { email, password, web } = req.body
 
-    console.log('body:\n', req.body)
     if (!email || !password) {
         if (web) {
             return res.redirect(`/login?error=Complete email, y password`)
@@ -92,7 +91,7 @@ router.post('/login', async (req, res) => {
     }
 
     usr = { ...usr }
-    delete usr.password
+    delete usr.password    
     req.session.user = usr
 
     if (web) {
@@ -101,4 +100,23 @@ router.post('/login', async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ payload: "Login correcto", usr });
     }
+})
+
+router.get("/logout", (req, res)=>{
+    req.session.destroy(e=>{
+        if(e){
+            console.log(error);
+            res.setHeader('Content-Type','application/json');
+            return res.status(500).json(
+                {
+                    error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                    detalle:`${error.message}`
+                }
+            )
+            
+        }
+    })
+
+    res.setHeader('Content-Type','application/json');
+    return res.status(200).json({payload:"Logout"});
 })
