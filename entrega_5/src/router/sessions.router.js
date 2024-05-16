@@ -30,11 +30,20 @@ router.post('/registro', async (req, res) => {
         }
     }
 
-    password = generaHash(password)
+    const ADMIN_MAIL = process.env.ADMIN_MAIL;
+    const ADMIN_PASSW = process.env.ADMIN_MAIL_PASSWORD
 
     try {
+        let newUser
         let newCart = await cm.create()
-        let newUser = await usrm.create({ name, email, password, rol: 'user', cart: newCart._id })
+
+        if(email != ADMIN_MAIL && password != ADMIN_PASSW){
+        
+            newUser = await usrm.create({ name, email, password: generaHash(password), rol: 'user', cart: newCart._id })
+        }else{
+            newUser = await usrm.create({ name, email, password:generaHash(password), rol: 'admin', cart: newCart._id })
+        }
+    
 
 
         if (web) {
