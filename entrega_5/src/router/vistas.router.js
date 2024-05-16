@@ -20,6 +20,8 @@ router.get('/productos', async (req, res) => {
     if (!pagina) pagina = 1
 
     try {
+        let user = req.session.user
+        
         cart = {_id: req.session.user.cart._id}
         
         let {
@@ -36,7 +38,7 @@ router.get('/productos', async (req, res) => {
 
         res.setHeader('Content-Type', 'text/html')
         res.status(200).render("products", {
-            payload, page, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage, prevLink, nextLink, cart
+            payload, page, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage, prevLink, nextLink, cart, user
         })
 
     } catch (error) {
