@@ -78,6 +78,6 @@ router.get('/login',(req,res)=>{
 router.get('/perfil', auth, (req,res)=>{
 
     res.status(200).render('perfil',{
-        usuario:req.session.usuario
+        user:req.session.user
     })
 })

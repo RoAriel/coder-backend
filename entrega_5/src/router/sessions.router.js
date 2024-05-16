@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
-import { generaHash } from '../utils.js'
+import { generaHash, validaPasword} from '../utils.js'
 
 export const router = new Router()
 
@@ -21,7 +21,6 @@ router.post('/registro', async (req, res) => {
     }
 
     let exist = await usrm.getBy({ email })
-    console.log(exist)
     if (exist) {
         if (web) {
             return res.redirect(`/registro?error=Ya existe ${email}`)
@@ -43,7 +42,7 @@ router.post('/registro', async (req, res) => {
         } else {
             res.setHeader('Content-Type', 'application/json')
             res.status(200).json({
-                message: "Registro correcto...!!!", newUser
+                message: "Registro correcto", newUser
             })
         }
 
@@ -56,5 +55,50 @@ router.post('/registro', async (req, res) => {
                 detalle: `${error.message}`
             }
         )
+    }
+})
+
+router.post('/login', async (req, res) => {
+    let { email, password, web } = req.body
+
+    console.log('body:\n', req.body)
+    if (!email || !password) {
+        if (web) {
+            return res.redirect(`/login?error=Complete email, y password`)
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(400).json({ error: `Complete email, y password` })
+        }
+    }
+    
+    let usr = await usrm.getBy({email})
+    if (!usr) {
+ 
+        if (web) {
+            return res.redirect(`/login?error=Credenciales invalidas`)
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(400).json({ error: `Credenciales inválidas` })
+        }
+    }
+
+    if(!validaPasword(password, usr.password)){
+        if(web){
+            return res.redirect(`/login?error=Credenciales invalidas`)
+        }else{
+            res.setHeader('Content-Type','application/json');
+            return res.status(400).json({error:`Credenciales inválidas`})
+        }  
+    }
+
+    usr = { ...usr }
+    delete usr.password
+    req.session.user = usr
+
+    if (web) {
+        res.redirect("/perfil")
+    } else {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({ payload: "Login correcto", usr });
     }
 })
