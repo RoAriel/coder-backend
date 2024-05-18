@@ -1,70 +1,28 @@
 import { Router } from "express";
+import passport from 'passport';
 import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
-import { generaHash, validaPasword} from '../utils.js'
 
 export const router = new Router()
 
 const usrm = new UserManager()
 const cm = new CartManager()
 
-router.post('/registro', async (req, res) => {
-    let { name, email, password, web } = req.body
+router.post('/registro', passport.authenticate("registro", { failureRedirect: "/api/sessions/error" }), async (req, res) => {
 
-    if (!name || !email || !password) {
-        if (web) {
-            return res.redirect('/registro?error=Complete nombre, email, y password')
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Complete nombre, email, y password` })
-        }
+    // Definicion anterior ver entrega_5 
+
+    let web = req.body.web
+    let newUser = req.user
+    if (web) {
+        return res.redirect(`/login?mensaje=Registro correcto para ${newUser.name}`)
+    } else {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200).json({
+            message: "Registro correcto", newUser
+        })
     }
 
-    let exist = await usrm.getBy({ email })
-    if (exist) {
-        if (web) {
-            return res.redirect(`/registro?error=Ya existe ${email}`)
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Ya existe ${email}` })
-        }
-    }
-
-    const ADMIN_MAIL = process.env.ADMIN_MAIL;
-    const ADMIN_PASSW = process.env.ADMIN_MAIL_PASSWORD
-
-    try {
-        let newUser
-        let newCart = await cm.create()
-
-        if(email != ADMIN_MAIL && password != ADMIN_PASSW){
-        
-            newUser = await usrm.create({ name, email, password: generaHash(password), rol: 'user', cart: newCart._id })
-        }else{
-            newUser = await usrm.create({ name, email, password:generaHash(password), rol: 'admin', cart: newCart._id })
-        }
-    
-
-
-        if (web) {
-            return res.redirect(`/login?mensaje=Registro correcto para ${name}`)
-        } else {
-            res.setHeader('Content-Type', 'application/json')
-            res.status(200).json({
-                message: "Registro correcto", newUser
-            })
-        }
-
-    } catch (error) {
-        console.log(error);
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
-    }
 })
 
 router.post('/login', async (req, res) => {
@@ -78,10 +36,10 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ error: `Complete email, y password` })
         }
     }
-    
-    let usr = await usrm.getByPopulate({email})
+
+    let usr = await usrm.getByPopulate({ email })
     if (!usr) {
- 
+
         if (web) {
             return res.redirect(`/login?error=Credenciales invalidas`)
         } else {
@@ -90,17 +48,17 @@ router.post('/login', async (req, res) => {
         }
     }
 
-    if(!validaPasword(password, usr.password)){
-        if(web){
+    if (!validaPasword(password, usr.password)) {
+        if (web) {
             return res.redirect(`/login?error=Credenciales invalidas`)
-        }else{
-            res.setHeader('Content-Type','application/json');
-            return res.status(400).json({error:`Credenciales inválidas`})
-        }  
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(400).json({ error: `Credenciales inválidas` })
+        }
     }
 
     usr = { ...usr }
-    delete usr.password    
+    delete usr.password
     req.session.user = usr
 
     if (web) {
@@ -111,21 +69,21 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get("/logout", (req, res)=>{
-    req.session.destroy(e=>{
-        if(e){
+router.get("/logout", (req, res) => {
+    req.session.destroy(e => {
+        if (e) {
             console.log(error);
-            res.setHeader('Content-Type','application/json');
+            res.setHeader('Content-Type', 'application/json');
             return res.status(500).json(
                 {
-                    error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                    detalle:`${error.message}`
+                    error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                    detalle: `${error.message}`
                 }
             )
-            
+
         }
     })
 
-    res.setHeader('Content-Type','application/json');
-    return res.status(200).json({payload:"Logout"});
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).json({ payload: "Logout" });
 })

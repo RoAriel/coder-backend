@@ -73,6 +73,8 @@ router.get('/',(req,res)=>{
 
 router.get('/registro',(req, res, next)=>{
     if(req.session.user){
+        console.log('paso por el router de la visata de sessions registro');
+        
         return res.redirect("/perfil")
     }
 
