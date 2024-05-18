@@ -1,0 +1,1772 @@
+[
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346888"
+    },
+    "title": "Limón",
+    "description": "Esta es una fruta llamada Limón",
+    "code": "105-F",
+    "price": 27.5,
+    "status": true,
+    "stock": 879,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Limón"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688a"
+    },
+    "title": "Naranja",
+    "description": "Esta es una fruta llamada Naranja",
+    "code": "107-F",
+    "price": 6.5,
+    "status": true,
+    "stock": 15,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Naranja"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346890"
+    },
+    "title": "Carambola",
+    "description": "Esta es una fruta llamada Carambola",
+    "code": "113-F",
+    "price": 18.5,
+    "status": true,
+    "stock": 139,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Carambola"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346893"
+    },
+    "title": "Dátil",
+    "description": "Esta es una fruta llamada Dátil",
+    "code": "116-F",
+    "price": 10,
+    "status": true,
+    "stock": 491,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Dátil"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689b"
+    },
+    "title": "Cereza",
+    "description": "Esta es una fruta llamada Cereza",
+    "code": "124-F",
+    "price": 28,
+    "status": true,
+    "stock": 393,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Cereza"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689d"
+    },
+    "title": "Higo",
+    "description": "Esta es una fruta llamada Higo",
+    "code": "126-F",
+    "price": 44.5,
+    "status": true,
+    "stock": 670,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Higo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689e"
+    },
+    "title": "Kaki",
+    "description": "Esta es una fruta llamada Kaki",
+    "code": "127-F",
+    "price": 16.5,
+    "status": true,
+    "stock": 714,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Kaki"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a0"
+    },
+    "title": "Melocotón",
+    "description": "Esta es una fruta llamada Melocotón",
+    "code": "129-F",
+    "price": 23.5,
+    "status": true,
+    "stock": 781,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Melocotón"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a3"
+    },
+    "title": "Pera",
+    "description": "Esta es una fruta llamada Pera",
+    "code": "132-F",
+    "price": 47,
+    "status": true,
+    "stock": 838,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Pera"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a5"
+    },
+    "title": "Almendra",
+    "description": "Esta es una fruta llamada Almendra",
+    "code": "134-F",
+    "price": 0,
+    "status": true,
+    "stock": 422,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Almendra"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ab"
+    },
+    "title": "Brasicáceas",
+    "description": "Esta es una verdura llamada Brasicáceas",
+    "code": "200-V",
+    "price": 9.5,
+    "status": true,
+    "stock": 395,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Brasicáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ad"
+    },
+    "title": "Col blanca",
+    "description": "Esta es una verdura llamada Col blanca",
+    "code": "202-V",
+    "price": 21,
+    "status": true,
+    "stock": 864,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Col blanca"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b0"
+    },
+    "title": "Colirábano",
+    "description": "Esta es una verdura llamada Colirábano",
+    "code": "205-V",
+    "price": 25,
+    "status": true,
+    "stock": 299,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Colirábano"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b4"
+    },
+    "title": "Escarola",
+    "description": "Esta es una verdura llamada Escarola",
+    "code": "209-V",
+    "price": 15.5,
+    "status": true,
+    "stock": 134,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Escarola"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b7"
+    },
+    "title": "Pepino",
+    "description": "Esta es una verdura llamada Pepino",
+    "code": "212-V",
+    "price": 48.5,
+    "status": true,
+    "stock": 43,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Pepino"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ba"
+    },
+    "title": "Haba",
+    "description": "Esta es una verdura llamada Haba",
+    "code": "215-V",
+    "price": 5,
+    "status": true,
+    "stock": 660,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Haba"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468bb"
+    },
+    "title": "Judía verde",
+    "description": "Esta es una verdura llamada Judía verde",
+    "code": "216-V",
+    "price": 20.5,
+    "status": true,
+    "stock": 665,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Judía verde"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468bc"
+    },
+    "title": "Gramíneas",
+    "description": "Esta es una verdura llamada Gramíneas",
+    "code": "217-V",
+    "price": 48,
+    "status": true,
+    "stock": 996,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Gramíneas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c3"
+    },
+    "title": "Hierba de los canónigos",
+    "description": "Esta es una verdura llamada Hierba de los canónigos",
+    "code": "224-V",
+    "price": 47.5,
+    "status": true,
+    "stock": 206,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Hierba de los canónigos"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c7"
+    },
+    "title": "Ajo",
+    "description": "Esta es una verdura llamada Ajo",
+    "code": "228-V",
+    "price": 14.5,
+    "status": true,
+    "stock": 365,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Ajo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c9"
+    },
+    "title": "Espárrago",
+    "description": "Esta es una verdura llamada Espárrago",
+    "code": "230-V",
+    "price": 26,
+    "status": true,
+    "stock": 813,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Espárrago"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468cc"
+    },
+    "title": "Espinaca",
+    "description": "Esta es una verdura llamada Espinaca",
+    "code": "233-V",
+    "price": 11,
+    "status": true,
+    "stock": 728,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Espinaca"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d3"
+    },
+    "title": "Umbelíferas",
+    "description": "Esta es una verdura llamada Umbelíferas",
+    "code": "240-V",
+    "price": 9.5,
+    "status": true,
+    "stock": 977,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Umbelíferas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d6"
+    },
+    "title": "Zanahoria",
+    "description": "Esta es una verdura llamada Zanahoria",
+    "code": "243-V",
+    "price": 7.5,
+    "status": true,
+    "stock": 4,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Zanahoria"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346886"
+    },
+    "title": "Fresa",
+    "description": "Esta es una fruta llamada Fresa",
+    "code": "103-F",
+    "price": 45,
+    "status": true,
+    "stock": 896,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Fresa"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688b"
+    },
+    "title": "Pomelo",
+    "description": "Esta es una fruta llamada Pomelo",
+    "code": "108-F",
+    "price": 45,
+    "status": true,
+    "stock": 438,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Pomelo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688d"
+    },
+    "title": "Cucurbitáceas",
+    "description": "Esta es una fruta llamada Cucurbitáceas",
+    "code": "110-F",
+    "price": 20.5,
+    "status": true,
+    "stock": 633,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Cucurbitáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688e"
+    },
+    "title": "Sandía",
+    "description": "Esta es una fruta llamada Sandía",
+    "code": "111-F",
+    "price": 8,
+    "status": true,
+    "stock": 893,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Sandía"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688f"
+    },
+    "title": "Aguacate",
+    "description": "Esta es una fruta llamada Aguacate",
+    "code": "112-F",
+    "price": 34,
+    "status": true,
+    "stock": 161,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Aguacate"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346892"
+    },
+    "title": "Coco",
+    "description": "Esta es una fruta llamada Coco",
+    "code": "115-F",
+    "price": 36,
+    "status": true,
+    "stock": 608,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Coco"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346894"
+    },
+    "title": "Kiwi",
+    "description": "Esta es una fruta llamada Kiwi",
+    "code": "117-F",
+    "price": 36.5,
+    "status": true,
+    "stock": 702,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Kiwi"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a4"
+    },
+    "title": "Uva",
+    "description": "Esta es una fruta llamada Uva",
+    "code": "133-F",
+    "price": 12.5,
+    "status": true,
+    "stock": 84,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Uva"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a6"
+    },
+    "title": "Avellana",
+    "description": "Esta es una fruta llamada Avellana",
+    "code": "135-F",
+    "price": 39,
+    "status": true,
+    "stock": 496,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Avellana"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a9"
+    },
+    "title": "Nuez",
+    "description": "Esta es una fruta llamada Nuez",
+    "code": "138-F",
+    "price": 48.5,
+    "status": true,
+    "stock": 914,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Nuez"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468aa"
+    },
+    "title": "Pistacho",
+    "description": "Esta es una fruta llamada Pistacho",
+    "code": "139-F",
+    "price": 11.5,
+    "status": true,
+    "stock": 891,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Pistacho"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ae"
+    },
+    "title": "Coliflor",
+    "description": "Esta es una verdura llamada Coliflor",
+    "code": "203-V",
+    "price": 10,
+    "status": true,
+    "stock": 420,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Coliflor"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b3"
+    },
+    "title": "Boniato",
+    "description": "Esta es una verdura llamada Boniato",
+    "code": "208-V",
+    "price": 34,
+    "status": true,
+    "stock": 723,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Boniato"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b8"
+    },
+    "title": "Fabáceas",
+    "description": "Esta es una verdura llamada Fabáceas",
+    "code": "213-V",
+    "price": 36.5,
+    "status": true,
+    "stock": 301,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Fabáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b9"
+    },
+    "title": "Guisante",
+    "description": "Esta es una verdura llamada Guisante",
+    "code": "214-V",
+    "price": 21.5,
+    "status": true,
+    "stock": 759,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Guisante"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468bd"
+    },
+    "title": "Maíz",
+    "description": "Esta es una verdura llamada Maíz",
+    "code": "218-V",
+    "price": 13.5,
+    "status": true,
+    "stock": 121,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Maíz"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468be"
+    },
+    "title": "Champiñón",
+    "description": "Esta es una verdura llamada Champiñón",
+    "code": "219-V",
+    "price": 23,
+    "status": true,
+    "stock": 793,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Champiñón"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c1"
+    },
+    "title": "Borraja",
+    "description": "Esta es una verdura llamada Borraja",
+    "code": "222-V",
+    "price": 18.5,
+    "status": true,
+    "stock": 954,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Borraja"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c8"
+    },
+    "title": "Ascalonia",
+    "description": "Esta es una verdura llamada Ascalonia",
+    "code": "229-V",
+    "price": 28.5,
+    "status": true,
+    "stock": 986,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Ascalonia"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d1"
+    },
+    "title": "Pimiento",
+    "description": "Esta es una verdura llamada Pimiento",
+    "code": "238-V",
+    "price": 32.5,
+    "status": true,
+    "stock": 735,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Pimiento"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d2"
+    },
+    "title": "Tomate",
+    "description": "Esta es una verdura llamada Tomate",
+    "code": "239-V",
+    "price": 18.5,
+    "status": true,
+    "stock": 53,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Tomate"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d5"
+    },
+    "title": "Chirivía",
+    "description": "Esta es una verdura llamada Chirivía",
+    "code": "242-V",
+    "price": 46,
+    "status": true,
+    "stock": 319,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Chirivía"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346884"
+    },
+    "title": "Arándano",
+    "description": "Esta es una fruta llamada Arándano",
+    "code": "101-F",
+    "price": 24.5,
+    "status": true,
+    "stock": 436,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Arándano"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346891"
+    },
+    "title": "Chirimoya",
+    "description": "Esta es una fruta llamada Chirimoya",
+    "code": "114-F",
+    "price": 29.5,
+    "status": true,
+    "stock": 134,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Chirimoya"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346895"
+    },
+    "title": "Litchi",
+    "description": "Esta es una fruta llamada Litchi",
+    "code": "118-F",
+    "price": 38,
+    "status": true,
+    "stock": 974,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Litchi"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346898"
+    },
+    "title": "Piña",
+    "description": "Esta es una fruta llamada Piña",
+    "code": "121-F",
+    "price": 13,
+    "status": true,
+    "stock": 385,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Piña"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346899"
+    },
+    "title": "Plátano",
+    "description": "Esta es una fruta llamada Plátano",
+    "code": "122-F",
+    "price": 3,
+    "status": true,
+    "stock": 257,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Plátano"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689a"
+    },
+    "title": "Albaricoque",
+    "description": "Esta es una fruta llamada Albaricoque",
+    "code": "123-F",
+    "price": 24,
+    "status": true,
+    "stock": 741,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Albaricoque"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689c"
+    },
+    "title": "Ciruela",
+    "description": "Esta es una fruta llamada Ciruela",
+    "code": "125-F",
+    "price": 28,
+    "status": true,
+    "stock": 242,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Ciruela"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468af"
+    },
+    "title": "Colinabo",
+    "description": "Esta es una verdura llamada Colinabo",
+    "code": "204-V",
+    "price": 8.5,
+    "status": true,
+    "stock": 591,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Colinabo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b1"
+    },
+    "title": "Nabo",
+    "description": "Esta es una verdura llamada Nabo",
+    "code": "206-V",
+    "price": 30.5,
+    "status": true,
+    "stock": 913,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Nabo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b5"
+    },
+    "title": "Lechuga",
+    "description": "Esta es una verdura llamada Lechuga",
+    "code": "210-V",
+    "price": 11.5,
+    "status": true,
+    "stock": 610,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Lechuga"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b6"
+    },
+    "title": "Calabaza",
+    "description": "Esta es una verdura llamada Calabaza",
+    "code": "211-V",
+    "price": 16,
+    "status": true,
+    "stock": 172,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Calabaza"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468bf"
+    },
+    "title": "Apio",
+    "description": "Esta es una verdura llamada Apio",
+    "code": "220-V",
+    "price": 30.5,
+    "status": true,
+    "stock": 395,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Apio"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c2"
+    },
+    "title": "Endibia",
+    "description": "Esta es una verdura llamada Endibia",
+    "code": "223-V",
+    "price": 13,
+    "status": true,
+    "stock": 917,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Endibia"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c6"
+    },
+    "title": "Liliáceas",
+    "description": "Esta es una verdura llamada Liliáceas",
+    "code": "227-V",
+    "price": 35.5,
+    "status": true,
+    "stock": 778,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Liliáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468cb"
+    },
+    "title": "Quenopodiáceas",
+    "description": "Esta es una verdura llamada Quenopodiáceas",
+    "code": "232-V",
+    "price": 33.5,
+    "status": true,
+    "stock": 156,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Quenopodiáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468cd"
+    },
+    "title": "Remolacha",
+    "description": "Esta es una verdura llamada Remolacha",
+    "code": "234-V",
+    "price": 10,
+    "status": true,
+    "stock": 33,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Remolacha"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d0"
+    },
+    "title": "Berenjena",
+    "description": "Esta es una verdura llamada Berenjena",
+    "code": "237-V",
+    "price": 25,
+    "status": true,
+    "stock": 84,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Berenjena"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346883"
+    },
+    "title": "Bayas",
+    "description": "Esta es una fruta llamada Bayas",
+    "code": "100-F",
+    "price": 29.5,
+    "status": true,
+    "stock": 501,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Bayas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346885"
+    },
+    "title": "Frambuesa",
+    "description": "Esta es una fruta llamada Frambuesa",
+    "code": "102-F",
+    "price": 5.5,
+    "status": true,
+    "stock": 528,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Frambuesa"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346887"
+    },
+    "title": "Zarzamora",
+    "description": "Esta es una fruta llamada Zarzamora",
+    "code": "104-F",
+    "price": 23.5,
+    "status": true,
+    "stock": 259,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Zarzamora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346889"
+    },
+    "title": "Mandarina",
+    "description": "Esta es una fruta llamada Mandarina",
+    "code": "106-F",
+    "price": 34,
+    "status": true,
+    "stock": 373,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Mandarina"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34688c"
+    },
+    "title": "Melón",
+    "description": "Esta es una fruta llamada Melón",
+    "code": "109-F",
+    "price": 17,
+    "status": true,
+    "stock": 153,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Melón"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346896"
+    },
+    "title": "Mango",
+    "description": "Esta es una fruta llamada Mango",
+    "code": "119-F",
+    "price": 20.5,
+    "status": true,
+    "stock": 353,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Mango"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d346897"
+    },
+    "title": "Papaya",
+    "description": "Esta es una fruta llamada Papaya",
+    "code": "120-F",
+    "price": 26,
+    "status": true,
+    "stock": 389,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Papaya"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d34689f"
+    },
+    "title": "Manzana",
+    "description": "Esta es una fruta llamada Manzana",
+    "code": "128-F",
+    "price": 4.5,
+    "status": true,
+    "stock": 645,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Manzana"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a1"
+    },
+    "title": "Nectarina",
+    "description": "Esta es una fruta llamada Nectarina",
+    "code": "130-F",
+    "price": 32,
+    "status": true,
+    "stock": 37,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Nectarina"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a2"
+    },
+    "title": "Níspero",
+    "description": "Esta es una fruta llamada Níspero",
+    "code": "131-F",
+    "price": 7.5,
+    "status": true,
+    "stock": 804,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Níspero"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a7"
+    },
+    "title": "Cacahuete",
+    "description": "Esta es una fruta llamada Cacahuete",
+    "code": "136-F",
+    "price": 0.5,
+    "status": true,
+    "stock": 643,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Cacahuete"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468a8"
+    },
+    "title": "Castaña",
+    "description": "Esta es una fruta llamada Castaña",
+    "code": "137-F",
+    "price": 19.5,
+    "status": true,
+    "stock": 260,
+    "category": "Frutas",
+    "thumbnail": [
+      "https://products/Castaña"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ac"
+    },
+    "title": "Brócoli",
+    "description": "Esta es una verdura llamada Brócoli",
+    "code": "201-V",
+    "price": 41,
+    "status": true,
+    "stock": 311,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Brócoli"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468b2"
+    },
+    "title": "Rábano",
+    "description": "Esta es una verdura llamada Rábano",
+    "code": "207-V",
+    "price": 22,
+    "status": true,
+    "stock": 320,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Rábano"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c0"
+    },
+    "title": "Acelga",
+    "description": "Esta es una verdura llamada Acelga",
+    "code": "221-V",
+    "price": 19.5,
+    "status": true,
+    "stock": 119,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Acelga"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c4"
+    },
+    "title": "Perejil",
+    "description": "Esta es una verdura llamada Perejil",
+    "code": "225-V",
+    "price": 34,
+    "status": true,
+    "stock": 186,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Perejil"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468c5"
+    },
+    "title": "Cebolla",
+    "description": "Esta es una verdura llamada Cebolla",
+    "code": "226-V",
+    "price": 27,
+    "status": true,
+    "stock": 657,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Cebolla"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ca"
+    },
+    "title": "Puerro",
+    "description": "Esta es una verdura llamada Puerro",
+    "code": "231-V",
+    "price": 45.5,
+    "status": true,
+    "stock": 204,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Puerro"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468ce"
+    },
+    "title": "Patata",
+    "description": "Esta es una verdura llamada Patata",
+    "code": "235-V",
+    "price": 12.5,
+    "status": true,
+    "stock": 692,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Patata"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468cf"
+    },
+    "title": "Solanáceas",
+    "description": "Esta es una verdura llamada Solanáceas",
+    "code": "236-V",
+    "price": 39.5,
+    "status": true,
+    "stock": 161,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Solanáceas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "66383118c84c43c66d3468d4"
+    },
+    "title": "Apio nabo",
+    "description": "Esta es una verdura llamada Apio nabo",
+    "code": "241-V",
+    "price": 40.5,
+    "status": true,
+    "stock": 733,
+    "category": "Verduras",
+    "thumbnail": [
+      "https://products/Apio nabo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd57"
+    },
+    "title": "Tablet",
+    "description": "Este es un electrodomestico llamado Tablet",
+    "code": "302-E",
+    "price": 7,
+    "status": true,
+    "stock": 605,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Tablet"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd56"
+    },
+    "title": "Smartphone",
+    "description": "Este es un electrodomestico llamado Smartphone",
+    "code": "301-E",
+    "price": 25.5,
+    "status": true,
+    "stock": 655,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Smartphone"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd59"
+    },
+    "title": "Fax",
+    "description": "Este es un electrodomestico llamado Fax",
+    "code": "304-E",
+    "price": 24,
+    "status": true,
+    "stock": 840,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Fax"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5a"
+    },
+    "title": "Teclado",
+    "description": "Este es un electrodomestico llamado Teclado",
+    "code": "305-E",
+    "price": 50,
+    "status": true,
+    "stock": 825,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Teclado"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5d"
+    },
+    "title": "Exprimidor",
+    "description": "Este es un electrodomestico llamado Exprimidor",
+    "code": "308-E",
+    "price": 44,
+    "status": true,
+    "stock": 48,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Exprimidor"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5e"
+    },
+    "title": "Tostadora",
+    "description": "Este es un electrodomestico llamado Tostadora",
+    "code": "309-E",
+    "price": 44.5,
+    "status": true,
+    "stock": 460,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Tostadora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd63"
+    },
+    "title": "Aspiradora",
+    "description": "Este es un electrodomestico llamado Aspiradora",
+    "code": "314-E",
+    "price": 11,
+    "status": true,
+    "stock": 900,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Aspiradora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd65"
+    },
+    "title": "Horno",
+    "description": "Este es un electrodomestico llamado Horno",
+    "code": "316-E",
+    "price": 0,
+    "status": true,
+    "stock": 13,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Horno"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd67"
+    },
+    "title": "Congelador",
+    "description": "Este es un electrodomestico llamado Congelador",
+    "code": "318-E",
+    "price": 49.5,
+    "status": true,
+    "stock": 164,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Congelador"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6a"
+    },
+    "title": "Aire acondicionado",
+    "description": "Este es un electrodomestico llamado Aire acondicionado",
+    "code": "321-E",
+    "price": 3.5,
+    "status": true,
+    "stock": 882,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Aire acondicionado"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6e"
+    },
+    "title": "Secadora",
+    "description": "Este es un electrodomestico llamado Secadora",
+    "code": "325-E",
+    "price": 42.5,
+    "status": true,
+    "stock": 665,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Secadora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd71"
+    },
+    "title": "Monitor",
+    "description": "Este es un electrodomestico llamado Monitor",
+    "code": "328-E",
+    "price": 19.5,
+    "status": true,
+    "stock": 271,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Monitor"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd75"
+    },
+    "title": "Auricular",
+    "description": "Este es un electrodomestico llamado Auricular",
+    "code": "332-E",
+    "price": 2.5,
+    "status": true,
+    "stock": 851,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Auricular"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5b"
+    },
+    "title": "Freidora",
+    "description": "Este es un electrodomestico llamado Freidora",
+    "code": "306-E",
+    "price": 1.5,
+    "status": true,
+    "stock": 972,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Freidora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd62"
+    },
+    "title": "Secador de pelo",
+    "description": "Este es un electrodomestico llamado Secador de pelo",
+    "code": "313-E",
+    "price": 24.5,
+    "status": true,
+    "stock": 405,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Secador de pelo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd66"
+    },
+    "title": "Frigorífico",
+    "description": "Este es un electrodomestico llamado Frigorífico",
+    "code": "317-E",
+    "price": 19.5,
+    "status": true,
+    "stock": 991,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Frigorífico"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd68"
+    },
+    "title": "Campana extractora",
+    "description": "Este es un electrodomestico llamado Campana extractora",
+    "code": "319-E",
+    "price": 13,
+    "status": true,
+    "stock": 123,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Campana extractora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd69"
+    },
+    "title": "Microondas",
+    "description": "Este es un electrodomestico llamado Microondas",
+    "code": "320-E",
+    "price": 25,
+    "status": true,
+    "stock": 198,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Microondas"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6b"
+    },
+    "title": "Equipo de calefacción",
+    "description": "Este es un electrodomestico llamado Equipo de calefacción",
+    "code": "322-E",
+    "price": 21.5,
+    "status": true,
+    "stock": 93,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Equipo de calefacción"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6c"
+    },
+    "title": "Ventilador",
+    "description": "Este es un electrodomestico llamado Ventilador",
+    "code": "323-E",
+    "price": 36,
+    "status": true,
+    "stock": 596,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Ventilador"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd70"
+    },
+    "title": "Televisor",
+    "description": "Este es un electrodomestico llamado Televisor",
+    "code": "327-E",
+    "price": 45.5,
+    "status": true,
+    "stock": 895,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Televisor"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd73"
+    },
+    "title": "Minicomponente",
+    "description": "Este es un electrodomestico llamado Minicomponente",
+    "code": "330-E",
+    "price": 44,
+    "status": true,
+    "stock": 865,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Minicomponente"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd76"
+    },
+    "title": "Mando a distancia",
+    "description": "Este es un electrodomestico llamado Mando a distancia",
+    "code": "333-E",
+    "price": 40,
+    "status": true,
+    "stock": 715,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Mando a distancia"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd60"
+    },
+    "title": "Báscula",
+    "description": "Este es un electrodomestico llamado Báscula",
+    "code": "311-E",
+    "price": 1,
+    "status": true,
+    "stock": 26,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Báscula"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd61"
+    },
+    "title": "Máquina de afeitar",
+    "description": "Este es un electrodomestico llamado Máquina de afeitar",
+    "code": "312-E",
+    "price": 1,
+    "status": true,
+    "stock": 982,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Máquina de afeitar"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd64"
+    },
+    "title": "Cepillo de dientes eléctrico",
+    "description": "Este es un electrodomestico llamado Cepillo de dientes eléctrico",
+    "code": "315-E",
+    "price": 37,
+    "status": true,
+    "stock": 815,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Cepillo de dientes eléctrico"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6f"
+    },
+    "title": "Lavaplato",
+    "description": "Este es un electrodomestico llamado Lavaplato",
+    "code": "326-E",
+    "price": 22.5,
+    "status": true,
+    "stock": 39,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Lavaplato"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd72"
+    },
+    "title": "Radio",
+    "description": "Este es un electrodomestico llamado Radio",
+    "code": "329-E",
+    "price": 40.5,
+    "status": true,
+    "stock": 21,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Radio"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd74"
+    },
+    "title": "Cámara de foto y vídeo",
+    "description": "Este es un electrodomestico llamado Cámara de foto y vídeo",
+    "code": "331-E",
+    "price": 36.5,
+    "status": true,
+    "stock": 948,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Cámara de foto y vídeo"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd55"
+    },
+    "title": "Notebook",
+    "description": "Este es un electrodomestico llamado Notebook",
+    "code": "300-E",
+    "price": 33,
+    "status": true,
+    "stock": 514,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Notebook"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd58"
+    },
+    "title": "Impresora",
+    "description": "Este es un electrodomestico llamado Impresora",
+    "code": "303-E",
+    "price": 8,
+    "status": true,
+    "stock": 201,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Impresora"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5c"
+    },
+    "title": "Cafetera",
+    "description": "Este es un electrodomestico llamado Cafetera",
+    "code": "307-E",
+    "price": 36.5,
+    "status": true,
+    "stock": 91,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Cafetera"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd5f"
+    },
+    "title": "Plancha",
+    "description": "Este es un electrodomestico llamado Plancha",
+    "code": "310-E",
+    "price": 15,
+    "status": true,
+    "stock": 321,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Plancha"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "663d1f9a5b6b9ae26110bd6d"
+    },
+    "title": "Lavadora",
+    "description": "Este es un electrodomestico llamado Lavadora",
+    "code": "324-E",
+    "price": 40.5,
+    "status": true,
+    "stock": 204,
+    "category": "Electrodomesticos",
+    "thumbnail": [
+      "https://products/Lavadora"
+    ]
+  }
+]
