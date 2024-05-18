@@ -5,9 +5,6 @@ import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 
 export const router = new Router()
 
-const usrm = new UserManager()
-const cm = new CartManager()
-
 router.post('/registro', passport.authenticate("registro", { failureRedirect: "/api/sessions/error" }), async (req, res) => {
 
     // Definicion anterior ver entrega_5 
@@ -25,39 +22,11 @@ router.post('/registro', passport.authenticate("registro", { failureRedirect: "/
 
 })
 
-router.post('/login', async (req, res) => {
-    let { email, password, web } = req.body
+router.post("/login", passport.authenticate("login", {failureRedirect:"/api/sessions/error"}), async(req, res)=>{
 
-    if (!email || !password) {
-        if (web) {
-            return res.redirect(`/login?error=Complete email, y password`)
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Complete email, y password` })
-        }
-    }
+    let { web } = req.body
+    let usr = {...req.user}
 
-    let usr = await usrm.getByPopulate({ email })
-    if (!usr) {
-
-        if (web) {
-            return res.redirect(`/login?error=Credenciales invalidas`)
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Credenciales inválidas` })
-        }
-    }
-
-    if (!validaPasword(password, usr.password)) {
-        if (web) {
-            return res.redirect(`/login?error=Credenciales invalidas`)
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Credenciales inválidas` })
-        }
-    }
-
-    usr = { ...usr }
     delete usr.password
     req.session.user = usr
 

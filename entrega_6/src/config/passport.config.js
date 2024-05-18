@@ -38,13 +38,39 @@ export const initPassport = () => {
         )
     )
 
-    passport.serializeUser((usuario, done) => {
-        return done(null, usuario._id)
+    passport.use('login',
+        new local.Strategy(
+            {
+                usernameField: 'email'
+            },
+
+            async (username, password, done) => {
+                try {
+
+                    let user = await usrm.getBy({ email: username })
+
+                    if (!user)
+                        return done(null, false)
+
+                    if (!validaPasword(password, user.password))
+                        return done(null, false)
+
+                    return done(null, user)
+
+                } catch (error) {
+                    return done(error)
+                }
+            }
+        )
+    )
+
+    passport.serializeUser((user, done) => {
+        return done(null, user._id)
     })
 
     passport.deserializeUser(async (id, done) => {
-        let usuario = await usrm.getBy({ _id: id })
-        return done(null, usuario)
+        let user = await usrm.getBy({ _id: id })
+        return done(null, user)
     })
 
 }
