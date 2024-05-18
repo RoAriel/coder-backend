@@ -24,7 +24,7 @@ router.get('/productos', auth, async (req, res) => {
     try {
         let user = req.session.user
         
-        cart = {_id: req.session.user.cart._id}
+        cart = {_id: req.session.user.cart}
         
         let {
             payload,
