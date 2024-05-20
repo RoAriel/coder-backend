@@ -1,9 +1,11 @@
 import passport from "passport";
 import local from 'passport-local'
 import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
+import {CartManagerMongo as CartManager} from '../dao/CartManager_mongo.js'
 import { generaHash, validaPasword } from '../utils.js'
 
 const usrm = new UserManager()
+const cm = new CartManager()
 
 //paso 1
 export const initPassport = () => {
@@ -29,7 +31,9 @@ export const initPassport = () => {
 
                     password = generaHash(password)
 
-                    let newUser = await usrm.create({ name, email: username, password, rol: 'user' })
+                    let cart = await cm.create()
+
+                    let newUser = await usrm.create({ name, email: username, password, rol: 'user', cart: cart._id})
                     return done(null, newUser)
                 } catch (error) {
                     return done(error)
