@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { engine } from 'express-handlebars';
 import sessions from "express-session"
+import connectMongo from 'connect-mongo'
 import passport from 'passport';
 import { initPassport } from './config/passport.config.js';
 import { router as sessionsRouter } from './router/sessions.router.js';
@@ -22,7 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(sessions({
-    secret: SECRET, resave: true, saveUninitialized: true
+    secret: SECRET, 
+    resave: true, saveUninitialized: true,
+     store: connectMongo.create({
+         mongoUrl:`${DATABASE_URL}`,
+         dbName: `${DATABASE}`,
+         ttl : 3600
+     })
 }))
 
 initPassport()
