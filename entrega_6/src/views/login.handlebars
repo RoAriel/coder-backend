@@ -4,11 +4,11 @@
 <form action="/api/sessions/login" method="post">
 
     {{#if error}}
-        <div style="font-weight: bolder; color: red;">{{error}}</div>
+    <div style="font-weight: bolder; color: red;">{{error}}</div>
     {{/if}}
 
     {{#if mensaje}}
-        <div style="font-weight: bolder; color: green;">{{mensaje}}</div>
+    <div style="font-weight: bolder; color: green;">{{mensaje}}</div>
     {{/if}}
 
     <input type="email" name="email" placeholder="correo electrónico">
@@ -16,6 +16,11 @@
     <input type="text" name="web" value="web" hidden>
     <br><br>
     <input class="btn btn-outline-primary btn-sm" type="submit" value="Login">
+</form>
+<br><br>
+<form action="/api/sessions/github" method="post">
+    <input type="text" name="webg" value="webg" hidden>
+    <input class="btn btn-outline-primary btn-sm" type="submit" value="Acceder con Github">
 </form>
 <br><br>
 {{>menu}}

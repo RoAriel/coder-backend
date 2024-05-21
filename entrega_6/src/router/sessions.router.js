@@ -1,7 +1,5 @@
 import { Router } from "express";
 import passport from 'passport';
-import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
-import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 
 export const router = new Router()
 
@@ -22,10 +20,10 @@ router.post('/registro', passport.authenticate("registro", { failureRedirect: "/
 
 })
 
-router.post("/login", passport.authenticate("login", {failureRedirect:"/api/sessions/error"}), async(req, res)=>{
+router.post("/login", passport.authenticate("login", { failureRedirect: "/api/sessions/error" }), async (req, res) => {
 
     let { web } = req.body
-    let usr = {...req.user}
+    let usr = { ...req.user }
 
     delete usr.password
     req.session.user = usr
@@ -33,6 +31,28 @@ router.post("/login", passport.authenticate("login", {failureRedirect:"/api/sess
     if (web) {
         res.redirect("/productos")
     } else {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({ payload: "Login correcto", usr });
+    }
+})
+
+router.post('/github', passport.authenticate("github", {}), (req, res) => { 
+
+})
+
+router.get('/callbackGithub', passport.authenticate("github", { failureRedirect: "/api/sessions/error" }), (req, res) => {
+
+    let { webg } = req.body
+    let usr = { ...req.user }
+console.log('body:\n', req.body);
+
+    req.session.user = usr
+
+    if (webg) {
+        res.redirect("/productos")
+    } else {
+        console.log('web', webg);
+        
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ payload: "Login correcto", usr });
     }
