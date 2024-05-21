@@ -36,26 +36,17 @@ router.post("/login", passport.authenticate("login", { failureRedirect: "/api/se
     }
 })
 
-router.post('/github', passport.authenticate("github", {}), (req, res) => { 
+router.get('/github', passport.authenticate("github", {}), (req, res) => { 
 
 })
 
 router.get('/callbackGithub', passport.authenticate("github", { failureRedirect: "/api/sessions/error" }), (req, res) => {
 
-    let { webg } = req.body
-    let usr = { ...req.user }
-console.log('body:\n', req.body);
-
-    req.session.user = usr
-
-    if (webg) {
-        res.redirect("/productos")
-    } else {
-        console.log('web', webg);
-        
+        let usr = { ...req.user }
+        req.session.user = usr
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ payload: "Login correcto", usr });
-    }
+
 })
 
 router.get("/logout", (req, res) => {
