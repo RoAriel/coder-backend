@@ -2,12 +2,13 @@ import { Router } from 'express';
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
 import { isValidObjectId } from 'mongoose';
 import { auth } from '../middleware/auth.js';
+import {passportCall} from '../utils.js'
 
 export const router = Router()
 
 const pm = new ProductManager
 
-router.get('/', auth,async (req, res) => {
+router.get('/', passportCall('current'),async (req, res) => {
 
     let pages_products
     let d0, d1, d2, d3 = {}, clave, val, qry = {} // variables necesarias para generar el qry de filtro
@@ -87,7 +88,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
-router.post('/', auth,async (req, res) => {
+router.post('/', passportCall('current'),async (req, res) => {
 
     let { title, description, code, price, status, stock, category, thumbnail } = req.body
 
@@ -195,7 +196,7 @@ router.delete('/:id', async (req, res) => {
 
 })
 
-router.put('/:id', auth,async (req, res) => {
+router.put('/:id', passportCall('current'),async (req, res) => {
     let { id } = req.params
     if (!isValidObjectId(id)) {
         res.setHeader('Content-Type', 'application/json');

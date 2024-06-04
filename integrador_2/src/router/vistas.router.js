@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ProductManagerMongo as ProductManager } from "../dao/ProductManager_mongo.js";
 import { CartManagerMongo as CartManager } from "../dao/CartManager_mongo.js"
-import { auth } from '../middleware/auth.js';
+import { passportCall } from '../utils.js';
 
 export const router = Router()
 
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     });
 })
 
-router.get('/productos', auth, async (req, res) => {
+router.get('/productos', passportCall('current'), async (req, res) => {
 
     let cart
     let { limit, pagina, query, sort } = req.query
@@ -83,13 +83,13 @@ router.get('/registro',(req, res, next)=>{
 })
 
 router.get('/login',
-    (req, res, next)=>{    
-        if(req.cookies["ecommerseCookie"]){
-            return res.redirect("/perfil")
-        }
+    // (req, res, next)=>{    
+    //     if(req.cookies["ecommerseCookie"]){
+    //         return res.redirect("/perfil")
+    //     }
 
-        next()
-    },
+    //     next()
+    // },
      (req,res)=>{
 
     let {error, mensaje}=req.query
@@ -97,7 +97,7 @@ router.get('/login',
     res.status(200).render('login', {error, mensaje, login: req.user})
 })
 
-router.get('/perfil', auth, (req,res)=>{
+router.get('/perfil', passportCall('current'), (req,res)=>{
 
     res.status(200).render('perfil',{
         user:req.user, login: req.user
