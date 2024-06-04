@@ -1,5 +1,6 @@
 import passport from "passport";
 import local from 'passport-local'
+import passportJWT from 'passport-jwt'
 import github from 'passport-github2'
 import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
@@ -8,8 +9,20 @@ import { generaHash, validaPasword } from '../utils.js'
 const usrm = new UserManager()
 const cm = new CartManager()
 
-//paso 1
+const searchTk = (req) => {
+    let token = null
+
+    if (req.cookies.coderCookie) token = req.cookies.coderCookie
+
+    return token
+}
+
+
 export const initPassport = () => {
+
+    const GIT_CLIENT = process.env.GIT_CLIENT
+    const GIT_CLIENT_SECTRET = process.env.GIT_CLIENT_SECTRET
+    const SECRET = process.env.SECRET
 
     passport.use('registro',
 
@@ -24,11 +37,11 @@ export const initPassport = () => {
 
                 try {
 
-                    let { name } = req.body
-                    if (!name) return done(null, false)
+                    let { name, last_name} = req.body
+                    if (!name || !last_name) return done(null, false, {message:"Ingrese Nombre completo."})
 
                     let exist = await usrm.getBy({ email: username })
-                    if (exist) return done(null, false)
+                    if (exist) return done(null, false, {message:"El mail ya existe registrado."})
 
                     password = generaHash(password)
 
@@ -55,10 +68,11 @@ export const initPassport = () => {
                     let user = await usrm.getBy({ email: username })
 
                     if (!user)
-                        return done(null, false)
+                        return done(null, false, {message:"Credenciales inválidas"})
 
                     if (!validaPasword(password, user.password))
-                        return done(null, false)
+                        
+                        return done(null, false, {message:"Credenciales inválidas"})
 
                     return done(null, user)
 
@@ -69,9 +83,6 @@ export const initPassport = () => {
         )
     )
 
-    const GIT_CLIENT = process.env.GIT_CLIENT
-    const GIT_CLIENT_SECTRET = process.env.GIT_CLIENT_SECTRET
-    
     passport.use('github',
         new github.Strategy(
             {
@@ -90,11 +101,11 @@ export const initPassport = () => {
 
                     let newUser = await usrm.getBy({ email: email })
 
-                    if (!newUser){
+                    if (!newUser) {
                         let cart = await cm.create()
-                        newUser = await usrm.create({ name, email,  rol: 'user', cart: cart._id, profile: profile })
+                        newUser = await usrm.create({ name, email, rol: 'user', cart: cart._id, profile: profile })
                     }
-                    
+
                     return done(null, newUser)
                 } catch (error) {
                     return done(error)
@@ -103,13 +114,20 @@ export const initPassport = () => {
 
         )
     )
-    passport.serializeUser((user, done) => {
-        return done(null, user._id)
-    })
 
-    passport.deserializeUser(async (id, done) => {
-        let user = await usrm.getBy({ _id: id })
-        return done(null, user)
-    })
+    passport.use("current", new passportJWT.Strategy(
+        {
+            secretOrKey: `${SECRET}`,
+            jwtFromRequest: new passportJWT.ExtractJwt.fromExtractors([searchTk])
+        },
+        async (usuario, done) => {
+            console.log("paso x estrategia current...!!!")
+            try {
+                return done(null, usuario)
+            } catch (error) {
+                return done(error)
+            }
+        }
 
+    ))
 }

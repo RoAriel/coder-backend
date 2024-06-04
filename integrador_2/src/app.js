@@ -3,14 +3,13 @@ import path from 'node:path';
 import express from 'express';
 import mongoose from 'mongoose';
 import { engine } from 'express-handlebars';
-import sessions from "express-session"
-import connectMongo from 'connect-mongo'
 import passport from 'passport';
 import { initPassport } from './config/passport.config.js';
 import { router as sessionsRouter } from './router/sessions.router.js';
 import { router as productRouter } from './router/product.router.js';
 import { router as cartRouter } from './router/cart.router.js';
 import { router as vistasRouter } from '../src/router/vistas.router.js'
+import cookieParser from 'cookie-parser';
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -22,19 +21,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(sessions({
-    secret: SECRET, 
-    resave: true, saveUninitialized: true,
-     store: connectMongo.create({
-         mongoUrl:`${DATABASE_URL}`,
-         dbName: `${DATABASE}`,
-         ttl : 3600
-     })
-}))
-
+app.use(cookieParser())
 initPassport()
 app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.session())
 
 
 app.engine('handlebars', engine({

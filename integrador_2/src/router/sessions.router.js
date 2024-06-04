@@ -1,5 +1,9 @@
 import { Router } from "express";
+import jwt from "jsonwebtoken"
 import passport from 'passport';
+import {passportCall} from '../utils.js'
+
+const SECRET = process.env.SECRET
 
 export const router = new Router()
 
@@ -20,19 +24,20 @@ router.post('/registro', passport.authenticate("registro", { failureRedirect: "/
 
 })
 
-router.post("/login", passport.authenticate("login", { failureRedirect: "/api/sessions/error" }), async (req, res) => {
-
+router.post('/login', passportCall('login'), async(req,res) => {
     let { web } = req.body
     let usr = { ...req.user }
 
     delete usr.password
-    req.session.user = usr
+    
+    let token = jwt.sign(usr, SECRET, {expiresIn:'1h'})
+    res.cookie("ecommerseCookie", token, {httpOnly:true})
 
     if (web) {
         res.redirect("/productos")
     } else {
         res.setHeader('Content-Type', 'application/json');
-        return res.status(200).json({ payload: "Login correcto", usr });
+        return res.status(200).json({ payload: "Login correcto", usuarioLogueado:usr, token });
     }
 })
 

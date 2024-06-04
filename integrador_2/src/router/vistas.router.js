@@ -11,7 +11,7 @@ const cm = new CartManager
 router.get('/', (req, res) => {
     res.setHeader('Content-Type', 'text/html');
     res.status(200).render('home',{
-        user:req.session.user, login: req.session.user
+        user:req.user, login: req.user
     });
 })
 
@@ -20,11 +20,12 @@ router.get('/productos', auth, async (req, res) => {
     let cart
     let { limit, pagina, query, sort } = req.query
     if (!pagina) pagina = 1
+console.log('pase');
 
     try {
-        let user = req.session.user
+        let user = req.user
         
-        cart = {_id: req.session.user.cart}
+        cart = {_id: req.user.cart}
         
         let {
             payload,
@@ -86,7 +87,7 @@ router.get('/registro',(req, res, next)=>{
 })
 
 router.get('/login',(req, res, next)=>{
-    if(req.session.user){
+    if(req.user){
         return res.redirect("/perfil")
     }
 
@@ -95,13 +96,13 @@ router.get('/login',(req, res, next)=>{
 
     let {error, mensaje}=req.query
 
-    res.status(200).render('login', {error, mensaje, login: req.session.user})
+    res.status(200).render('login', {error, mensaje, login: req.user})
 })
 
 router.get('/perfil', auth, (req,res)=>{
 
     res.status(200).render('perfil',{
-        user:req.session.user, login: req.session.user
+        user:req.user, login: req.user
     })
 })
 
