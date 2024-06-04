@@ -63,7 +63,7 @@ router.get('/carrito/:cid', async (req, res) => {
     return res.status(200).render("cart", { cart });
 })
 
-// LOGG
+// LOG
 
 router.get('/',(req,res)=>{
 
@@ -71,9 +71,7 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/registro',(req, res, next)=>{
-    if(req.user){
-        console.log('paso por el router de la visata de registro');
-        
+    if(req.user){        
         return res.redirect("/perfil")
     }
 
@@ -84,13 +82,15 @@ router.get('/registro',(req, res, next)=>{
     res.status(200).render('registro', {error, login: req.user})
 })
 
-router.get('/login',(req, res, next)=>{    
-    if(req.cookies["ecommerseCookie"]){
-        return res.redirect("/perfil")
-    }
+router.get('/login',
+    (req, res, next)=>{    
+        if(req.cookies["ecommerseCookie"]){
+            return res.redirect("/perfil")
+        }
 
-    next()
-}, (req,res)=>{
+        next()
+    },
+     (req,res)=>{
 
     let {error, mensaje}=req.query
 
@@ -105,20 +105,6 @@ router.get('/perfil', auth, (req,res)=>{
 })
 
 router.get('/logout',(req,res)=>{
-    req.session.destroy(e=>{
-        if(e){
-            console.log(error);
-            res.setHeader('Content-Type','application/json');
-            return res.status(500).json(
-                {
-                    error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                    detalle:`${error.message}`
-                }
-            )
-            
-        }
-    })
-
     res.setHeader('Content-Type','application/json');
     return res.redirect("/login")
 })
