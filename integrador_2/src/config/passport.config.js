@@ -12,7 +12,7 @@ const cm = new CartManager()
 const searchTk = (req) => {
     let token = null
 
-    if (req.cookies.coderCookie) token = req.cookies.coderCookie
+    if (req.cookies.ecommerseCookie) token = req.cookies.ecommerseCookie
 
     return token
 }
@@ -121,10 +121,9 @@ export const initPassport = () => {
             jwtFromRequest: new passportJWT.ExtractJwt.fromExtractors([searchTk])
         },
         async (user, done) => {
-            console.log("paso x estrategia current...!!!")
             try {
                 return done(null, user)
-            } catch (error) {
+            } catch (error) {                
                 return done(error)
             }
         }

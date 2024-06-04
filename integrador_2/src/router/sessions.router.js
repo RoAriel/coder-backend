@@ -69,3 +69,21 @@ router.get("/logout", (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json({ payload: "Logout" });
 })
+
+router.get('/current', passportCall('current'), (req, res) => {
+   
+    try {
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json({user: req.user});
+    } catch (error) {
+        res.setHeader('Content-Type','application/json');
+        return res.status(500).json(
+            {
+                error:`Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle:`${error.message}`
+            }
+        )
+        
+    }
+    
+})
