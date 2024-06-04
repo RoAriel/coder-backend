@@ -20,8 +20,6 @@ router.get('/productos', auth, async (req, res) => {
     let cart
     let { limit, pagina, query, sort } = req.query
     if (!pagina) pagina = 1
-console.log('pase');
-
     try {
         let user = req.user
         
@@ -73,8 +71,8 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/registro',(req, res, next)=>{
-    if(req.session.user){
-        console.log('paso por el router de la visata de sessions registro');
+    if(req.user){
+        console.log('paso por el router de la visata de registro');
         
         return res.redirect("/perfil")
     }
@@ -83,11 +81,11 @@ router.get('/registro',(req, res, next)=>{
 },(req,res)=>{
     let {error}=req.query
 
-    res.status(200).render('registro', {error, login: req.session.user})
+    res.status(200).render('registro', {error, login: req.user})
 })
 
-router.get('/login',(req, res, next)=>{
-    if(req.user){
+router.get('/login',(req, res, next)=>{    
+    if(req.cookies["ecommerseCookie"]){
         return res.redirect("/perfil")
     }
 

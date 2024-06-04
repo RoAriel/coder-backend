@@ -3,23 +3,20 @@ import jwt from "jsonwebtoken"
 import passport from 'passport';
 import {passportCall} from '../utils.js'
 
-const SECRET = process.env.SECRET
-
 export const router = new Router()
 
-router.post('/registro', passport.authenticate("registro", { failureRedirect: "/api/sessions/error" }), async (req, res) => {
+router.post('/registro', passportCall('registro'), async (req, res) => {
 
-    // Definicion anterior ver entrega_5 
 
     let web = req.body.web
     let newUser = req.user
+    let token = jwt.sign(newUser, process.env.SECRET, {expiresIn:'1h'})
+    res.cookie("ecommerseCookie", token, {httpOnly:true})
     if (web) {
         return res.redirect(`/login?mensaje=Registro correcto para ${newUser.name}`)
     } else {
         res.setHeader('Content-Type', 'application/json')
-        res.status(200).json({
-            message: "Registro correcto", newUser
-        })
+        res.status(200).json({ payload: "Registro correcto", newUser:newUser, token })
     }
 
 })
@@ -30,7 +27,7 @@ router.post('/login', passportCall('login'), async(req,res) => {
 
     delete usr.password
     
-    let token = jwt.sign(usr, SECRET, {expiresIn:'1h'})
+    let token = jwt.sign(usr, process.env.SECRET, {expiresIn:'1h'})
     res.cookie("ecommerseCookie", token, {httpOnly:true})
 
     if (web) {

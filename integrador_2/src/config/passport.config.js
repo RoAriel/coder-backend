@@ -47,7 +47,7 @@ export const initPassport = () => {
 
                     let cart = await cm.create()
 
-                    let newUser = await usrm.create({ name, email: username, password, rol: 'user', cart: cart._id })
+                    let newUser = await usrm.create({ name, last_name, email: username, password, rol: 'user', cart: cart._id })
                     return done(null, newUser)
                 } catch (error) {
                     return done(error)
@@ -120,10 +120,10 @@ export const initPassport = () => {
             secretOrKey: `${SECRET}`,
             jwtFromRequest: new passportJWT.ExtractJwt.fromExtractors([searchTk])
         },
-        async (usuario, done) => {
+        async (user, done) => {
             console.log("paso x estrategia current...!!!")
             try {
-                return done(null, usuario)
+                return done(null, user)
             } catch (error) {
                 return done(error)
             }
