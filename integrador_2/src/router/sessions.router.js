@@ -52,22 +52,10 @@ router.get('/callbackGithub', passport.authenticate("github", { failureRedirect:
 })
 
 router.get("/logout", (req, res) => {
-    req.session.destroy(e => {
-        if (e) {
-            console.log(error);
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(500).json(
-                {
-                    error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                    detalle: `${error.message}`
-                }
-            )
-
-        }
-    })
+    res.clearCookie("ecommerseCookie")
 
     res.setHeader('Content-Type', 'application/json');
-    return res.status(200).json({ payload: "Logout" });
+    return res.status(200).json({ payload: 'Logout correcto!' });
 })
 
 router.get('/current', passportCall('current'), (req, res) => {

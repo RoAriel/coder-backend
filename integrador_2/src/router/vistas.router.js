@@ -105,6 +105,7 @@ router.get('/perfil', passportCall('current'), (req,res)=>{
 })
 
 router.get('/logout',(req,res)=>{
+    res.clearCookie("ecommerseCookie")
     res.setHeader('Content-Type','application/json');
     return res.redirect("/login")
 })
