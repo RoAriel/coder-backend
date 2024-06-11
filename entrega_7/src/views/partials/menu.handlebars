@@ -7,9 +7,8 @@
         <a href="/productos">Comprar</a>
     </li>
     <li>
-        {{!-- <a href="/logout">Logout</a> --}}
-        <button onclick="delcookie()">logout</button>
-        ecommerseCookie
+        <a href="/logout">Logout</a> 
+
     </li>
 
     {{else}}
@@ -21,13 +20,3 @@
     </li>
     {{/if}}
 </ul>
-
-<script>
-    const delcookie = () =>{
-       console.log('START cookies:', document.cookie);
-       
-    document.cookie = "ecommerseCookie" + '=; Max-Age=0'
-       console.log('END cookies:', document.cookie);
-
-    }
-</script>
