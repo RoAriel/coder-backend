@@ -1,0 +1,14 @@
+{{>navbar}}
+<h2>Carrito {{cart._id}}</h2>
+
+<div class="d-flex flex-column mb-3">
+    {{#each cart.products}}
+        <div class="p-1">
+            Item: <strong>{{pid.title}} </strong> - cantidad: {{quantity}}
+        </div>
+    {{/each}}
+</div>
+
+<br>
+<br>
+<a href="/productos">Seguir Comprando</a>

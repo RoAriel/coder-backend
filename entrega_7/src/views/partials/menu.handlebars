@@ -1,0 +1,33 @@
+<ul>
+    {{#if login}}
+    <li>
+        <a href="/perfil">Perfil</a>
+    </li>
+    <li>
+        <a href="/productos">Comprar</a>
+    </li>
+    <li>
+        {{!-- <a href="/logout">Logout</a> --}}
+        <button onclick="delcookie()">logout</button>
+        ecommerseCookie
+    </li>
+
+    {{else}}
+    <li>
+        <a href="/registro">Registro</a>
+    </li>
+    <li>
+        <a href="/login">Login</a>
+    </li>
+    {{/if}}
+</ul>
+
+<script>
+    const delcookie = () =>{
+       console.log('START cookies:', document.cookie);
+       
+    document.cookie = "ecommerseCookie" + '=; Max-Age=0'
+       console.log('END cookies:', document.cookie);
+
+    }
+</script>
