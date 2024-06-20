@@ -26,6 +26,7 @@ router.post('/login', passportCall('login'), async (req, res) => {
     let usr = { ...req.user }
 
     delete usr.password
+console.log('user', usr);
 
     let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
     res.cookie("ecommerseCookie", token, { httpOnly: true })
@@ -38,16 +39,21 @@ router.post('/login', passportCall('login'), async (req, res) => {
     }
 })
 
-router.get('/github', passport.authenticate("github", {session: false}), (req, res) => {
+router.get('/github', passport.authenticate("github", {}), (req, res) => {})
 
-})
 
-router.get('/callbackGithub', passport.authenticate("github", { failureRedirect: "/api/sessions/error" }), (req, res) => {
+router.get('/callbackGithub', passport.authenticate("github",{session: false}), (req, res) => {
 
     let usr = { ...req.user }
-    req.session.user = usr
-    res.setHeader('Content-Type', 'application/json');
-    return res.status(200).json({ payload: "Login correcto", usr });
+
+    delete usr.profile
+    console.log('NEW_USER\n', usr);
+    
+    let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
+   
+    res.cookie("ecommerseCookie", token, { httpOnly: true })
+    res.redirect("/productos")
+ 
 
 })
 

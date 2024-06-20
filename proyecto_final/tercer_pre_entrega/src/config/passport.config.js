@@ -94,16 +94,18 @@ export const initPassport = () => {
             async (tokenAccess, tokenRefresh, profile, done) => {
 
                 try {
-                    let name = profile._json.name
-                    let email = profile._json.email
 
-                    if (!name || !email) return done(null, false)
+                    let first_name = profile._json.name.split(' ')[0]
+                    let last_name = profile._json.name.split(' ')[1]
+                    let email = profile._json.email
+                    let age = -1
+                    if (!first_name || !email) return done(null, false)
 
                     let newUser = await usrm.getBy({ email: email })
 
                     if (!newUser) {
                         let cart = await cm.create()
-                        newUser = await usrm.create({ name, email, rol: 'user', cart: cart._id, profile: profile })
+                        newUser = await usrm.create({ first_name, last_name, age, email, rol: 'user', cart: cart._id, profile: profile })
                     }
 
                     return done(null, newUser)
