@@ -15,6 +15,10 @@ router.get('/', (req, res) => {
     });
 })
 
+router.get('/chat',(req,res)=>{
+    res.status(200).render('chat')
+})
+
 router.get('/productos', passportCall('current'), async (req, res) => {
 
     let cart

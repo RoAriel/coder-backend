@@ -8,7 +8,7 @@
 
 - Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio. 
 
-- Modificar la ruta  /current Para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
+- Modificar la ruta  /current para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
 
 - Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
 
@@ -18,7 +18,7 @@
 
     - Sólo el usuario puede agregar productos a su carrito.
 
-- Crear un modelo Ticket el cual contará con todas las formalizaciones de la compra. Éste contará con los campos
+- Crear un modelo Ticket el cual contará con todas las formalizaciones de la compra. Éste contará con los campos:
     ```
     Id (autogenerado por mongo)
     code: String debe autogenerarse y ser único
