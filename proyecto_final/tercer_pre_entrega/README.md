@@ -25,8 +25,7 @@
     purchase_datetime: Deberá guardar la fecha y hora exacta en la cual se formalizó la compra (básicamente es un created_at)
     amount: Number, total de la compra.
     purchaser: String, contendrá el correo del usuario asociado al carrito.
-
-
+    ```
 - Implementar, en el router de carts, la ruta /:cid/purchase, la cual permitirá finalizar el proceso de compra de dicho carrito.
     - La compra debe corroborar el stock del producto al momento de finalizarse
 

@@ -38,7 +38,7 @@ router.post('/login', passportCall('login'), async (req, res) => {
     }
 })
 
-router.get('/github', passport.authenticate("github", {}), (req, res) => {
+router.get('/github', passport.authenticate("github", {session: false}), (req, res) => {
 
 })
 
