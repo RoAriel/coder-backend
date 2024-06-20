@@ -13,7 +13,7 @@ router.post('/registro', passportCall('registro'), async (req, res) => {
     let token = jwt.sign(newUser, process.env.SECRET, { expiresIn: '1h' })
     res.cookie("ecommerseCookie", token, { httpOnly: true })
     if (web) {
-        return res.redirect(`/login?mensaje=Registro correcto para ${newUser.name}`)
+        return res.redirect(`/login?mensaje=Registro correcto para ${newUser.first_name}`)
     } else {
         res.setHeader('Content-Type', 'application/json')
         res.status(200).json({ payload: "Registro correcto", newUser: newUser, token })

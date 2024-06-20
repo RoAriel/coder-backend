@@ -37,8 +37,8 @@ export const initPassport = () => {
 
                 try {
 
-                    let { name, last_name} = req.body
-                    if (!name || !last_name) return done(null, false, {message:"Ingrese Nombre completo."})
+                    let { first_name, last_name, age} = req.body
+                    if (!first_name || !last_name) return done(null, false, {message:"Ingrese Nombre completo."})
 
                     let exist = await usrm.getBy({ email: username })
                     if (exist) return done(null, false, {message:"El mail ya existe registrado."})
@@ -47,7 +47,7 @@ export const initPassport = () => {
 
                     let cart = await cm.create()
 
-                    let newUser = await usrm.create({ name, last_name, email: username, password, rol: 'user', cart: cart._id })
+                    let newUser = await usrm.create({ first_name, last_name, age, email: username, password, rol: 'user', cart: cart._id })
                     return done(null, newUser)
                 } catch (error) {
                     return done(error)

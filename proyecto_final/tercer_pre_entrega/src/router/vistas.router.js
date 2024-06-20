@@ -86,15 +86,7 @@ router.get('/registro',(req, res, next)=>{
     res.status(200).render('registro', {error, login: req.user})
 })
 
-router.get('/login',
-    // (req, res, next)=>{    
-    //     if(req.cookies["ecommerseCookie"]){
-    //         return res.redirect("/perfil")
-    //     }
-
-    //     next()
-    // },
-     (req,res)=>{
+router.get('/login',(req,res)=>{
 
     let {error, mensaje}=req.query
 
