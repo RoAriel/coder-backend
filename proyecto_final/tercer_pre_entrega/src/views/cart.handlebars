@@ -1,12 +1,23 @@
 {{>navbar}}
 <h2>Carrito {{cart._id}}</h2>
 
-<div class="d-flex flex-column mb-3">
-    {{#each cart.products}}
-        <div class="p-1">
-            Item: <strong>{{pid.title}} </strong> - cantidad: {{quantity}}
-        </div>
-    {{/each}}
+<div class="d-flex">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each cart.products}}
+            <tr>
+                <td>{{pid.title}}</td>
+                <td>{{quantity}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
 
 <br>
