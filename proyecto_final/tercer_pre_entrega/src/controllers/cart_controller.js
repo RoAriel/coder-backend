@@ -1,9 +1,12 @@
 import { isValidObjectId } from 'mongoose';
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js'
+import { TicketManagerMongo as TicketManager } from '../dao/TicketManager_mongo.js';
+import { v4 as uuidv4 } from "uuid"
 
 const cartManager = new CartManager
 const productManager = new ProductManager
+const ticketManager = new TicketManager
 
 export const getCartByCid = async (req, res) => {
 
@@ -302,7 +305,7 @@ export const updateQuantityOfProduct = async (req, res) => {
     let product
     try {
         product = await productManager.getProductBy({ _id: pid })
-        
+
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -322,10 +325,10 @@ export const updateQuantityOfProduct = async (req, res) => {
     let products = cart.products
     let indiceProducto = cart.products.findIndex(p => p.pid.toString() == product._id.toString())
 
-    if(!products[indiceProducto]){
-        res.setHeader('Content-Type','application/json');
-        return res.status(400).json({error:`El producto no existe en el carrito.`})
-    }else{
+    if (!products[indiceProducto]) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `El producto no existe en el carrito.` })
+    } else {
         products[indiceProducto].quantity = cantidad
     }
     try {
@@ -388,4 +391,60 @@ export const deleteCartProducts = async (req, res) => {
         )
 
     }
+}
+
+export const purchase = async (req, res) => {
+
+    let { cid } = req.params
+    let user = req.user
+    let cart
+    let cartWithNoStock = []
+    let amount = 0
+    try {
+        cart = await cartManager.getCart(cid)
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json(
+            {
+                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
+                detalle: `${error.message}`
+            }
+        )
+    }
+    if (!cart) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(400).json({ error: `Ingrese ID's valido para la operacion` })
+    }
+
+    for (const product of cart.products) {
+        let prd = await productManager.getProductBy({ _id: product.pid })
+
+        if (product.quantity < prd.stock) {
+
+            await productManager.updtadeProduct(prd._id, { stock: prd.stock - product.quantity })
+            amount = amount + (product.quantity * prd.price)
+
+        } else {
+            cartWithNoStock.push(product)
+        }
+
+    }
+
+    if(cartWithNoStock.length > 0){
+        cartManager.addProductToCart(cid,cartWithNoStock)
+    }else{
+        cartManager.addProductToCart(cid,[])
+
+    }
+
+    let ticket = {
+        code: uuidv4(),
+        purchase_datetime: new Date(),
+        amount: amount,
+        purchaser: user.email,
+    }
+
+    ticketManager.create(ticket)
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).json({ payload: cartWithNoStock.map(prod => prod.id) });
 }
