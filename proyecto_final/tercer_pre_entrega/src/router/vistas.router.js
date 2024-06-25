@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ProductManagerMongo as ProductManager } from "../dao/ProductManager_mongo.js";
 import { CartManagerMongo as CartManager } from "../dao/CartManager_mongo.js"
 import { passportCall } from '../utils.js';
+import { auth } from "../middleware/auth.js";
 
 export const router = Router()
 
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
     });
 })
 
-router.get('/chat',(req,res)=>{
+router.get('/chat',passportCall('current'), auth(['user']),(req,res)=>{
     res.status(200).render('chat')
 })
 
@@ -63,7 +64,6 @@ router.get('/carrito/:cid', async (req, res) => {
     let { cid } = req.params
 
     let cart = await cm.getOneByPopulate(cid)
-    console.log('CART:', cart)
     res.setHeader('Content-Type', 'text/html');
     return res.status(200).render("cart", { cart });
 })

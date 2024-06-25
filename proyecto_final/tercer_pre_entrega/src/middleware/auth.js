@@ -1,21 +1,17 @@
-import jwt from "jsonwebtoken"
+export const auth=(permisos=[])=>{   // auth(["ADmIN", "premium"])  o  auth(["public"])
+    return (req, res, next)=>{
+        permisos=permisos.map(p=>p.toLowerCase())
 
-export const auth=(req, res, next)=>{
-    if(!req.cookies["ecommerseCookie"]){
-        res.setHeader('Content-Type','application/json');
-        return res.status(401).json({error:`Usuario no autenticado`})
+        if(!req.user?.rol){
+            res.setHeader('Content-Type','application/json');
+            return res.status(401).json({error:`No hay usuarios autenticados, o problema con el rol`})
+        }
+
+        if(!permisos.includes(req.user.rol.toLowerCase())){
+            res.setHeader('Content-Type','application/json');
+            return res.status(403).json({error:`Privilegios insuficientes para acceder al recurso`})
+        }
+
+        return next()
     }
-
-    let token=req.cookies["ecommerseCookie"]
-    try {
-        let usuario=jwt.verify(token, process.env.SECRET)
-        req.user=usuario
-        
-    } catch (error) {
-        res.setHeader('Content-Type','application/json');
-        return res.status(401).json({error:`${error}`})
-    }
-
-
-    next()
 }
