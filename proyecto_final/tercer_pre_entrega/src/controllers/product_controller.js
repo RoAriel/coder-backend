@@ -1,5 +1,6 @@
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
 import { isValidObjectId } from 'mongoose';
+import { productService } from '../repository/product.services.js';
 
 const productManager = new ProductManager
 
@@ -34,7 +35,7 @@ export const getAllProducts = async (req, res) => {
 
     try {
 
-        pages_products = await productManager.getAllPaginate(limit, page, qry, sort)
+        pages_products = await productService.getProductsPaginate(limit, page, qry, sort)
 
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json(pages_products);
@@ -60,7 +61,7 @@ export const getProductByPid = async (req, res) => {
     }
 
     try {
-        let product = await productManager.getProductBy({ _id: pid })
+        let product = await productService.getProductBy({ _id: pid })
         if (product) {
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json({ product });
@@ -94,7 +95,7 @@ export const createNewProduct = async (req, res) => {
     let prExist
 
     try {
-        prExist = await productManager.getProductBy({ code })
+        prExist = await productService.getProductBy({ code })
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -116,7 +117,7 @@ export const createNewProduct = async (req, res) => {
 
     try {
         let prd = { title, description, code, price, status, stock, category, thumbnail }
-        let newProduct = await productManager.addProduct(prd)
+        let newProduct = await productService.addProduct(prd)
 
         res.setHeader('Content-Type', 'application/json');
 
@@ -150,7 +151,7 @@ export const updateProduct = async (req, res) => {
     if (prdUpd.code) {
         let exists
         try {
-            exists = await pm.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
+            exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
             if (exists) {
                 res.setHeader('Content-Type', 'application/json');
                 return res.status(400).json({ error: `Ya existe otro producto con el nro de codigo ingresado` })
@@ -168,7 +169,7 @@ export const updateProduct = async (req, res) => {
     }
     try {
 
-        let prodUpdated = await productManager.updtadeProduct(pid, prdUpd)
+        let prodUpdated = await productService.updtadeProduct(pid, prdUpd)
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ prodUpdated });
     } catch (error) {
@@ -195,7 +196,7 @@ export const deleteProduct = async (req, res) => {
     let prExist
 
     try {
-        prExist = await productManager.getProductBy({ _id: pid })
+        prExist = await productService.getProductBy({ _id: pid })
 
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
@@ -214,11 +215,11 @@ export const deleteProduct = async (req, res) => {
     }
 
     try {
-        let prDel = await productManager.deleteProduct(pid)
+        let prDel = await productService.deleteProduct(pid)
 
         if (prDel.deletedCount > 0) {
 
-            let products = await productManager.getProducts()
+            let products = await productService.getProducts()
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json({ payload: `Producto ${prExist.title} eliminado` });
         } else {

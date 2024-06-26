@@ -1,6 +1,5 @@
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
-
-const productManager = new ProductManager
+import { productService } from '../repository/product.services.js';
 
 export const getProducts = async (req, res) => {
 
@@ -22,7 +21,7 @@ export const getProducts = async (req, res) => {
             hasNextPage,
             prevLink,
             nextLink
-        } = await productManager.getAllPaginate(limit, pagina, query, sort)
+        } = await productService.getProductsPaginate(limit, pagina, query, sort)
 
         res.setHeader('Content-Type', 'text/html')
         res.status(200).render("products", {

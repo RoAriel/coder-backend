@@ -2,11 +2,11 @@ import { productModel } from './models/product.model.js'
 
 export class ProductManagerMongo {
 
-    async getProducts() {
+    async get() {
         return await productModel.find()
     }
 
-    async getProductBy(filtro) {
+    async getBy(filtro) {
         return await productModel.findOne(filtro)
     }
 
@@ -52,17 +52,16 @@ export class ProductManagerMongo {
         return ret
     }
 
-    async addProduct(product) {
+    async create(obj) {
 
-        return await productModel.create(product)
+        return await productModel.create(obj)
     }
 
-    async deleteProduct(productId) {
-
-        return await productModel.deleteOne({ _id: productId })
+    async delete(id) {
+        return await productModel.deleteOne({ _id: id })
     }
 
-    async updtadeProduct(id, product) {
-        return await productModel.findByIdAndUpdate(id, product, { runValidators: true, returnDocument: "after" })
+    async update(id, obj) {
+        return await productModel.findByIdAndUpdate(id, obj, { runValidators: true, returnDocument: "after" })
     }
 }

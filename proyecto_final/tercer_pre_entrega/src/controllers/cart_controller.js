@@ -3,6 +3,7 @@ import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mon
 import { TicketManagerMongo as TicketManager } from '../dao/TicketManager_mongo.js';
 import { v4 as uuidv4 } from "uuid"
 import { cartService } from '../repository/cart.services.js';
+import { productService } from '../repository/product.services.js';
 
 const productManager = new ProductManager
 const ticketManager = new TicketManager
@@ -88,7 +89,7 @@ export const addProductToCart = async (req, res) => {
     //Controlo que existe el PID
     let existProduct
     try {
-        existProduct = await productManager.getProductBy({ _id: pid })
+        existProduct = await productService.getProductBy({ _id: pid })
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -165,7 +166,7 @@ export const removeProductFromCart = async (req, res) => {
     //Controlo que existe el PID
     let existProduct
     try {
-        existProduct = await productManager.getProductBy({ _id: pid })
+        existProduct = await productService.getProductBy({ _id: pid })
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -233,7 +234,7 @@ export const changeProductsfromCart = async (req, res) => {
 
     // Controlo que los productos que llegan al body sean existan
     try {
-        let products = await productManager.getProducts()
+        let products = await productService.getProducts()
         let existenProductos = prods.every(e => (products.map(pr => (pr._id).toString())).includes(e.pid))
 
         if (!existenProductos) {
@@ -303,7 +304,7 @@ export const updateQuantityOfProduct = async (req, res) => {
     //Controlo que existe el PID
     let product
     try {
-        product = await productManager.getProductBy({ _id: pid })
+        product = await productService.getProductBy({ _id: pid })
 
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
@@ -416,11 +417,11 @@ export const purchase = async (req, res) => {
     }
 
     for (const product of cart.products) {
-        let prd = await productManager.getProductBy({ _id: product.pid })
+        let prd = await productService.getProductBy({ _id: product.pid })
 
         if (product.quantity < prd.stock) {
 
-            await productManager.updtadeProduct(prd._id, { stock: prd.stock - product.quantity })
+            await productService.updtadeProduct(prd._id, { stock: prd.stock - product.quantity })
             amount = amount + (product.quantity * prd.price)
 
         } else {
