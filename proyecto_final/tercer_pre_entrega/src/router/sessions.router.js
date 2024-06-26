@@ -25,8 +25,6 @@ router.post('/login', passportCall('login'), async (req, res) => {
     let { web } = req.body
     let usr = { ...req.user }
 
-    delete usr.password
-
     let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
     res.cookie("ecommerseCookie", token, { httpOnly: true })
 

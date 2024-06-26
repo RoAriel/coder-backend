@@ -5,6 +5,7 @@ import github from 'passport-github2'
 import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { generaHash, validaPasword } from '../utils.js'
+import { UserDto } from "../dto/UserDTO.js";
 
 const usrm = new UserManager()
 const cm = new CartManager()
@@ -74,6 +75,7 @@ export const initPassport = () => {
                         
                         return done(null, false, {message:"Credenciales inválidas"})
 
+                    user = new UserDto(user)
                     return done(null, user)
 
                 } catch (error) {
