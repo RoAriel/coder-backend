@@ -2,8 +2,8 @@ import { usersModel } from "./models/user.model.js"
 
 export class UserManagerMongo{
 
-    async create(user){
-        let newUser=await usersModel.create(user)
+    async create(obj){
+        let newUser=await usersModel.create(obj)
         return newUser.toJSON()
     }
 

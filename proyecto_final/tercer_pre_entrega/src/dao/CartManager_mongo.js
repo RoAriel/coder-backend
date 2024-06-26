@@ -15,7 +15,8 @@ export class CartManagerMongo {
     }
 
     async create(list){
-        return await cartModel.create(list)
+        let cart = await cartModel.create({products: list})
+        return cart.toJSON()
     }
 
     async update(id, list){

@@ -7,6 +7,7 @@ import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { generaHash, validaPasword } from '../utils.js'
 import { UserDto } from "../dto/UserDTO.js";
 import { cartService } from "../repository/cart.services.js";
+import { userService } from "../repository/user.services.js";
 
 const usrm = new UserManager()
 
@@ -41,16 +42,17 @@ export const initPassport = () => {
                     let { first_name, last_name, age} = req.body
                     if (!first_name || !last_name) return done(null, false, {message:"Ingrese Nombre completo."})
 
-                    let exist = await usrm.getBy({ email: username })
+                    let exist = await userService.getUserBy({ email: username })
                     if (exist) return done(null, false, {message:"El mail ya existe registrado."})
 
                     password = generaHash(password)
 
                     let cart = await cartService.createCart([])
-                  
+                    console.log('NEW_CART', cart);
                     
+    
 
-                    let newUser = await usrm.create({ first_name, last_name, age, email: username, password, rol: 'user', cart: cart._id })
+                    let newUser = await userService.createUser({ first_name, last_name, age, email: username, password, rol: 'user', cart: cart._id })
                     return done(null, newUser)
                 } catch (error) {
                     return done(error)
@@ -68,7 +70,7 @@ export const initPassport = () => {
             async (username, password, done) => {
                 try {
 
-                    let user = await usrm.getBy({ email: username })
+                    let user = await userService.getUserBy({ email: username })
 
                     if (!user)
                         return done(null, false, {message:"Credenciales inválidas"})
@@ -105,11 +107,13 @@ export const initPassport = () => {
                     let age = -1
                     if (!first_name || !email) return done(null, false)
 
-                    let newUser = await usrm.getBy({ email: email })
+                    let newUser = await userService.getUserBy({ email: email })
 
                     if (!newUser) {
                         let cart = await cartService.createCart([])
-                        newUser = await usrm.create({ first_name, last_name, age, email, rol: 'user', cart: cart._id, profile: profile })
+                        console.log('CART_NEW', cart);
+                        
+                        newUser = await userService.createUser({ first_name, last_name, age, email, rol: 'user', cart: cart._id, profile: profile })
                     }
 
                     return done(null, newUser)

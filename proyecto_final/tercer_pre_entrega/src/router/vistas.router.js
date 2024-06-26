@@ -24,13 +24,15 @@ router.get('/chat', passportCall('current'), auth(['user']), (req, res) => {
 
 router.get('/productos', passportCall('current'), getProducts)
 
-router.get('/carrito/:cid', async (req, res) => {
+router.get('/carrito/:cid', passportCall('current'),async (req, res) => {
 
     let { cid } = req.params
+    let user = req.user
+console.log('USER:',user);
 
     let cart = await cartService.getCartPopulate(cid)
     res.setHeader('Content-Type', 'text/html');
-    return res.status(200).render("cart", { cart });
+    return res.status(200).render("cart", { cart, user});
 })
 
 // LOG
