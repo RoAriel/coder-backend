@@ -2,14 +2,10 @@ import passport from "passport";
 import local from 'passport-local'
 import passportJWT from 'passport-jwt'
 import github from 'passport-github2'
-import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
-import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { generaHash, validaPasword } from '../utils.js'
 import { UserDto } from "../dto/UserDTO.js";
 import { cartService } from "../repository/cart.services.js";
 import { userService } from "../repository/user.services.js";
-
-const usrm = new UserManager()
 
 const searchTk = (req) => {
     let token = null

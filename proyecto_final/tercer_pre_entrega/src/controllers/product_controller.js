@@ -2,8 +2,6 @@ import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mon
 import { isValidObjectId } from 'mongoose';
 import { productService } from '../repository/product.services.js';
 
-const productManager = new ProductManager
-
 export const getAllProducts = async (req, res) => {
 
     let pages_products

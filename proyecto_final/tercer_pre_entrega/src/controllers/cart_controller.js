@@ -1,12 +1,9 @@
 import { isValidObjectId } from 'mongoose';
-import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js'
-import { TicketManagerMongo as TicketManager } from '../dao/TicketManager_mongo.js';
 import { v4 as uuidv4 } from "uuid"
 import { cartService } from '../repository/cart.services.js';
 import { productService } from '../repository/product.services.js';
+import { ticketService } from '../repository/ticket.services.js';
 
-const productManager = new ProductManager
-const ticketManager = new TicketManager
 
 export const getCartByCid = async (req, res) => {
 
@@ -444,7 +441,7 @@ export const purchase = async (req, res) => {
         purchaser: user.email,
     }
 
-    ticketManager.create(ticket)
+    await ticketService.createTicket(ticket)
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json({ payload: cartWithNoStock.map(prod => prod.id) });
 }
