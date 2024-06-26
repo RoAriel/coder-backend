@@ -12,6 +12,7 @@ import { router as cartRouter } from './router/cart.router.js';
 import { router as vistasRouter } from '../src/router/vistas.router.js'
 import { messageModel } from './dao/models/message.model.js';
 import cookieParser from 'cookie-parser';
+import cords from 'cors'
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -24,6 +25,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cords())
 
 app.use(cookieParser())
 initPassport()
