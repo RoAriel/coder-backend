@@ -4,6 +4,7 @@ import { CartManagerMongo as CartManager } from "../dao/CartManager_mongo.js"
 import { passportCall } from '../utils.js';
 import { auth } from "../middleware/auth.js";
 import { getProducts } from "../controllers/vista_controller.js";
+import { cartService } from "../repository/cart.services.js";
 
 export const router = Router()
 
@@ -27,7 +28,7 @@ router.get('/carrito/:cid', async (req, res) => {
 
     let { cid } = req.params
 
-    let cart = await cm.getOneByPopulate(cid)
+    let cart = await cartService.getCartPopulate(cid)
     res.setHeader('Content-Type', 'text/html');
     return res.status(200).render("cart", { cart });
 })

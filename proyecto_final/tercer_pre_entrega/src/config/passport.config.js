@@ -6,9 +6,9 @@ import { UserManagerMongo as UserManager } from '../dao/UserManager_mongo.js'
 import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { generaHash, validaPasword } from '../utils.js'
 import { UserDto } from "../dto/UserDTO.js";
+import { cartService } from "../repository/cart.services.js";
 
 const usrm = new UserManager()
-const cm = new CartManager()
 
 const searchTk = (req) => {
     let token = null
@@ -46,7 +46,9 @@ export const initPassport = () => {
 
                     password = generaHash(password)
 
-                    let cart = await cm.create()
+                    let cart = await cartService.createCart([])
+                  
+                    
 
                     let newUser = await usrm.create({ first_name, last_name, age, email: username, password, rol: 'user', cart: cart._id })
                     return done(null, newUser)
@@ -106,7 +108,7 @@ export const initPassport = () => {
                     let newUser = await usrm.getBy({ email: email })
 
                     if (!newUser) {
-                        let cart = await cm.create()
+                        let cart = await cartService.createCart([])
                         newUser = await usrm.create({ first_name, last_name, age, email, rol: 'user', cart: cart._id, profile: profile })
                     }
 

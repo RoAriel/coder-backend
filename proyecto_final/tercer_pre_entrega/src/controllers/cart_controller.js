@@ -1,10 +1,9 @@
 import { isValidObjectId } from 'mongoose';
-import { CartManagerMongo as CartManager } from '../dao/CartManager_mongo.js'
 import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js'
 import { TicketManagerMongo as TicketManager } from '../dao/TicketManager_mongo.js';
 import { v4 as uuidv4 } from "uuid"
+import { cartService } from '../repository/cart.services.js';
 
-const cartManager = new CartManager
 const productManager = new ProductManager
 const ticketManager = new TicketManager
 
@@ -17,7 +16,7 @@ export const getCartByCid = async (req, res) => {
         return res.status(400).json({ error: `Favor ingrese un ID valido.` })
     }
     try {
-        let cart = await cartManager.getOneByPopulate(cid)
+        let cart = await cartService.getCartPopulate(cid)
 
         if (cart) {
             res.setHeader('Content-Type', 'application/json');
@@ -47,7 +46,7 @@ export const createCart = async (req, res) => {
     }
 
     try {
-        let cartNew = await cartManager.addCart(products)
+        let cartNew = await cartService.createCart(products)
 
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ cartNew });
@@ -75,7 +74,7 @@ export const addProductToCart = async (req, res) => {
     //Controlo que existe el CID
     let existCart
     try {
-        existCart = await cartManager.getProductsByCartId(cid)
+        existCart = await cartService.getProductsByCartId(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -107,25 +106,25 @@ export const addProductToCart = async (req, res) => {
 
     try {
 
-        let productsInCart = await cartManager.getProductsByCartId(cid)
+        let productsInCart = await cartService.getProductsByCartId(cid)
 
         if ((productsInCart.map(pr => (pr.pid).toString())).includes(pid)) {
 
             productsInCart.forEach(pr => { if ((pr.pid).toString() == pid) pr.quantity++ })
 
-            await cartManager.addProductToCart(cid, productsInCart)
+            await cartService.addProductToCart(cid, productsInCart)
 
             res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(`El producto ya existia, se agrega una unidad más`);
+            return res.status(200).json(`El producto ${existProduct.title} ya existia, se agrega una unidad más`);
 
         } else {
 
             productsInCart.push({ pid: pid, quantity: 1 })
 
-            await cartManager.addProductToCart(cid, productsInCart)
+            await cartService.addProductToCart(cid, productsInCart)
 
             res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(`Se agrego el producto al Cart`);
+            return res.status(200).json(`Se agrego el producto ${existProduct.title} al Cart`);
         }
 
     } catch (error) {
@@ -151,7 +150,7 @@ export const removeProductFromCart = async (req, res) => {
     //Controlo que existe el CID
     let cart
     try {
-        cart = await cartManager.getCart(cid)
+        cart = await cartService.getCartById(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -186,7 +185,7 @@ export const removeProductFromCart = async (req, res) => {
 
         let cart_products = cart.products.filter(item => item.pid != pid)
 
-        await cartManager.addProductToCart(cid, cart_products)
+        await cartService.addProductToCart(cid, cart_products)
 
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json('Carrito actializado');
@@ -215,7 +214,7 @@ export const changeProductsfromCart = async (req, res) => {
     //Controlo que existe el CID
     let cart
     try {
-        cart = await cartManager.getCart(cid)
+        cart = await cartService.getCartById(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -254,7 +253,7 @@ export const changeProductsfromCart = async (req, res) => {
 
     // Cargo los nuevos productos
     try {
-        await cartManager.addProductToCart(cid, prods)
+        await cartService.addProductToCart(cid, prods)
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json('Se agregan productos');
     } catch (error) {
@@ -289,7 +288,7 @@ export const updateQuantityOfProduct = async (req, res) => {
     //Controlo que existe el CID
     let cart
     try {
-        cart = await cartManager.getCart(cid)
+        cart = await cartService.getCartById(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -332,7 +331,7 @@ export const updateQuantityOfProduct = async (req, res) => {
         products[indiceProducto].quantity = cantidad
     }
     try {
-        await cartManager.addProductToCart(cid, products)
+        await cartService.addProductToCart(cid, products)
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json(`Update quantity del Producto ${pid}`);
     } catch (error) {
@@ -359,7 +358,7 @@ export const deleteCartProducts = async (req, res) => {
     //Controlo que existe el CID
     let cart
     try {
-        cart = await cartManager.getCart(cid)
+        cart = await cartService.getCartById(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -378,7 +377,7 @@ export const deleteCartProducts = async (req, res) => {
 
     try {
 
-        await cartManager.addProductToCart(cid, [])
+        await cartService.addProductToCart(cid, [])
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json(`Carrido de CID ${cid}, fue vaciado.`);
     } catch (error) {
@@ -401,7 +400,7 @@ export const purchase = async (req, res) => {
     let cartWithNoStock = []
     let amount = 0
     try {
-        cart = await cartManager.getCart(cid)
+        cart = await cartService.getCartById(cid)
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).json(
@@ -430,10 +429,10 @@ export const purchase = async (req, res) => {
 
     }
 
-    if(cartWithNoStock.length > 0){
-        cartManager.addProductToCart(cid,cartWithNoStock)
-    }else{
-        cartManager.addProductToCart(cid,[])
+    if (cartWithNoStock.length > 0) {
+        await cartService.addProductToCart(cid, cartWithNoStock)
+    } else {
+        await cartService.addProductToCart(cid, [])
 
     }
 

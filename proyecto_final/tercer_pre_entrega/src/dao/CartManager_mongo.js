@@ -2,7 +2,7 @@ import { cartModel } from './models/cart.model.js'
 
 export class CartManagerMongo {
 
-    async getCarts(){
+    async getAll(){
         return await cartModel.find()
     }
 
@@ -10,28 +10,20 @@ export class CartManagerMongo {
         return await cartModel.findOne(filtro).lean()
     }
 
-    async getCart(cid){
-        return await cartModel.findById({_id : cid})
-    }
-    async getProductsByCartId(cid){
-
-        return (await cartModel.findById({_id : cid})).products
+    async getById(id){
+        return await cartModel.findById({_id : id})
     }
 
-    async addCart(listProducts){
-        return cartModel.create(listProducts)
+    async create(list){
+        return await cartModel.create(list)
     }
 
-    async addProductToCart(cid, products){
-        return cartModel.updateOne({_id : cid}, {$set: {products: products}})
+    async update(id, list){
+        return await cartModel.updateOne({_id : id}, {$set: {products: list}})
     }
 
-    async getOneByPopulate(cid){
-        return await cartModel.findOne({_id : cid}).populate("products.pid")//.lean()
+    async getOneByPopulate(id){
+        return await cartModel.findOne({_id : id}).populate("products.pid")//.lean()
     }
 
-    async create(){
-        let cart=await cartModel.create({productos:[]})
-        return cart.toJSON()
-    }
 }
