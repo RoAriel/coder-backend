@@ -107,7 +107,6 @@ export const initPassport = () => {
 
                     if (!newUser) {
                         let cart = await cartService.createCart([])
-                        console.log('CART_NEW', cart);
                         
                         newUser = await userService.createUser({ first_name, last_name, age, email, rol: 'user', cart: cart._id, profile: profile })
                     }
