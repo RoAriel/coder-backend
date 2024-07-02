@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { passportCall } from '../utils.js'
 import { auth } from '../middleware/auth.js';
-import { getAllProducts, getProductByPid, createNewProduct, updateProduct,deleteProduct} from '../controllers/product_controller.js';
+import { getAllProducts, getProductByPid, createNewProduct, updateProduct,deleteProduct, mockingproducts} from '../controllers/product_controller.js';
 
 export const router = Router()
+
+router.get('/mockingproducts',mockingproducts)
 
 router.get('/', passportCall('current'), getAllProducts)
 

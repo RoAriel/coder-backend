@@ -1,6 +1,6 @@
-import { ProductManagerMongo as ProductManager } from '../dao/ProductManager_mongo.js';
 import { isValidObjectId } from 'mongoose';
 import { productService } from '../repository/product.services.js';
+import {fakerES_MX as faker} from "@faker-js/faker"
 
 export const getAllProducts = async (req, res) => {
 
@@ -236,5 +236,30 @@ export const deleteProduct = async (req, res) => {
 
     }
 
+}
 
+export const mockingproducts = (req, res) =>{
+
+    let products = []
+    for (let index = 0; index < 100; index++) {
+        let product = {
+
+            _id : faker.database.mongodbObjectId(),
+            price : faker.commerce.price(),
+            title : faker.commerce.productName(),
+            description :  faker.commerce.productDescription(),
+            code : `${index}-MK`,
+            status : true,
+            stock : Math.ceil(Math.random() * 1000),
+            category : 'Mocks',
+            thumbnail : [`https://products/${faker.commerce.productName().replace(/\s+/g, '')}`],
+            updatedAt : new Date()
+        }
+
+        products.push(product)
+        
+    }
+
+    res.setHeader('Content-Type','application/json');
+    return res.status(200).json({payload: products});
 }
