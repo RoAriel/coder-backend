@@ -15,4 +15,4 @@ router.post('/', passportCall('current'), auth(['admin']), createNewProduct)
 
 router.delete('/:pid', passportCall('current'), auth(['admin']), deleteProduct)
 
-router.put('/:pid', passportCall('current'), auth(['admin']), passportCall('current'), updateProduct)
+router.put('/:pid', passportCall('current'), auth(['admin']), updateProduct)
