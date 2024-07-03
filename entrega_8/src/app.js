@@ -13,6 +13,7 @@ import { router as vistasRouter } from '../src/router/vistas.router.js'
 import { messageModel } from './dao/models/message.model.js';
 import cookieParser from 'cookie-parser';
 import cords from 'cors'
+import {errorHandler} from '../src/middleware/errorHandler.js'
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -50,6 +51,7 @@ app.use('/api/sessions', sessionsRouter)
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/', vistasRouter)
+app.use(errorHandler)
 
 
 const server = app.listen(PORT, () => {

@@ -3,34 +3,32 @@ import { v4 as uuidv4 } from "uuid"
 import { cartService } from '../repository/cart.services.js';
 import { productService } from '../repository/product.services.js';
 import { ticketService } from '../repository/ticket.services.js';
+import { CustomError } from '../utils/CustomError.js';
+import { TIPOS_ERROR } from '../utils/EErrors.js';
+import { errorCause } from '../utils/errorCause.js';
 
 
-export const getCartByCid = async (req, res) => {
-
+export const getCartByCid = async (req, res, next) => {
     let { cid } = req.params
+    let errorName
 
-    if (!isValidObjectId(cid)) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
-    }
     try {
+        if (!isValidObjectId(cid)) {
+            errorName = 'getCartByCid : Object ID no valido'
+            CustomError.createError(errorName, errorCause('getCartByCid', errorName, `isValidObjectId: ${isValidObjectId(cid)}`) , "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+        }
+
         let cart = await cartService.getCartPopulate(cid)
 
         if (cart) {
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json(cart.products);
         } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Cart ID no existe` })
+
+            CustomError.createError("ID carrtito no existe", `Cart: ${cart}`, "Ingrese carrito existente", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
+        return next(error)
     }
 }
 

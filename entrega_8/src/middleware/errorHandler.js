@@ -2,7 +2,7 @@ import { TIPOS_ERROR } from "../utils/EErrors.js";
 
 export const errorHandler=(error, req, res, next)=>{
 
-    console.log(`${error.cause?error.cause:error.message}`)
+    console.log(error.cause?error.cause:error.menssage);
 
     switch (error.code) {
         case TIPOS_ERROR.AUTENTICACION || TIPOS_ERROR.AUTORIZACION:
