@@ -7,15 +7,17 @@ import { CustomError } from '../utils/CustomError.js';
 import { TIPOS_ERROR } from '../utils/EErrors.js';
 import { errorCause } from '../utils/errorCause.js';
 
+let errorName
 
 export const getCartByCid = async (req, res, next) => {
     let { cid } = req.params
-    let errorName
+
+    console.log('cid:', cid);
 
     try {
         if (!isValidObjectId(cid)) {
-            errorName = 'getCartByCid : Object ID no valido'
-            CustomError.createError(errorName, errorCause('getCartByCid', errorName, `isValidObjectId: ${isValidObjectId(cid)}`) , "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+            errorName = 'ObjectId no valido'
+            CustomError.createError(errorName, errorCause('getCartByCid', errorName, `isValidObjectId: ${isValidObjectId(cid)}`), "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
 
         let cart = await cartService.getCartPopulate(cid)
@@ -24,38 +26,48 @@ export const getCartByCid = async (req, res, next) => {
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json(cart.products);
         } else {
-
-            CustomError.createError("ID carrtito no existe", `Cart: ${cart}`, "Ingrese carrito existente", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+            errorName = 'ID cart no existe'
+            CustomError.createError(errorName, errorCause('getCartByCid', errorName, `CID: ${cid} --> Cart: ${cart}`), "Ingrese carrito existente", TIPOS_ERROR.NOT_FOUND)
         }
     } catch (error) {
         return next(error)
     }
 }
 
-export const createCart = async (req, res) => {
+export const createCart = async (req, res, next) => {
 
-    let products = req.body
-
-    if (!products) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Complete los campos que son requeridos` })
-    }
+    let productCart = req.body
 
     try {
-        let cartNew = await cartService.createCart(products)
+
+        if (!productCart.hasOwnProperty('products')) {
+            errorName = 'No hay lista de productos'
+            CustomError.createError(errorName,
+                errorCause('createCart',
+                    errorName,
+                    `body: ${JSON.stringify(productCart)}`),
+                'Favor de corrigir el argumento',
+                TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+        }
+
+        if (typeof (productCart.products) != typeof ([])) {
+            errorName = 'Products no es una lista'
+            CustomError.createError(errorName,
+                errorCause('createCart',
+                    errorName,
+                    `body: ${JSON.stringify(productCart)}`),
+                'Favor de corrigir el argumento',
+                TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+        }
+
+        let cartNew = await cartService.createCart(productCart.products)
 
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ cartNew });
 
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
-
+        
+        return next(error)
     }
 }
 
@@ -63,22 +75,19 @@ export const addProductToCart = async (req, res) => {
     let { cid, pid } = req.params
 
     if (!isValidObjectId(cid) && !isValidObjectId(pid)) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
+        errorName = 'ObjectId no valido'
+        CustomError.createError(errorName, errorCause('addProductToCart', errorName, `isValidObjectId: cid ${isValidObjectId(cid)} / pid ${isValidObjectId(pid)}`), "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
     }
 
     //Controlo que existe el CID
     let existCart
-    try {
+     try {
         existCart = await cartService.getProductsByCartId(cid)
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
+        errorName = 'Cart No Found'
+        return CustomError.createError(errorName, errorCause('addProductToCart', errorName, `cid ${cid}}`), "Favor de corrigir el argumento", TIPOS_ERROR.NOT_FOUND)
+        
+        
     }
 
     //Controlo que existe el PID
