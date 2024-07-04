@@ -11,58 +11,60 @@ class CartService {
         this.dao = dao
     }
 
-    getCarts = async (next) => {
+    getCarts = async () => {
         try {
             return await this.dao.getAll()
         } catch (error) {
             errorName = 'Error en getCarts'
-            return next(CustomError.createError(errorName, errorCause('getCarts', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('getCarts', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 
-    getCartById = async (cid, next) => {
+    getCartById = async (cid) => {
         try {
             return await this.dao.getById(cid)
         } catch (error) {
             errorName = 'Error en getCartById'
-            return next(CustomError.createError(errorName, errorCause('getCartById', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('getCartById', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 
-    getProductsByCartId = async (cid, next) => {
+    getProductsByCartId = async (cid) => {
 
         try {
             return (await this.getCartById(cid)).products
         } catch (error) {
             errorName = 'Error en getProductsByCartId'
-            return next(CustomError.createError(errorName, errorCause('getProductsByCartId', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('getProductsByCartId', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 
-    createCart = async (products, next) => {
+    createCart = async (products) => {
         try {
             return this.dao.create(products)
         } catch (error) {
             errorName = 'Error en createCart'
-            return next(CustomError.createError(errorName, errorCause('createCart', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('createCart', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 
-    addProductToCart = async (cid, products, next) => {
+    addProductToCart = async (cid, products) => {
         try {
             return await this.dao.update(cid, products)
         } catch (error) {
             errorName = 'Error en addProductToCart'
-            return next(CustomError.createError(errorName, errorCause('addProductToCart', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('addProductToCart', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 
-    getCartPopulate = async (cid, next) => {
+    getCartPopulate = async (cid) => {
         try {
             return this.dao.getOneByPopulate(cid)
         } catch (error) {
+            console.log('pase');
+            
             errorName = 'Error en getCartPopulate'
-            return next(CustomError.createError(errorName, errorCause('getCartPopulate', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR))
+            return CustomError.createError(errorName, errorCause('getCartPopulate', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 }

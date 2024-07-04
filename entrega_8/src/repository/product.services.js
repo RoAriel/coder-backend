@@ -1,4 +1,8 @@
 import { ProductManagerMongo as ProductDao } from '../dao/ProductManager_mongo.js'
+import { CustomError } from '../utils/CustomError.js'
+import { errorCause } from '../utils/errorCause.js'
+import { TIPOS_ERROR } from '../utils/EErrors.js'
+let errorName
 
 class ProductService {
     constructor(dao) {
@@ -10,7 +14,13 @@ class ProductService {
     }
 
     getProductBy = async (filter) => {
-        return await this.dao.getBy(filter)
+        try {
+
+            return await this.dao.getBy(filter)
+        } catch (error) {
+            errorName = 'Error en getProductBy'
+            return CustomError.createError(errorName, errorCause('getProductBy', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
+        }
     }
 
     getProductsPaginate = async (limit, page, query, sort) => {

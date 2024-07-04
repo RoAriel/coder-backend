@@ -1,6 +1,19 @@
 import { isValidObjectId } from 'mongoose';
 import { productService } from '../repository/product.services.js';
 import {fakerES_MX as faker} from "@faker-js/faker"
+import { CustomError } from '../utils/CustomError.js';
+import { TIPOS_ERROR } from '../utils/EErrors.js';
+import { errorCause } from '../utils/errorCause.js';
+
+const errorSiNoEsValidoID = (id, description) => {
+    if (!(isValidObjectId(id))) {
+        
+        errorName = 'ObjectId no valido'
+        return CustomError.createError(errorName,
+            errorCause('addProductToCart', errorName, `${description} isValidObjectId: ${isValidObjectId(id)} - value: ${id}`),
+            "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+    }
+}
 
 export const getAllProducts = async (req, res) => {
 
@@ -50,13 +63,10 @@ export const getAllProducts = async (req, res) => {
     }
 }
 
-export const getProductByPid = async (req, res) => {
+export const getProductByPid = async (req, res, next) => {
     let { pid } = req.params
 
-    if (!isValidObjectId(pid)) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
-    }
+    errorSiNoEsValidoID(pid,'PID')
 
     try {
         let product = await productService.getProductBy({ _id: pid })
@@ -64,19 +74,12 @@ export const getProductByPid = async (req, res) => {
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json({ product });
         } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(400).json({ error: `Producto no encontrado` })
+            return CustomError.createError(errorName,
+                errorCause('addProductToCart', errorName, error.message),
+                error.message, TIPOS_ERROR.NOT_FOUND)
         }
     } catch (error) {
-        console.log('error', error);
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
-
+return next(error)
 
     }
 }
