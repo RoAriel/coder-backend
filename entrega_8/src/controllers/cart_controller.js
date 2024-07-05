@@ -14,7 +14,7 @@ const errorSiNoEsValidoID = (id, description) => {
         errorName = 'ObjectId no valido'
         return CustomError.createError(errorName,
             errorCause('addProductToCart', errorName, `${description} isValidObjectId: ${isValidObjectId(id)} - value: ${id}`),
-            "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+            "Favor de corregir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
     }
 }
 
@@ -51,7 +51,7 @@ export const createCart = async (req, res, next) => {
                 errorCause('createCart',
                     errorName,
                     `body: ${JSON.stringify(productCart)}`),
-                'Favor de corrigir el argumento',
+                'Favor de corregir el argumento',
                 TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
 
@@ -61,7 +61,7 @@ export const createCart = async (req, res, next) => {
                 errorCause('createCart',
                     errorName,
                     `body: ${JSON.stringify(productCart)}`),
-                'Favor de corrigir el argumento',
+                'Favor de corregir el argumento',
                 TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
 
@@ -84,8 +84,8 @@ export const addProductToCart = async (req, res, next) => {
     try {
 
 
-        //errorSiNoEsValidoID(cid, 'CID')
-        //errorSiNoEsValidoID(pid, 'PID')
+        errorSiNoEsValidoID(cid, 'CID')
+        errorSiNoEsValidoID(pid, 'PID')
 
 
         //Controlo que existe el PID
@@ -94,7 +94,7 @@ export const addProductToCart = async (req, res, next) => {
         if (!existProduct) {
             errorName = 'No Existe Product'
             return next(CustomError.createError(errorName,
-                errorCause('addProductToCart', errorName, error.message),
+                errorCause('addProductToCart', errorName, error.message), //  --> aca la correccion es sacar el error.message porque no esta def error 
                 error.message, TIPOS_ERROR.NOT_FOUND
             ))
         }

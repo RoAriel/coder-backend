@@ -18,7 +18,6 @@ import {errorHandler} from '../src/middleware/errorHandler.js'
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
 const DATABASE = process.env.DATABASE;
-const SECRET = process.env.SECRET;
 
 let io
 
@@ -31,8 +30,6 @@ app.use(cords())
 app.use(cookieParser())
 initPassport()
 app.use(passport.initialize())
-// app.use(passport.session())
-
 
 app.engine('handlebars', engine({
     runtimeOptions: {
@@ -90,4 +87,10 @@ io.on("connection", socket => {
         io.emit("nuevoMensaje", user, mensaje)
     })
 
+})
+
+
+process.on('uncaughtException',error=>{
+    console.log(error.message, "Error no capturado");
+    
 })
