@@ -4,6 +4,7 @@ import { TIPOS_ERROR } from '../utils/EErrors.js'
 import { errorCause } from '../utils/errorCause.js'
 
 let errorName
+let cart
 
 class CartService {
 
@@ -21,13 +22,15 @@ class CartService {
     }
 
     getCartById = async (cid) => {
-        try {
-            return await this.dao.getById(cid)
-        } catch (error) {
+        cart = await this.dao.getById(cid)
+        if (!cart) {
             errorName = 'Error en getCartById'
-            return CustomError.createError(errorName, errorCause('getCartById', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
+            return CustomError.createError(errorName, errorCause('getCartById', errorName, `Cart id : ${cid} - Cart ${cart}`), `Carrito Inexistente`, TIPOS_ERROR.NOT_FOUND)
         }
+
+        return cart
     }
+
 
     getProductsByCartId = async (cid) => {
 
@@ -62,11 +65,10 @@ class CartService {
             return this.dao.getOneByPopulate(cid)
         } catch (error) {
             console.log('pase');
-            
+
             errorName = 'Error en getCartPopulate'
             return CustomError.createError(errorName, errorCause('getCartPopulate', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
     }
 }
-
 export const cartService = new CartService(new CartDao)
