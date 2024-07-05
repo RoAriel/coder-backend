@@ -64,8 +64,6 @@ class CartService {
         try {
             return this.dao.getOneByPopulate(cid)
         } catch (error) {
-            console.log('pase');
-
             errorName = 'Error en getCartPopulate'
             return CustomError.createError(errorName, errorCause('getCartPopulate', errorName, error.message), error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
