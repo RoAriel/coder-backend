@@ -77,7 +77,7 @@ export const getProductByPid = async (req, res, next) => {
     }
 }
 
-export const createNewProduct = async (req, res) => {
+export const createNewProduct = async (req, res, next) => {
 
     try {
 
@@ -98,40 +98,20 @@ export const createNewProduct = async (req, res) => {
 
 
         prExist = await productService.getProductBy({ code })
-    } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
 
-    }
 
-    if (prExist) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `El producto con codigo ${code} ya existe.` })
-    }
 
-    // valido que status venga con contenido, de no ser así pongo True
-    (status == null) ? status = true : status
+            // valido que status venga con contenido, de no ser así pongo True
+            (status == null) ? status = true : status
 
-    try {
         let prd = { title, description, code, price, status, stock, category, thumbnail }
         let newProduct = await productService.addProduct(prd)
 
         res.setHeader('Content-Type', 'application/json');
-
         return res.status(201).json({ payload: newProduct });
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
+
+        return next(error)
 
     }
 
@@ -139,50 +119,33 @@ export const createNewProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     let { pid } = req.params
-    if (!isValidObjectId(pid)) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
-    }
-
     let prdUpd = req.body
 
-    if (prdUpd._id) {
-        delete prdUpd._id
-    }
+    try {
 
-    if (prdUpd.code) {
-        let exists
-        try {
-            exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
-            if (exists) {
-                res.setHeader('Content-Type', 'application/json');
-                return res.status(400).json({ error: `Ya existe otro producto con el nro de codigo ingresado` })
+        errorSiNoEsValidoID(pid, 'PID')
+
+        if (prdUpd._id) {
+            delete prdUpd._id
+        }
+
+        if (prdUpd.code) {
+            let exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
+            if (!exists) {
+                errorName = 'Error en updateProduct-controller'
+                CustomError.createError(errorName,
+                    errorCause('updateProduct', errorName, `Ya existe otro producto con el nro de codigo ${code}`),
+                    'Codigo de producto existente', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
             }
-        } catch (error) {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(500).json(
-                {
-                    error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                    detalle: `${error.message}`
-                }
-            )
 
         }
-    }
-    try {
+
 
         let prodUpdated = await productService.updtadeProduct(pid, prdUpd)
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ prodUpdated });
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
-
+        return next(error)
     }
 
 }
@@ -190,53 +153,21 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     let { pid } = req.params
 
-    if (!isValidObjectId(pid)) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Favor ingrese un ID valido.` })
-    }
-
-    let prExist
-
     try {
-        prExist = await productService.getProductBy({ _id: pid })
+        errorSiNoEsValidoID(pid, 'PID')
 
-    } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
+        let prExist = await productService.getProductBy({ _id: pid })
 
-    }
-
-    if (!prExist) {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).json({ error: `Producto con ID ${pid} no existe.` })
-    }
-
-    try {
         let prDel = await productService.deleteProduct(pid)
 
         if (prDel.deletedCount > 0) {
 
-            let products = await productService.getProducts()
             res.setHeader('Content-Type', 'application/json');
             return res.status(200).json({ payload: `Producto ${prExist.title} eliminado` });
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(404).json({ error: `No existen producto con id ${pid} / o error al eliminar` })
         }
     } catch (error) {
 
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(500).json(
-            {
-                error: `Error inesperado en el servidor - Intente más tarde, o contacte a su administrador`,
-                detalle: `${error.message}`
-            }
-        )
+        return next(error)
 
     }
 

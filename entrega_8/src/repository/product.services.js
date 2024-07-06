@@ -16,23 +16,23 @@ class ProductService {
     getProductBy = async (filter) => {
         let product = await this.dao.getBy(filter)
 
-        if(!product) {
+        if (!product) {
             errorName = 'Error en getProductBy.service'
-            return CustomError.createError(errorName, 
-                errorCause('getProductBy', errorName, 'Producto no econtrado'), 
+            return CustomError.createError(errorName,
+                errorCause('getProductBy', errorName, 'Producto no econtrado'),
                 'Producto no econtrado', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
-        } 
+        }
         return product
     }
 
     getProductsPaginate = async (limit, page, query, sort) => {
         try {
-        
+
             return await this.dao.getAllPaginate(limit, page, query, sort)
         } catch (error) {
             errorName = 'Error en getProductsPaginate.service'
-            return CustomError.createError(errorName, 
-                errorCause('getProductsPaginate', errorName, error.message), 
+            return CustomError.createError(errorName,
+                errorCause('getProductsPaginate', errorName, error.message),
                 error.message, TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
     }
@@ -42,34 +42,42 @@ class ProductService {
             return await this.dao.create(product)
         } catch (error) {
             errorName = 'Error en addProduct.service'
-            return CustomError.createError(errorName, 
-                errorCause('addProduct', errorName, error.message), 
+            return CustomError.createError(errorName,
+                errorCause('addProduct', errorName, error.message),
                 error.message, TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
     }
-    
+
 
     deleteProduct = async (pid) => {
         try {
-            
+
+            let product = await this.dao.getBy({ _id: pid })
+
+            if (!product) {
+                errorName = 'Error en deleteProduct.service'
+                 CustomError.createError(errorName,
+                    errorCause('getdeleteProductProductBy', errorName, 'Producto no econtrado'),
+                    'Producto no econtrado', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+            }
             return await this.dao.delete(pid)
         } catch (error) {
-            errorName = 'Error en addProduct.service'
-            return CustomError.createError(errorName, 
-                errorCause('addProduct', errorName, error.message), 
+            errorName = 'Error en deleteProduct.service'
+            return CustomError.createError(errorName,
+                errorCause('deleteProduct', errorName, error.message),
                 error.message, TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
     }
 
     updtadeProduct = async (pid, cambios) => {
-        let product = await this.dao.update(pid,cambios)
+        let product = await this.dao.update(pid, cambios)
 
-        if(!product) {
+        if (!product) {
             errorName = 'Error en updtadeProduct.service'
-            return CustomError.createError(errorName, 
-                errorCause('updtadeProduct', errorName, `Product: ${product}`), 
+            return CustomError.createError(errorName,
+                errorCause('updtadeProduct', errorName, `Product: ${product}`),
                 'Errpr en Update', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
-        } 
+        }
         return product
 
 
