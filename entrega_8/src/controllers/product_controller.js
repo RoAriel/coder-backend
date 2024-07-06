@@ -58,9 +58,9 @@ export const getAllProducts = async (req, res, next) => {
 export const getProductByPid = async (req, res, next) => {
     let { pid } = req.params
 
-    errorSiNoEsValidoID(pid, 'PID')
-
     try {
+        errorSiNoEsValidoID(pid, 'PID')
+
         let product = await productService.getProductBy({ _id: pid })
         if (product) {
             res.setHeader('Content-Type', 'application/json');
@@ -81,12 +81,11 @@ export const createNewProduct = async (req, res, next) => {
 
     try {
 
-        let propiedadesHeroeNuevo = Object.keys(req.body)
+        let propiedadesProductoNuevo = Object.keys(req.body)
         let propiedadesValidas = ['title', 'description', 'code', 'price', 'status', 'stock', 'category', 'thumbnail']
 
 
-        let valido = propiedadesHeroeNuevo.every(prop => propiedadesValidas.includes(prop))
-
+        let valido = propiedadesValidas.every(prop => propiedadesProductoNuevo.includes(prop))
         let { title, description, code, price, status, stock, category, thumbnail } = req.body
 
         if (!valido) {
@@ -97,18 +96,25 @@ export const createNewProduct = async (req, res, next) => {
         }
 
 
-        prExist = await productService.getProductBy({ code })
+        let prExist = await productService.getProductBy({ code })
 
-
-
+        if (prExist) {
+            errorName = 'Error en createNewProduct-controller'
+            CustomError.createError(errorName,
+                errorCause('createNewProduct-controller', errorName, 'Codigo de producto existente'),
+                'Argumento Code existente', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+        }else{
             // valido que status venga con contenido, de no ser así pongo True
             (status == null) ? status = true : status
+    
+            let prd = { title, description, code, price, status, stock, category, thumbnail }
+            let newProduct = await productService.addProduct(prd)
+    
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(201).json({ payload: newProduct });
 
-        let prd = { title, description, code, price, status, stock, category, thumbnail }
-        let newProduct = await productService.addProduct(prd)
+        }
 
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(201).json({ payload: newProduct });
     } catch (error) {
 
         return next(error)
@@ -117,7 +123,7 @@ export const createNewProduct = async (req, res, next) => {
 
 }
 
-export const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res,next) => {
     let { pid } = req.params
     let prdUpd = req.body
 
@@ -130,11 +136,12 @@ export const updateProduct = async (req, res) => {
         }
 
         if (prdUpd.code) {
-            let exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
-            if (!exists) {
+            let exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })            
+            if (exists) {
+               
                 errorName = 'Error en updateProduct-controller'
                 CustomError.createError(errorName,
-                    errorCause('updateProduct', errorName, `Ya existe otro producto con el nro de codigo ${code}`),
+                    errorCause('updateProduct', errorName, `Ya existe otro producto con el nro de codigo ${prdUpd.code}`),
                     'Codigo de producto existente', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
             }
 
@@ -145,18 +152,17 @@ export const updateProduct = async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ prodUpdated });
     } catch (error) {
+        
         return next(error)
     }
 
 }
 
-export const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res, next) => {
     let { pid } = req.params
 
     try {
         errorSiNoEsValidoID(pid, 'PID')
-
-        let prExist = await productService.getProductBy({ _id: pid })
 
         let prDel = await productService.deleteProduct(pid)
 
