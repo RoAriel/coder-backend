@@ -14,6 +14,7 @@ import { messageModel } from './dao/models/message.model.js';
 import cookieParser from 'cookie-parser';
 import cords from 'cors'
 import {errorHandler} from '../src/middleware/errorHandler.js'
+import { middLogger } from './middleware/middLogger.js';
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -25,6 +26,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(middLogger)
 app.use(cords())
 
 app.use(cookieParser())
@@ -88,7 +90,6 @@ io.on("connection", socket => {
     })
 
 })
-
 
 process.on('uncaughtException',error=>{
     console.log(error.message, "Error no capturado");
