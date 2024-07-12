@@ -1,4 +1,4 @@
-import __dirname from './utils.js';
+import __dirname, { logger } from './utils.js';
 import path from 'node:path';
 import express from 'express';
 import { Server } from 'socket.io';
@@ -10,10 +10,11 @@ import { router as sessionsRouter } from './router/sessions.router.js';
 import { router as productRouter } from './router/product.router.js';
 import { router as cartRouter } from './router/cart.router.js';
 import { router as vistasRouter } from '../src/router/vistas.router.js'
+import { router as loggerTest } from '../src/router/loggerTest.router.js'
 import { messageModel } from './dao/models/message.model.js';
 import cookieParser from 'cookie-parser';
 import cords from 'cors'
-import {errorHandler} from '../src/middleware/errorHandler.js'
+import { errorHandler } from '../src/middleware/errorHandler.js'
 import { middLogger } from './middleware/middLogger.js';
 
 const PORT = process.env.PORT || 8080;
@@ -49,21 +50,22 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
+app.use('/api/loggerTest', loggerTest)
 app.use('/', vistasRouter)
 app.use(errorHandler)
 
 
 const server = app.listen(PORT, () => {
-    console.log(`SERVER ONLINE  >>> PORT: ${PORT}`);
+    logger.info(`SERVER ONLINE  >>> PORT: ${PORT}`);
 });
 
 const connDB = async () => {
     try {
 
         await mongoose.connect(`${DATABASE_URL}`, { dbName: `${DATABASE}` })
-        console.log(`DB ONLINE  >>> DBNAME: ${DATABASE}`)
+        logger.info(`DB ONLINE  >>> DBNAME: ${DATABASE}`)
     } catch (error) {
-        console.log("Error al conectar a DB", error.message)
+        logger.error("Error al conectar a DB", error.message)
     }
 
 }
@@ -73,9 +75,9 @@ io = new Server(server)
 
 io.on("connection", socket => {
     socket.on("id", async (user) => {
-        
+
         let mensajes = await messageModel.find().lean()
-        
+
         mensajes = mensajes.map(m => {
             return { user: m.user, mensaje: m.mensaje }
         })
@@ -91,7 +93,7 @@ io.on("connection", socket => {
 
 })
 
-process.on('uncaughtException',error=>{
-    console.log(error.message, "Error no capturado");
-    
+process.on('uncaughtException', error => {
+    logger.fatal(error.message, "Error no capturado");
+
 })
