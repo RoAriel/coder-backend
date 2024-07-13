@@ -9,7 +9,9 @@ export const usersModel = mongoose.model('users', new mongoose.Schema({
     },
     password: String,
     rol: {
-        type: String, default: "user"
+        type: String,
+        enum: ['admin', 'user', 'premium'],
+        default: "user"
     },
     cart: {
         type: mongoose.Types.ObjectId, ref: "carts"

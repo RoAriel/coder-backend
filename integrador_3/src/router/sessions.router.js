@@ -1,7 +1,9 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken"
 import passport from 'passport';
+import { auth } from '../middleware/auth.js';
 import { passportCall } from '../utils.js'
+import { updateRol } from "../controllers/sessions_controller.js";
 
 export const router = new Router()
 
@@ -78,3 +80,5 @@ router.get('/current', passportCall('current'), (req, res) => {
     }
 
 })
+
+router.post('/premium/:uid',passportCall('current'), auth(['admin']),updateRol)
