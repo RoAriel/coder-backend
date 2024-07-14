@@ -11,8 +11,8 @@ router.get('/', passportCall('current'), getAllProducts)
 
 router.get('/:pid', getProductByPid)
 
-router.post('/', passportCall('current'), auth(['admin']), createNewProduct)
+router.post('/', passportCall('current'), auth(['admin','premium']), createNewProduct)
 
-router.delete('/:pid', passportCall('current'), auth(['admin']), deleteProduct)
+router.delete('/:pid', passportCall('current'), auth(['admin','premium']), deleteProduct)
 
 router.put('/:pid', passportCall('current'), auth(['admin']), updateProduct)

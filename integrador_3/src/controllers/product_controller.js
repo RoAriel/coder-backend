@@ -4,16 +4,7 @@ import { fakerES_MX as faker } from "@faker-js/faker"
 import { CustomError } from '../utils/CustomError.js';
 import { TIPOS_ERROR } from '../utils/EErrors.js';
 import { errorCause } from '../utils/errorCause.js';
-
-const errorSiNoEsValidoID = (id, description) => {
-    if (!(isValidObjectId(id))) {
-
-        errorName = 'ObjectId no valido'
-        return CustomError.createError(errorName,
-            errorCause('addProductToCart', errorName, `${description} isValidObjectId: ${isValidObjectId(id)} - value: ${id}`),
-            "Favor de corrigir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
-    }
-}
+import { errorSiNoEsValidoID } from '../utils.js';
 
 let errorName
 
@@ -87,6 +78,8 @@ export const createNewProduct = async (req, res, next) => {
 
         let valido = propiedadesValidas.every(prop => propiedadesProductoNuevo.includes(prop))
         let { title, description, code, price, status, stock, category, thumbnail } = req.body
+        let user = req.user
+        let prd
 
         if (!valido) {
             errorName = 'Error en createNewProduct-controller'
@@ -103,13 +96,20 @@ export const createNewProduct = async (req, res, next) => {
             CustomError.createError(errorName,
                 errorCause('createNewProduct-controller', errorName, 'Codigo de producto existente'),
                 'Argumento Code existente', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
-        }else{
+        } else {
             // valido que status venga con contenido, de no ser así pongo True
             (status == null) ? status = true : status
-    
-            let prd = { title, description, code, price, status, stock, category, thumbnail }
+
+            if (user.rol != 'admin') {
+
+                prd = { title, description, code, price, status, stock, category, thumbnail, owner: user.email }
+            } else {
+                prd = { title, description, code, price, status, stock, category, thumbnail }
+
+            }
+
             let newProduct = await productService.addProduct(prd)
-    
+
             res.setHeader('Content-Type', 'application/json');
             return res.status(201).json({ payload: newProduct });
 
@@ -123,7 +123,7 @@ export const createNewProduct = async (req, res, next) => {
 
 }
 
-export const updateProduct = async (req, res,next) => {
+export const updateProduct = async (req, res, next) => {
     let { pid } = req.params
     let prdUpd = req.body
 
@@ -136,9 +136,9 @@ export const updateProduct = async (req, res,next) => {
         }
 
         if (prdUpd.code) {
-            let exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })            
+            let exists = await productService.getProductBy({ _id: { $ne: pid }, code: prdUpd.code })
             if (exists) {
-               
+
                 errorName = 'Error en updateProduct-controller'
                 CustomError.createError(errorName,
                     errorCause('updateProduct', errorName, `Ya existe otro producto con el nro de codigo ${prdUpd.code}`),
@@ -152,7 +152,7 @@ export const updateProduct = async (req, res,next) => {
         res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({ prodUpdated });
     } catch (error) {
-        
+
         return next(error)
     }
 
@@ -160,19 +160,34 @@ export const updateProduct = async (req, res,next) => {
 
 export const deleteProduct = async (req, res, next) => {
     let { pid } = req.params
-
+    let user = req.user
+    let productsDelUser
     try {
         errorSiNoEsValidoID(pid, 'PID')
 
-        let prDel = await productService.deleteProduct(pid)
+        if (user.rol != 'admin') {
+            productsDelUser = await productService.getProducts({ owner: user.email })
 
-        if (prDel.deletedCount > 0) {
+            if (!((productsDelUser.map(pr => (pr._id).toString())).includes(pid))) {
+                errorName = 'Error en  deleteProduct-controller'
+                CustomError.createError(errorName,
+                    errorCause('deleteProduct',
+                        errorName,
+                        'El producto no pertenece a la lista de productos creados por el usuario'),
+                    'No puede eliminar este producto', TIPOS_ERROR.AUTORIZACION)
+            }
+        }
+
+        let productName = (await productService.getProductBy({ _id: pid })).title
+        let data = await productService.deleteProduct(pid)
+
+        if (data.deletedCount > 0) {
 
             res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json({ payload: `Producto ${prExist.title} eliminado` });
+            return res.status(200).json({ payload: `Producto ${productName} eliminado` });
         }
     } catch (error) {
-
+        console.log('ERROR: ', error)
         return next(error)
 
     }

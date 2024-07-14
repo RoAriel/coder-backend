@@ -17,7 +17,7 @@ export const updateRol = async (req, res, next) => {
             CustomError.createError(errorName,errorCause('updateRol',errorName,`El uid es incorrecto. isValidObjectId: ${isValidObjectId(uid)}`),errorName, TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
 
-        let user = await userService.getUserId(uid)
+        let user = await userService.getUserBy({_id:uid})
 
         if (user.rol == 'user') new_rol = 'premium'
         if (user.rol == 'premium') new_rol = 'user'

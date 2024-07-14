@@ -9,8 +9,8 @@ class ProductService {
         this.dao = dao
     }
 
-    getProducts = async () => {
-        return await this.dao.get()
+    getProducts = async (filtro={}) => {
+        return await this.dao.get(filtro)
     }
 
     getProductBy = async (filter) => {

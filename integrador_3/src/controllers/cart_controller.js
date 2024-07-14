@@ -6,16 +6,9 @@ import { ticketService } from '../repository/ticket.services.js';
 import { CustomError } from '../utils/CustomError.js';
 import { TIPOS_ERROR } from '../utils/EErrors.js';
 import { errorCause } from '../utils/errorCause.js';
-
+import { errorSiNoEsValidoID } from '../utils.js';
 let errorName
-const errorSiNoEsValidoID = (id, description) => {
-    if (!(isValidObjectId(id))) {
-        errorName = 'ObjectId no valido'
-        return CustomError.createError(errorName,
-            errorCause('addProductToCart', errorName, `${description} isValidObjectId: ${isValidObjectId(id)} - value: ${id}`),
-            "Favor de corregir el argumento", TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
-    }
-}
+
 
 export const getCartByCid = async (req, res, next) => {
     let { cid } = req.params
@@ -77,6 +70,7 @@ export const createCart = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
     let { cid, pid } = req.params
+    let user = req.user
     let existCart
     let existProduct
 
@@ -96,6 +90,16 @@ export const addProductToCart = async (req, res, next) => {
                 'PID inexistente en DB', TIPOS_ERROR.NOT_FOUND
             )
         }
+
+        // Controlo que el producto no sea uno creado por el usuario
+        if(existProduct.owner == user.email){
+            errorName = 'No Puede agregar el producto'
+            CustomError.createError(errorName,
+                errorCause('addProductToCart', errorName, `Product ID: ${pid} tiene como owner al usuario de esta operacion ${user.email}`), //  --> aca la correccion es sacar el error.message porque no esta def error 
+                'No puede agregar un producto que usted creo', TIPOS_ERROR.ARGUMENTOS_INVALIDOS
+            )
+        }
+        
 
         //Controlo que existe el CID
 

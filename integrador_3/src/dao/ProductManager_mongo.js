@@ -2,8 +2,8 @@ import { productModel } from './models/product.model.js'
 
 export class ProductManagerMongo {
 
-    async get() {
-        return await productModel.find()
+    async get(filtro = {}) {
+        return await productModel.find(filtro)
     }
 
     async getBy(filtro) {
