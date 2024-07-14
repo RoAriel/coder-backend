@@ -15,4 +15,7 @@ export class UserManagerMongo{
         return await usersModel.findOne(filtro).populate("cart").lean()
     }
 
+    async update(id, obj) {
+        return await usersModel.findByIdAndUpdate(id, obj, { runValidators: true, returnDocument: "after" })
+    }
 }
