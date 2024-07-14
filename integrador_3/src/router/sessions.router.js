@@ -46,7 +46,6 @@ router.get('/callbackGithub', passport.authenticate("github",{session: false}), 
     let usr = { ...req.user }
 
     delete usr.profile
-    console.log('NEW_USER\n', usr);
     
     let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
    

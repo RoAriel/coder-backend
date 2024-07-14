@@ -64,7 +64,6 @@ export default class CartManager {
 
     async addProductToCart(cid, pid) {
         let pr = await this.producManager.getProductById(pid)
-        console.log('pr:\n',pr)
         let prCart = await this.getProductByCartId(cid)
 
         let cart = (await this.getCarts()).filter(cart => cart.cid == cid)

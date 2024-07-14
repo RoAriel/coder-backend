@@ -28,7 +28,6 @@ router.get('/carrito/:cid', passportCall('current'),async (req, res) => {
 
     let { cid } = req.params
     let user = req.user
-console.log('USER:',user);
 
     let cart = await cartService.getCartPopulate(cid)
     res.setHeader('Content-Type', 'text/html');

@@ -8,7 +8,6 @@ const comprar=async(pid,prdName)=>{
     })
     if(respuesta.status===200){
         let datos=await respuesta.json()
-        console.log(datos)
         Swal.fire({
             text:`Producto ${prdName} agregado!!!`,
             toast:true,

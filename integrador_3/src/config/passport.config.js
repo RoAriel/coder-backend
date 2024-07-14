@@ -44,9 +44,6 @@ export const initPassport = () => {
                     password = generaHash(password)
 
                     let cart = await cartService.createCart([])
-                    console.log('NEW_CART', cart);
-                    
-    
 
                     let newUser = await userService.createUser({ first_name, last_name, age, email: username, password, rol: 'user', cart: cart._id })
                     return done(null, newUser)
