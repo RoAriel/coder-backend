@@ -1,15 +1,10 @@
 import { Router } from "express";
-import { ProductManagerMongo as ProductManager } from "../dao/ProductManager_mongo.js";
-import { CartManagerMongo as CartManager } from "../dao/CartManager_mongo.js"
 import { passportCall } from '../utils.js';
 import { auth } from "../middleware/auth.js";
 import { getProducts } from "../controllers/vista_controller.js";
 import { cartService } from "../repository/cart.services.js";
 
 export const router = Router()
-
-const pm = new ProductManager
-const cm = new CartManager
 
 router.get('/', (req, res) => {
     res.setHeader('Content-Type', 'text/html');
@@ -71,4 +66,13 @@ router.get('/logout', (req, res) => {
     res.clearCookie("ecommerseCookie")
     res.setHeader('Content-Type', 'application/json');
     return res.redirect("/login")
+})
+
+// Recuepero
+router.get('/recupero', (req,res) =>{
+    res.status(200).render('recupero')
+})
+
+router.get('/newPassword',(req,res) =>{
+    res.status(200).render('newPassword')
 })
