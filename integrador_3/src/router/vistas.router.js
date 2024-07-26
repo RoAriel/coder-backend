@@ -73,6 +73,6 @@ router.get('/recupero', (req,res) =>{
     res.status(200).render('recupero')
 })
 
-router.get('/newPassword/:token',(req,res) =>{
+router.get('/newPassword/',(req,res) =>{
     res.status(200).render('newPassword')
 })

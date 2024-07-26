@@ -62,7 +62,7 @@ export const recuperarPWemail = async (req, res) =>{
     position: relative;
     border-radius: 10px;
     text-decoration: none;" 
-    href="http://localhost:${process.env.PORT}/newPassword/${token}">
+    href="http://localhost:${process.env.PORT}/newPassword/?tk=${token}">
   Recuperar contraseña
 </a>
 `
