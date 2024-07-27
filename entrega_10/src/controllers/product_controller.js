@@ -40,6 +40,8 @@ export const getAllProducts = async (req, res, next) => {
     try {
 
         pages_products = await productService.getProductsPaginate(limit, page, qry, sort)
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(201).json({ payload: pages_products });
 
     } catch (error) {
         return next(error)
