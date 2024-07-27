@@ -19,14 +19,14 @@ router.get('/chat', passportCall('current'), auth(['user']), (req, res) => {
 
 router.get('/productos', passportCall('current'), getProducts)
 
-router.get('/carrito/:cid', passportCall('current'),async (req, res) => {
+router.get('/carrito/:cid', passportCall('current'), async (req, res) => {
 
     let { cid } = req.params
     let user = req.user
 
     let cart = await cartService.getCartPopulate(cid)
     res.setHeader('Content-Type', 'text/html');
-    return res.status(200).render("cart", { cart, user});
+    return res.status(200).render("cart", { cart, user });
 })
 
 // LOG
@@ -69,10 +69,20 @@ router.get('/logout', (req, res) => {
 })
 
 // Recuepero
-router.get('/recupero', (req,res) =>{
+router.get('/recupero', (req, res) => {
     res.status(200).render('recupero')
 })
 
-router.get('/newPassword/',(req,res) =>{
-    res.status(200).render('newPassword')
+router.get('/solicitudenviada', (req, res) => {
+
+        let { email, first_name } = req.query
+        let user = { nombre: first_name, email: email }
+
+        res.status(200).render('reviseEmail', { user: user })
+
+})
+router.get('/newPassword/', (req, res) => {
+
+    let { tk } = req.query
+    res.status(200).render('newPassword', { token: tk })
 })

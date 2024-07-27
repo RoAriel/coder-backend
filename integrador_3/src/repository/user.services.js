@@ -25,12 +25,12 @@ class UserService {
         try {
             let user =  await this.dao.getBy(filter)
             
-            if(!user){
-                errorName = 'Error en getUserBy-services'
-                return CustomError.createError(errorName,
-                    errorCause('getUserId', errorName, `Usuario : ${user}`),
-                    errorName, TIPOS_ERROR.NOT_FOUND)
-            }
+            // if(!user){
+            //     errorName = 'Error en getUserBy-services'
+            //     return CustomError.createError(errorName,
+            //         errorCause('getUserId', errorName, `Usuario : ${user}`),
+            //         errorName, TIPOS_ERROR.NOT_FOUND)
+            // }
 
             return user
         } catch (error) {
