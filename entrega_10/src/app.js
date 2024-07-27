@@ -16,6 +16,9 @@ import cookieParser from 'cookie-parser';
 import cords from 'cors'
 import { errorHandler } from '../src/middleware/errorHandler.js'
 import { middLogger } from './middleware/middLogger.js';
+import swaggerUi from 'swagger-ui-express'
+import { spec } from './utils/swaggerConfig.js';
+
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -46,7 +49,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
