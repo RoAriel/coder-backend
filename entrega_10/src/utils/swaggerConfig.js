@@ -9,6 +9,6 @@ const options = {
             description: "Documentación ABM Productos y Carro de compras"
         },
     },
-    apis: ["./docs/*.yaml"]
+    apis: ["./src/docs/*.yaml"]
 }
 export const spec = swaggerJsdoc(options)
