@@ -1,0 +1,21 @@
+paths:
+  /api/carts/{cid}:
+    get:
+      tags:
+        - Carts
+      summary: Retorna un carrito de compras.
+      description: Retorna el carrito al cual correspone el CID.
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito que se está solicitando
+      responses:
+        '200':
+          description: El carrito fue obtenido correctamente.
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#components/schemas/Cart'

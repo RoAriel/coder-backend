@@ -1,4 +1,7 @@
+import path from 'node:path';
+import __dirname from "../utils.js"
 import swaggerJsdoc from "swagger-jsdoc"
+
 
 const options = {
     definition: {
@@ -9,6 +12,6 @@ const options = {
             description: "Documentación ABM Productos y Carro de compras"
         },
     },
-    apis: ["./src/docs/*.yaml"]
+    apis: [path.join(__dirname, '/docs/*.yaml')]
 }
 export const spec = swaggerJsdoc(options)

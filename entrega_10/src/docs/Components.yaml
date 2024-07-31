@@ -1,0 +1,66 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: string
+          description: Nombre del producto.
+        description:
+          type: string
+          description: Descipcion del producto.
+        code:
+          type: string
+          description: Codigo interno del producto.
+        price:
+          type: number
+          description: Precio del producto.
+        status:
+          type: boolean
+          description: Estado del producto (disponible/no disponible).
+        stock:
+          type: number
+          description: Stock disponible.
+        category:
+          type: string
+          description: Categoria a la cual pertenece el producto.
+        thumbnail:
+          type: array
+          items: 
+            type: string
+          description: Url del producto.
+        updatedAt:
+          type: date
+          description: Fecha de creacion/ Actualizacion del producto.
+        owner:
+          type: string
+          description: Quien creo el producto.
+    ProductRespuesta:
+      type: object
+      properties:
+        product:
+          type: object
+          $ref: '#components/schemas/Product'
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        pid:
+          type: object
+          $ref: '#components/schemas/Product'
+        quantity:
+          type: number
+          description: Cantidad de productos de este tipo en el carrito
+
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string

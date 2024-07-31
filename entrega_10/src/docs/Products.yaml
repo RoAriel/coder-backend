@@ -1,46 +1,21 @@
 paths:
-  /api/producs:
+  /api/products/{pid}:
     get:
-      summary: Returns a list of products.
       tags:
         - Products
-      description: Optional extended description in CommonMark or HTML.
+      summary: Retorna un producto.
+      description: Retorna el producto al cual correspone el PID.
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se está solicitando
       responses:
         '200':    # status code
-          description: A JSON array of products
-          # content:
-          #   application/json:
-          #     schema: 
-          #       type: array
-          #       items: 
-          #         type: string
-        '404':    # status code
-          description: Error
-          # content:
-          #   application/json:
-          #     schema: 
-          #       type: array
-          #       items: 
-          #         type: string
-    post:
-      summary: Graba un Producto.
-      tags:
-        - Products
-      description: Optional extended description in CommonMark or HTML.
-      responses:
-        '200':    # status code
-          description: A JSON product
-          # content:
-          #   application/json:
-          #     schema: 
-          #       type: array
-          #       items: 
-          #         type: string
-        '404':    # status code
-          description: Error
-          # content:
-          #   application/json:
-          #     schema: 
-          #       type: array
-          #       items: 
-          #         type: string
+          description: El producto fue obtenido correctamente.
+          content:
+            application/json:
+              schema: 
+                type: object
+                items: 
+                  $ref: '#components/schemas/ProductRespuesta'
