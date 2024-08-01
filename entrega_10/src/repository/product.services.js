@@ -63,7 +63,7 @@ class ProductService {
             errorName = 'Error en updtadeProduct.service'
             return CustomError.createError(errorName,
                 errorCause('updtadeProduct', errorName, `Product: ${product}`),
-                'Errpr en Update', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
+                'Error en Update', TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
         return product
 
