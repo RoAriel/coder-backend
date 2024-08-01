@@ -56,7 +56,6 @@ components:
         quantity:
           type: number
           description: Cantidad de productos de este tipo en el carrito
-
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -64,3 +63,13 @@ components:
         WWW_Authenticate:
           schema:
             type: string
+  requestBodies:
+    logUser:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Correo del usuario
+        password:
+          type: string
+          description: Contraseña del usuario
