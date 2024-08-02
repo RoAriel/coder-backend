@@ -24,7 +24,7 @@ export class CartManagerMongo {
     }
 
     async getOneByPopulate(id){
-        return await cartModel.findOne({_id : id}).populate("products.pid")//.lean()
+        return await cartModel.findOne({_id : id}).populate("products")//.lean()
     }
 
 }

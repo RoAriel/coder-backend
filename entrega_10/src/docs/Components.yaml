@@ -1,6 +1,6 @@
 components:
   schemas:
-    ProductBD:
+    ProductDB:
       type: object
       properties:
         _id:
@@ -43,7 +43,7 @@ components:
       properties:
         product:
           type: object
-          $ref: '#components/schemas/ProductBD'
+          $ref: '#components/schemas/ProductDB'
     ProductsPaginated:
       type: object
       properties:
@@ -90,7 +90,7 @@ components:
           description: Id autogenerado de mongo
         pid:
           type: object
-          $ref: '#components/schemas/Product'
+          $ref: '#components/schemas/ProductDB'
         quantity:
           type: number
           description: Cantidad de productos de este tipo en el carrito
