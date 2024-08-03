@@ -82,18 +82,23 @@ components:
             nextLink: 
               type: string
               description: Link a pagina siguiente
-    Cart:
+    CartRespuesta:
       type: object
       properties:
-        _id:
-          type: ObjectId
-          description: Id autogenerado de mongo
-        pid:
+        cart:
           type: object
-          $ref: '#components/schemas/ProductDB'
-        quantity:
-          type: number
-          description: Cantidad de productos de este tipo en el carrito
+          description: El carrito
+        properties:
+          _id:
+            type: ObjectId
+            description: Id autogenerado de mongo
+          products:
+            type: array
+            items:
+              $ref: '#components/schemas/ProuctBD'
+          quantity:
+            type: number
+            description: Cantidad de productos de este tipo en el carrito
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid

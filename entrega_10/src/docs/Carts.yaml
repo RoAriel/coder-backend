@@ -16,6 +16,6 @@ paths:
           content:
             application/json:
               schema: 
-                type: array
-                items: 
-                  $ref: '#components/schemas/Cart'
+                type: object
+                items:
+                  $ref: '#components/schemas/CartRespuesta'
