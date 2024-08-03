@@ -95,10 +95,11 @@ components:
           products:
             type: array
             items:
-              $ref: '#components/schemas/ProuctBD'
+              $ref: '#components/schemas/ProductDB'
           quantity:
             type: number
             description: Cantidad de productos de este tipo en el carrito
+
   responses:
     UnauthorizedError:
       description: Authentication information is missing or invalid
@@ -106,6 +107,7 @@ components:
         WWW_Authenticate:
           schema:
             type: string
+  
   requestBodies:
     logUser:
       type: object
@@ -145,5 +147,23 @@ components:
           items: 
             type: string
           description: Url del producto.
+    cargaCart:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: object
+                properties:
+                  pid:
+                    type: objectId
+                    descripton: Id del producto a ingresar.
+                  quantity:
+                    type: number
+                    decription: Cantidad del producto a ingresar. 
+          description: Lista de productos
 
 

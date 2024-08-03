@@ -265,7 +265,7 @@ export const deleteCartProducts = async (req, res, next) => {
 
         await cartService.addProductToCart(cid, [])
         res.setHeader('Content-Type', 'application/json');
-        return res.status(200).json(`Carrido de CID ${cid}, fue vaciado.`);
+        return res.status(200).json(`Carrito de CID ${cid}, fue vaciado.`);
     } catch (error) {
         return next(error)
     }
