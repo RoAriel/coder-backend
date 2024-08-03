@@ -155,15 +155,12 @@ components:
           items:
             type: object
             properties:
-              product:
-                type: object
-                properties:
-                  pid:
-                    type: objectId
-                    descripton: Id del producto a ingresar.
-                  quantity:
-                    type: number
-                    decription: Cantidad del producto a ingresar. 
+              pid:
+                type: objectId
+                descripton: Id del producto a ingresar.
+              quantity:
+                type: number
+                decription: Cantidad del producto a ingresar. 
           description: Lista de productos
 
 
