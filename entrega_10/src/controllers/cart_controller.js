@@ -18,15 +18,14 @@ export const getCartByCid = async (req, res, next) => {
         errorSiNoEsValidoID(cid, 'CID')
 
         let cart = await cartService.getCartPopulate(cid)
-
         if (cart) {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(cart.products);
+            
+            return res.status(200).json({cart});
         } else {
             errorName = 'ID cart no existe'
             CustomError.createError(errorName, errorCause('getCartByCid', errorName, `CID: ${cid} --> Cart: ${cart}`), "Ingrese carrito existente", TIPOS_ERROR.NOT_FOUND)
         }
-    } catch (error) {
+    } catch (error) {        
         return next(error)
     }
 }
