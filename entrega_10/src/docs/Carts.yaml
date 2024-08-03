@@ -1,4 +1,26 @@
 paths:
+  /api/carts/:
+    post:
+      tags:
+        - Carts
+      summary: Crea un Carrito con productos.
+      description: Crea un carrito sin owner, solo crea un carro con productos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/cargaCart'
+      responses:
+        '200':
+          description: El carrito creado correctamente.
+          content:
+            application/json:
+              schema: 
+                type: object
+                items:
+                  $ref: '#components/schemas/CartRespuesta'
+
   /api/carts/{cid}:
     get:
       tags:
