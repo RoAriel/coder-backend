@@ -11,16 +11,19 @@ paths:
           schema:
             type: number
             description: Numero de productos que quiero ver.
+          example: 1
         - in: query
           name: page
           schema:
             type: number
             description: Numero de pagina que quiero ver.
+          example: 1
         - in: query
           name: sort
           schema:
             type: string
             description: El orden de precios asc/desc.
+          example: asc/desc
       responses:
         '200':    # status code
           description: Los productos fueron obtenidos correctamente.
@@ -56,6 +59,7 @@ paths:
         - name: pid
           in: path
           required: true
+          example: 6674a1436f05df233631f749
           description: id del producto que se está solicitando
       responses:
         '200':    # status code
@@ -70,23 +74,20 @@ paths:
       tags:
         - Products
       summary: Actualiza propiedad del producto
+      description: "Las pros a modificar son: title /description /price /status /stock /category."
       parameters:
         - name: pid
           in: path
           type: ObjectId
           required: true
+          example: 6674a1436f05df233631f749
           description: Id del producto a ser actualizado
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              propiedadUpdate:
-                type: object
-                properties:
-                  prop:
-                    type: any
-                    description: Propiedad a actualizar 
+              $ref: '#components/requestBodies/putProduct'
       responses:
         '200':    # status code
           description: El producto fue actualizado correctamente.
@@ -115,6 +116,7 @@ paths:
           type: ObjectId
           required: true
           description: Id a ser eliminado
+          example: 6674a1436f05df233631f749
       
       responses:
         '200':    # status code

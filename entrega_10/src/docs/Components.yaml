@@ -56,7 +56,7 @@ components:
             payload:
               type: array
               items:
-                $ref: '#components/schemas/ProuctBD'
+                $ref: '#components/schemas/ProuctDB'
               description: Productos en la db
             totalPages: 
               type: number
@@ -114,9 +114,11 @@ components:
       properties:
         email:
           type: string
+          example: test@jmail.com
           description: Correo del usuario
         password:
           type: string
+          example: "123"
           description: Contraseña del usuario
     newProduct:
       type: object
@@ -124,29 +126,44 @@ components:
         title:
           type: string
           description: Nombre del producto.
+          example: FrutaMagíca
         description:
           type: string
           description: Descipcion del producto.
+          example: Fruta especial
         code:
           type: string
           description: Codigo interno del producto.
+          example: FM-100
         price:
           type: number
           description: Precio del producto.
+          example: 1000000
         status:
           type: boolean
           description: Estado del producto (disponible/no disponible).
+          example: true
         stock:
           type: number
           description: Stock disponible.
+          example: 1
         category:
           type: string
           description: Categoria a la cual pertenece el producto.
+          example: Frutas
         thumbnail:
           type: array
           items: 
             type: string
           description: Url del producto.
+          example: [http://frutas/magicas]
+    putProduct:
+      type: object
+      properties:
+        prop:
+          type: string
+          description: Propiedad a cambiar
+          example: value
     cargaCart:
       type: object
       properties:
@@ -157,9 +174,11 @@ components:
             properties:
               pid:
                 type: objectId
+                example: 6674a1436f05df233631f749
                 descripton: Id del producto a ingresar.
               quantity:
                 type: number
+                example: 14
                 decription: Cantidad del producto a ingresar. 
           description: Lista de productos
 
