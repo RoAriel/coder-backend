@@ -18,4 +18,8 @@ export class UserManagerMongo{
     async update(id, obj) {
         return await usersModel.findByIdAndUpdate(id, obj, { runValidators: true, returnDocument: "after" })
     }
+
+    async delete(filtro={}){
+        return await usersModel.deleteOne(filtro)
+    }
 }

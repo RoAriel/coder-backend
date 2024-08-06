@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "nodemon --env-file=.env ./src/app.js ",
-    "test": "mocha ./test/**/*.js --exit"
+    "test": "node --env-file=.env ./node_modules/mocha/bin/mocha ./test/**/*.js --exit"
   },
   "keywords": [],
   "author": "",

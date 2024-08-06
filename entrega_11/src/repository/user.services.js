@@ -23,8 +23,8 @@ class UserService {
 
     getUserBy = async (filter) => {
         try {
-            let user =  await this.dao.getBy(filter)
-            
+            let user = await this.dao.getBy(filter)
+
             // if(!user){
             //     errorName = 'Error en getUserBy-services'
             //     return CustomError.createError(errorName,
@@ -35,9 +35,9 @@ class UserService {
             return user
         } catch (error) {
             errorName = 'Error en getUserId-services'
-                return CustomError.createError(errorName,
-                    errorCause('getUserId', errorName, error.message),
-                    error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
+            return CustomError.createError(errorName,
+                errorCause('getUserId', errorName, error.message),
+                error.message, TIPOS_ERROR.INTERNAL_SERVER_ERROR)
         }
 
     }
@@ -63,6 +63,10 @@ class UserService {
                 errorCause('updateUser', errorName, error.message),
                 error.message, TIPOS_ERROR.ARGUMENTOS_INVALIDOS)
         }
+    }
+
+    deleteUser = async (filtro = {}) => {
+        return await this.dao.delete(filtro)
     }
 }
 
