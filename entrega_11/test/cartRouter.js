@@ -3,8 +3,7 @@ import { expect } from "chai"
 import supertest from "supertest"
 import mongoose, { isValidObjectId, ObjectId } from "mongoose";
 import { logger } from '../src/utils.js'
-import { productService } from '../src/repository/product.services.js';
-
+import { cartService } from '../src/repository/cart.services.js';
 
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -27,19 +26,20 @@ connDB()
 
 const requester = supertest(`http://localhost:${PORT}`)
 
-describe('Test products router', async function () {
+describe('Test cart router', async function () {
     this.timeout(10000)
 
-    it("La ruta /api/products/:pid, en su metodo get, retorna un object con el producto buscado", async () => {
-
-        let pid = '6674a1436f05df233631f749'
-        let product = await productService.getProductBy({ _id: pid })
-
-        let res = await requester.get(`/api/products/${pid}`)
-        expect(res.statusCode).to.exist.and.to.be.equal(200)
+    it("La ruta /api/carts/:cid, en su metodo get, retorna un object con el cart buscado", async () => {
         
-        let {body} = await requester.get(`/api/products/${pid}`)
-        expect(body.product._id).to.be.equal(product._id.toString())
+       let cid = '6674a503c009b4436b1c71ae'
+       let cart = await cartService.getCartById(cid)
+
+       let res = await requester.get(`/api/carts/${cid}`)
+       expect(res.statusCode).to.exist.and.to.be.equal(200)
+       
+       let {body} = await requester.get(`/api/carts/${cid}`)
+       
+       expect(body.cart._id).to.be.equal(cart._id.toString())
     })
 
 })

@@ -1,9 +1,10 @@
-import { afterEach, before, describe, it } from "mocha"
+import { afterEach, before, describe, it , after} from "mocha"
 import { expect } from "chai"
 import supertest from "supertest"
 import mongoose, { isValidObjectId, ObjectId } from "mongoose";
 import { logger } from '../src/utils.js'
 import { userService } from '../src/repository/user.services.js';
+import passport from "passport";
 
 
 const PORT = process.env.PORT || 8080;
@@ -31,7 +32,7 @@ describe('Test sessions router', async function () {
 
     this.timeout(10000)
 
-    afterEach(async function () {
+    after(async function () {
         await userService.deleteUser({ email: "test@test.com" })
     })
 
@@ -44,10 +45,30 @@ describe('Test sessions router', async function () {
             password: "123"
         }
         let { body } = await requester.post("/api/sessions/registro").send(userTest)
-
+        
         expect(body.payload).to.exist
         expect(body.payload).to.be.equal("Registro correcto")
         expect(isValidObjectId(body.newUser._id)).to.be.true
+
+    })
+
+    it('Existe una cookie para un user logueado', async ()=>{
+
+    
+        let res= await requester.post("/api/sessions/login").send({email: "test@test.com", password : '123' })
+
+        let cookie = res.header['set-cookie'][0]
+
+        expect(cookie).to.be.ok
+
+        cookie = {
+            name : cookie.split('=')[0],
+            token: cookie.split('=')[1]
+        }
+
+        expect(cookie.name).to.be.ok.and.to.be.equal('ecommerseCookie')
+        expect(cookie.token).to.be.ok
+
 
     })
 
