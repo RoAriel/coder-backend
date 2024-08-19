@@ -86,3 +86,13 @@ router.get('/newPassword/', (req, res) => {
     let { tk } = req.query
     res.status(200).render('newPassword', { token: tk })
 })
+
+router.get('/uploads',(req,res) =>{
+    try {
+        
+        res.status(200).render('uploads')
+    } catch (error) {
+        console.log('ERROR en RVIEW: ', error);
+        
+    }
+})

@@ -15,7 +15,20 @@ export const usersModel = mongoose.model('users', new mongoose.Schema({
     },
     cart: {
         type: mongoose.Types.ObjectId, ref: "carts"
+    },
+    documents: {
+        type: [
+            {
+                name: { type: String },
+                reference: { type: String }
+            }
+        ]
     }
+    ,
+    last_connection: { type: Date, default: Date.now },
+    complete: {
+        type: Boolean, default: false
+    },
 },
     {
         timestamps: true,

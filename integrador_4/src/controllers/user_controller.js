@@ -72,7 +72,7 @@ export const recuperarPWemail = async (req, res) => {
         res.redirect(`/solicitudenviada/?email=${user.email}&first_name=${user.first_name}`);
     } catch (error) {
         console.log('error redi: ', error);
-        
+
     }
 }
 
@@ -122,6 +122,23 @@ export const updatePassword = async (req, res, next) => {
 
         next(error)
     }
+
+}
+
+export const uploaderImgProfile = async (req, res, next) => {
+    try {
+        console.log('entre');
+
+        const file = req.file;
+        console.log('file data:\n', file);
+
+        res.send({ status: "success" })
+    } catch (error) {
+        console.log('ERROR: ', error);
+        next(error)
+
+    }
+
 
 }
 
