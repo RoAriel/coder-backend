@@ -26,9 +26,8 @@ export const usersModel = mongoose.model('users', new mongoose.Schema({
     }
     ,
     last_connection: { type: Date, default: Date.now },
-    complete: {
-        type: Boolean, default: false
-    },
+    upload_files: { type: Number, default: 0 },
+    complete_documentation: { type: Boolean, default: false },
 },
     {
         timestamps: true,
