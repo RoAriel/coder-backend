@@ -1,6 +1,7 @@
 import { TIPOS_ERROR } from "../utils/EErrors.js";
 
 export const errorHandler = (error, req, res, next) => {
+console.log('ERROR:', error);
 
     req.logger.error(error.cause?error.cause:error.menssage)
 

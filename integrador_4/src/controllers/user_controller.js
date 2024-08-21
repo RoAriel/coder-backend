@@ -142,5 +142,22 @@ export const uploaderImgProfile = async (req, res, next) => {
 
 }
 
+export const login = async(req, res, next) => {
 
+    let { web } = req.body
+    let usr = { ...req.user }
+
+    let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
+    res.cookie("ecommerseCookie", token, { httpOnly: true })
+
+    console.log('USER: ', usr);
+    
+
+    if (web) {
+        res.redirect("/productos")
+    } else {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({ payload: "Login correcto", usuarioLogueado: usr, token });
+    }
+}
 

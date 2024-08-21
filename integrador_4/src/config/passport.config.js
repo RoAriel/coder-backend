@@ -71,6 +71,8 @@ export const initPassport = () => {
                     if (!validaPasword(password, user.password))
                         
                         return done(null, false, {message:"Credenciales inválidas"})
+                    
+                    user = await userService.updateUser(user._id, { last_connection: new Date()})
 
                     user = new UserDto(user)
                     return done(null, user)

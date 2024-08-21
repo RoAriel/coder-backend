@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import passport from 'passport';
 import { auth } from '../middleware/auth.js';
 import { passportCall } from '../utils.js'
-import { updateRol, recuperarPWemail,updatePassword, uploaderImgProfile } from "../controllers/user_controller.js";
+import { updateRol, recuperarPWemail,updatePassword, uploaderImgProfile, login } from "../controllers/user_controller.js";
 import uploader from "../utils/uploader.js";
 
 export const router = new Router()
@@ -24,20 +24,7 @@ router.post('/registro', passportCall('registro'), async (req, res) => {
 
 })
 
-router.post('/login', passportCall('login'), async (req, res) => {
-    let { web } = req.body
-    let usr = { ...req.user }
-
-    let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
-    res.cookie("ecommerseCookie", token, { httpOnly: true })
-
-    if (web) {
-        res.redirect("/productos")
-    } else {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(200).json({ payload: "Login correcto", usuarioLogueado: usr, token });
-    }
-})
+router.post('/login', passportCall('login'), login)
 
 router.get('/github', passport.authenticate("github", {}), (req, res) => {})
 
@@ -57,6 +44,7 @@ router.get('/callbackGithub', passport.authenticate("github",{session: false}), 
 })
 
 router.get("/logout", (req, res) => {
+    
     res.clearCookie("ecommerseCookie")
 
     res.setHeader('Content-Type', 'application/json');
