@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import passport from 'passport';
 import { auth } from '../middleware/auth.js';
 import { passportCall } from '../utils.js'
-import { updateRol, recuperarPWemail,updatePassword, uploaderImgProfile, login } from "../controllers/user_controller.js";
+import { updateRol, recuperarPWemail,updatePassword, documents, login } from "../controllers/user_controller.js";
 import uploader from "../utils/uploader.js";
 
 export const router = new Router()
@@ -75,4 +75,4 @@ router.post('/emailDeRecupero', recuperarPWemail)
 
 router.post('/updatePassword', updatePassword)
 
-router.post('/uploadPerfil', uploader.single('foto'),uploaderImgProfile)
+router.post('/:uid/documents', uploader.any(),documents)

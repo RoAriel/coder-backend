@@ -1,3 +1,5 @@
 node_modules/
 src/logs/
 .env
+src/public/img*
+src/public/documents

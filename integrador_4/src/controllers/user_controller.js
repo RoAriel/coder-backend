@@ -125,16 +125,21 @@ export const updatePassword = async (req, res, next) => {
 
 }
 
-export const uploaderImgProfile = async (req, res, next) => {
+export const documents = async (req, res, next) => {
     try {
-        console.log('entre');
+        let {uid} = req.params
 
-        const file = req.file;
-        console.log('file data:\n', file);
+        let user = await userService.updateUser(uid,{complete_documentation: true})
+        console.log(user);
+        
+        // por cada documento gurar en la propiedad del usuario
+        // incrementar el conador de documentos
+        // setear correctamente el flad de completo o incompleto 
 
-        res.send({ status: "success" })
+        res.setHeader('Content-Type','application/json');
+        return res.status(200).json({payload: 'carga completa'});
     } catch (error) {
-        console.log('ERROR: ', error);
+
         next(error)
 
     }
@@ -148,10 +153,7 @@ export const login = async(req, res, next) => {
     let usr = { ...req.user }
 
     let token = jwt.sign(usr, process.env.SECRET, { expiresIn: '1h' })
-    res.cookie("ecommerseCookie", token, { httpOnly: true })
-
-    console.log('USER: ', usr);
-    
+    res.cookie("ecommerseCookie", token, { httpOnly: true }) 
 
     if (web) {
         res.redirect("/productos")

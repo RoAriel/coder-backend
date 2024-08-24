@@ -6,5 +6,18 @@
 <p>Correo electrónico: <strong>{{user.email}}</strong></p>
 <p>Rol: <strong>{{user.rol}}</strong></p>
 
+<h2>Completar perfil</h2>
+<hr>
+<form action='/api/sessions/{{user.id}}/documents' method="post" enctype="multipart/form-data">
+
+    <input type="file" name="profile"/>
+    <br>
+        <input type="file" name="product"/>
+    <br>
+        <input type="file" name="documents" multiple/>
+    <br>
+    <input type="submit" value="Grabar">
+</form>
+
 <br><br>
 {{>menu}}
